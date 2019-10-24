@@ -1,0 +1,12 @@
+# SPDX-License-Identifier: Unlicense OR MIT
+
+runtime: go112
+
+handlers:
+
+- url: /static
+  static_dir: static
+
+- url: .*
+  script: auto
+  secure: always

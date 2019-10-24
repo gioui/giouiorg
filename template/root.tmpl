@@ -1,0 +1,41 @@
+{{define "root"}}
+<!DOCTYPE html>
+<html lang="en">
+<head>
+	<meta charset="utf-8">
+	<title>{{template "title" .}}</title>
+	<meta name="description" content="Gio is an open source library for creating portable, immediate mode GUI programs for Android, iOS, Linux, Windows, macOS.">
+	<meta name="viewport" content="width=device-width, initial-scale=1">
+	<link rel="icon" type="image/png" href="/static/favicon196.png" sizes="196x196"/>
+	<link rel="icon" type="image/png" href="/static/favicon32.png" sizes="32x32"/>
+	<link rel="stylesheet" href="/static/style.css"/>
+</head>
+	<header>
+		<nav>
+			<a href="/">
+				<img class="logo" src="/static/logo.svg" alt="Gio">
+			</a>
+		</nav>
+	</header>
+	<body>
+		<main>
+			<div class="container">
+			{{template "content" .}}
+			</div>
+		</main>
+	</body>
+	<script src="https://code.jquery.com/jquery-3.4.1.min.js"
+	integrity="sha256-CSXorXvZcTkaix6Yvo6HppcZGetbYMGWSFlBw8HfCJo="
+	crossorigin="anonymous"></script>
+    <script src="https://play.golang.org/playground.js"></script>
+	<script>
+		$(function() {
+			playground({
+				codeEl: $("#code"),
+				outputEl: $("#output"),
+				runEl: $("#run")
+			});
+		})
+	</script>
+</html>
+{{end}}
