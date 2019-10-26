@@ -41,6 +41,7 @@ pre {
 	background: #efefef;
 	padding: 0.625rem;
 	border-radius: 0.3125rem;
+	overflow-x: auto;
 }
 pre,
 code {
