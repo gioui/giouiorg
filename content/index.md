@@ -131,7 +131,7 @@ See the [contribution guide](/doc/contribute) for more details.
 
 ## License
 
-Dual-licensed under [UNLICENSE](http://unlicense.org) or the MIT.
+Dual-licensed under [UNLICENSE](https://unlicense.org) or the MIT.
 
 ## Donations
 
