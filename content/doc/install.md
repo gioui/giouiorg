@@ -6,15 +6,18 @@ title: Installation
 
 ## Linux {#linux}
 
-For Linux you need Wayland and the wayland, xkbcommon, GLES, EGL development packages.
+For Linux you need Wayland and the wayland, x11, xkbcommon, GLES, EGL development packages.
 
 On Fedora 28 and newer, install the dependencies with the command
 
-    $ sudo dnf install wayland-devel libxkbcommon-devel mesa-libGLES-devel mesa-libEGL-devel
+    $ sudo dnf install wayland-devel libX11-devel libxkbcommon-devel mesa-libGLES-devel mesa-libEGL-devel
 
 On Ubuntu 18.04 and newer, use
 
-    $ sudo apt install libwayland-dev libxkbcommon-dev libgles2-mesa-dev libegl1-mesa-dev
+    $ sudo apt install libwayland-dev libx11-dev libxkbcommon-dev libgles2-mesa-dev libegl1-mesa-dev
+
+You can build Gio programs without X11 support with the `nox11` build tag, and
+without Wayland support with the `nowayland` build tag.
 
 ## macOS, iOS, tvOS {#apple}
 
