@@ -98,15 +98,19 @@ func loadPage(content []byte) (page, error) {
 	return page{front, md}, nil
 }
 
-func pageHandler(w http.ResponseWriter, r *http.Request) {
-	path := r.URL.Path
-	if strings.HasSuffix(path, "/") {
-		path = path + "index"
-	}
-	p, ok := pages[path]
-	if !ok {
-		http.NotFound(w, r)
-		return
-	}
-	w.Write(p)
+// pageHandler serves a page from the content directory, or
+// falls back to a fallback handler if none were found.
+func pageHandler(fallback http.Handler) http.Handler {
+	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
+		path := r.URL.Path
+		if strings.HasSuffix(path, "/") {
+			path = path + "index"
+		}
+		p, ok := pages[path]
+		if !ok {
+			fallback.ServeHTTP(w, r)
+			return
+		}
+		w.Write(p)
+	})
 }

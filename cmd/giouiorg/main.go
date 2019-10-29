@@ -16,8 +16,9 @@ func main() {
 	subHandler("/issue/", http.HandlerFunc(issueHandler))
 	subHandler("/commit/", http.HandlerFunc(commitHandler))
 	subHandler("/patch/", http.HandlerFunc(patchesHandler))
-	subHandler("/pkg/", http.HandlerFunc(godocHandler))
-	http.Handle("/", vanityHandler(http.HandlerFunc(pageHandler)))
+	http.Handle("/", vanityHandler(
+		pageHandler(http.HandlerFunc(godocHandler)),
+	))
 
 	port := os.Getenv("PORT")
 	if port == "" {
@@ -53,12 +54,16 @@ func commitHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func godocHandler(w http.ResponseWriter, r *http.Request) {
-	p := r.URL.Path
-	if p == "" {
-		http.Redirect(w, r, "/pkg/gioui.org/", http.StatusFound)
-		return
+	godocURL := "https://godoc.org/gioui.org" + r.URL.Path
+	resp, err := http.Head(godocURL)
+	switch {
+	case err != nil:
+		http.Error(w, "failed to HEAD godoc.org", http.StatusInternalServerError)
+	case resp.StatusCode == http.StatusOK:
+		http.Redirect(w, r, godocURL, http.StatusFound)
+	default:
+		http.NotFound(w, r)
 	}
-	http.Redirect(w, r, "https://godoc.org/"+p, http.StatusFound)
 }
 
 // vanityHandler serves git location meta headers for the go tool.
