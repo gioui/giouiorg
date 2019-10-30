@@ -7,13 +7,11 @@ import (
 	"log"
 	"net/http"
 	"os"
-
-	_ "gioui.org/website/internal/playground"
-	"golang.org/x/tools/godoc/static"
+	//_ "gioui.org/website/internal/playground"
 )
 
 func main() {
-	subHandler("/static/", http.HandlerFunc(staticHandler))
+	//subHandler("/static/", http.HandlerFunc(staticHandler))
 	subHandler("/files/", http.FileServer(http.Dir("files")))
 	subHandler("/issue/", http.HandlerFunc(issueHandler))
 	subHandler("/commit/", http.HandlerFunc(commitHandler))
@@ -30,14 +28,14 @@ func main() {
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
 }
 
-func staticHandler(w http.ResponseWriter, r *http.Request) {
+/*func staticHandler(w http.ResponseWriter, r *http.Request) {
 	content, ok := static.Files[r.URL.Path]
 	if !ok {
 		http.NotFound(w, r)
 		return
 	}
 	w.Write([]byte(content))
-}
+}*/
 
 func subHandler(root string, handler http.Handler) {
 	http.Handle(root, http.StripPrefix(root, handler))
