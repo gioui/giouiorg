@@ -4,8 +4,10 @@ package main
 
 import (
 	"bytes"
+	"errors"
 	"fmt"
 	"html/template"
+	"io"
 	"io/ioutil"
 	"log"
 	"net/http"
@@ -14,6 +16,7 @@ import (
 	"strings"
 
 	"github.com/gomarkdown/markdown"
+	"github.com/gomarkdown/markdown/parser"
 	"gopkg.in/yaml.v2"
 )
 
@@ -27,8 +30,14 @@ type page struct {
 }
 
 var (
-	docTmpl *template.Template
-	pages   = make(map[string][]byte)
+	docTmpl   *template.Template
+	pages     = make(map[string][]byte)
+	errNoPage = errors.New("no such page")
+)
+
+const (
+	contentRoot = "content"
+	includeRoot = "include"
 )
 
 func init() {
@@ -36,7 +45,7 @@ func init() {
 		filepath.Join("template", "page.tmpl"),
 		filepath.Join("template", "root.tmpl"),
 	))
-	if err := loadDocs(filepath.Join("content")); err != nil {
+	if err := loadDocs(filepath.Join(contentRoot)); err != nil {
 		log.Fatal(err)
 	}
 }
@@ -51,7 +60,7 @@ func loadDocs(root string) error {
 		}
 		name := path[len(root):]
 		name = name[:len(name)-len(".md")]
-		content, err := loadMarkdown(path)
+		content, err := loadMarkdown(name)
 		if err != nil {
 			return err
 		}
@@ -60,19 +69,48 @@ func loadDocs(root string) error {
 	})
 }
 
-func loadMarkdown(f string) ([]byte, error) {
-	content, err := ioutil.ReadFile(f)
+func servePage(w io.Writer, path string) error {
+	var page []byte
+	if os.Getenv("GAE_APPLICATION") != "" {
+		p, ok := pages[path]
+		if !ok {
+			return errNoPage
+		}
+		page = p
+	} else {
+		p, err := loadMarkdown(path)
+		if err != nil {
+			return err
+		}
+		page = p
+	}
+	_, err := w.Write(page)
+	return err
+}
+
+func loadMarkdown(url string) ([]byte, error) {
+	path := filepath.Join(contentRoot, url+".md")
+	content, err := ioutil.ReadFile(path)
 	if err != nil {
 		return nil, err
 	}
 	page, err := loadPage(content)
 	if err != nil {
-		return nil, fmt.Errorf("%s: failed to parse front matter: %v", f, err)
+		return nil, fmt.Errorf("%s: failed to parse front matter: %v", path, err)
 	}
 	if page.Front.Title == "" {
 		page.Front.Title = "Gio - immediate mode GUI in Go"
 	}
-	html := markdown.ToHTML(page.Content, nil, nil)
+	mdp := parser.NewWithExtensions(parser.CommonExtensions | parser.Includes)
+	mdp.Opts.ReadIncludeFn = func(from, path string, address []byte) []byte {
+		path = filepath.Join(includeRoot, path)
+		content, err := ioutil.ReadFile(path)
+		if err != nil {
+			content = []byte(err.Error())
+		}
+		return content
+	}
+	html := markdown.ToHTML(page.Content, mdp, nil)
 	args := struct {
 		Front   frontMatter
 		Content template.HTML
@@ -106,11 +144,13 @@ func pageHandler(fallback http.Handler) http.Handler {
 		if strings.HasSuffix(path, "/") {
 			path = path + "index"
 		}
-		p, ok := pages[path]
-		if !ok {
-			fallback.ServeHTTP(w, r)
-			return
+		if err := servePage(w, path); err != nil {
+			if err == errNoPage {
+				fallback.ServeHTTP(w, r)
+			} else {
+				log.Printf("%s: %v", path, err)
+				http.Error(w, "failed to serve page", http.StatusInternalServerError)
+			}
 		}
-		w.Write(p)
 	})
 }
