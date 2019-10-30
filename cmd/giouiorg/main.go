@@ -9,9 +9,11 @@ import (
 	"os"
 
 	_ "gioui.org/website/internal/playground"
+	"golang.org/x/tools/godoc/static"
 )
 
 func main() {
+	http.HandleFunc("/playground.js", servePlayground)
 	subHandler("/static/", http.FileServer(http.Dir("static")))
 	subHandler("/issue/", http.HandlerFunc(issueHandler))
 	subHandler("/commit/", http.HandlerFunc(commitHandler))
@@ -26,6 +28,10 @@ func main() {
 	}
 
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
+}
+
+func servePlayground(w http.ResponseWriter, r *http.Request) {
+	w.Write([]byte(static.Files["playground.js"]))
 }
 
 func subHandler(root string, handler http.Handler) {
