@@ -42,6 +42,8 @@ pre {
 	padding: 0.625rem;
 	border-radius: 0.3125rem;
 	overflow-x: auto;
+	tab-size: 4;
+	-moz-tab-size: 4;
 }
 pre,
 code {
