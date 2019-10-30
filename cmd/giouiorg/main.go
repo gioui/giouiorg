@@ -13,8 +13,8 @@ import (
 )
 
 func main() {
-	http.HandleFunc("/playground.js", servePlayground)
-	subHandler("/static/", http.FileServer(http.Dir("static")))
+	subHandler("/static/", http.HandlerFunc(staticHandler))
+	subHandler("/files/", http.FileServer(http.Dir("files")))
 	subHandler("/issue/", http.HandlerFunc(issueHandler))
 	subHandler("/commit/", http.HandlerFunc(commitHandler))
 	subHandler("/patch/", http.HandlerFunc(patchesHandler))
@@ -30,8 +30,13 @@ func main() {
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
 }
 
-func servePlayground(w http.ResponseWriter, r *http.Request) {
-	w.Write([]byte(static.Files["playground.js"]))
+func staticHandler(w http.ResponseWriter, r *http.Request) {
+	content, ok := static.Files[r.URL.Path]
+	if !ok {
+		http.NotFound(w, r)
+		return
+	}
+	w.Write([]byte(content))
 }
 
 func subHandler(root string, handler http.Handler) {
