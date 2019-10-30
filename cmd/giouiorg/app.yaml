@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Unlicense OR MIT
 
-runtime: go112
+runtime: go113
 
 handlers:
 
