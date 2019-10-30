@@ -8,7 +8,7 @@ import (
 	"net/http"
 	"os"
 
-	_ "golang.org/x/tools/playground"
+	_ "gioui.org/website/internal/playground"
 )
 
 func main() {
