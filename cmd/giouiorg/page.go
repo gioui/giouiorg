@@ -102,8 +102,8 @@ func loadMarkdown(url string) ([]byte, error) {
 		page.Front.Title = "Gio - immediate mode GUI in Go"
 	}
 	mdp := parser.NewWithExtensions(parser.CommonExtensions | parser.Includes | parser.Attributes)
-	mdp.Opts.ReadIncludeFn = func(from, path string, address []byte) []byte {
-		content, err := includeExample(path)
+	mdp.Opts.ReadIncludeFn = func(from, path string, addr []byte) []byte {
+		content, err := includeExample(path, addr)
 		if err != nil {
 			content = []byte(err.Error())
 		}
@@ -121,7 +121,8 @@ func loadMarkdown(url string) ([]byte, error) {
 	return buf.Bytes(), nil
 }
 
-func includeExample(path string) ([]byte, error) {
+func includeExample(path string, addr []byte) ([]byte, error) {
+	log.Printf("%s", addr)
 	path = filepath.Join(includeRoot, path)
 	return ioutil.ReadFile(path)
 }
