@@ -82,3 +82,6 @@ header .menu > .item > a:visited {
 header .menu > .item > a:hover {
 	text-decoration: underline;
 }
+[contenteditable]:focus {
+	outline: 0px solid transparent;
+}

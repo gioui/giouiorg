@@ -1,16 +1,23 @@
 $(function() {
+	'use strict';
+
 	$("[data-run=browser]").each(function() {
-		$(this).attr("content-editable", "true");
-		var cont = $(this).parent();
+		var code = this;
+		$(code).attr("contenteditable", "true");
+		$(code).attr("spellcheck", "false");
+		var cont = $(code).parent();
 		var run = $('<button>Run</button>');
-		var output = $('<div></div>');
 		$(cont).append(run);
+		var output = $('<div></div>');
+		output.hide();
 		$(cont).append(output);
-		playground({
-			codeEl: $(this),
-			outputEl: output,
-			runEl: run
-		});
+		var transport = new HTTPTransport();
+		function onRun() {
+			output.text("");
+			output.show();
+			transport.Run($(code).text(), PlaygroundOutput(output.get(0)), null);
+		}
+		run.click(onRun);
 	})
 })
 
