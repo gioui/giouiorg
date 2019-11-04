@@ -85,3 +85,36 @@ header .menu > .item > a:hover {
 [contenteditable]:focus {
 	outline: 0px solid transparent;
 }
+.play {
+	position: relative;
+	display: flex;
+	flex-direction: column;
+}
+.run {
+	position: absolute;
+	right: 0.625rem;
+	bottom: 0.625rem;
+}
+.output {
+	background: #380f16;
+}
+pre.output {
+  color: #e6e6e6;
+}
+.output .stderr,
+.output .error {
+  color: rgb(244, 74, 63);
+}
+.output .system,
+.output .exit {
+  color: rgb(255, 209, 77);
+}
+.window {
+	margin: 1.25rem;
+	display: flex;
+}
+.window > iframe {
+	border: 0;
+	overflow: hidden;
+	flex: 1;
+}

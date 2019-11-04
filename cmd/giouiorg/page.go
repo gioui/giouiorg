@@ -122,7 +122,6 @@ func loadMarkdown(url string) ([]byte, error) {
 }
 
 func includeExample(path string, addr []byte) ([]byte, error) {
-	log.Printf("%s", addr)
 	path = filepath.Join(includeRoot, path)
 	return ioutil.ReadFile(path)
 }

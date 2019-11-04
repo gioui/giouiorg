@@ -17,6 +17,7 @@ import (
 
 func main() {
 	subHandler("/scripts.js", http.HandlerFunc(scriptsHandler))
+	subHandler("/wasm/", http.FileServer(http.Dir("wasm")))
 	subHandler("/files/", http.FileServer(http.Dir("files")))
 	subHandler("/issue/", http.HandlerFunc(issueHandler))
 	subHandler("/commit/", http.HandlerFunc(commitHandler))
