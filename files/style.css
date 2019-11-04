@@ -118,3 +118,13 @@ pre.output {
 	overflow: hidden;
 	flex: 1;
 }
+.sponsor {
+	width: 25rem;
+	display: flex;
+	flex-direction: column;
+	font-size: 1.1rem;
+	margin: 1.25rem;
+}
+.sponsor a {
+	text-align: center;
+}

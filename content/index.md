@@ -1,7 +1,7 @@
 # Gio
 
 Gio implements portable immediate mode GUI programs in Go. Gio programs run on all the major platforms:
-iOS/tvOS, Android, Linux (Wayland/X11), macOS, Windows, FreeBSDand browsers (Webassembly/WebGL).
+iOS/tvOS, Android, Linux (Wayland/X11), macOS, Windows, FreeBSD and browsers (Webassembly/WebGL).
 
 Gio includes an efficient vector renderer based on the Pathfinder project (https://github.com/pcwalton/pathfinder).
 Text and other shapes are rendered using only their outlines without baking them into texture images,
@@ -132,6 +132,24 @@ See the [contribution guide](/doc/contribute) for more details.
 ## License
 
 Dual-licensed under [UNLICENSE](https://unlicense.org) or the MIT.
+
+## Sponsors
+
+<div class="sponsor">
+	<a href="https://orijtech.com/">
+		<img srcset="/files/orijtech/orijtech.png,
+					 /files/orijtech/orijtech@2x.png 2x,
+					 /files/orijtech/orijtech@3x.png 3x"
+					 src="/files/orijtech/orijtech@3x.png" alt="Orijtech, Inc." width="350">
+		<em>"Observability and infrastructure for high performance systems and the cloud."</em>
+	</a>
+</div>
+
+
+Gio's main developer is working full-time on Gio, 100% supported by
+sponsorships. Please consider [sponsoring Gio](https://github.com/sponsors/eliasnaur) if you find it
+useful. Sponsorships are handled by GitHub Sponsors and are easy to
+set up.
 
 ## Donations
 
