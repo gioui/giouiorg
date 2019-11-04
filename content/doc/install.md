@@ -1,5 +1,5 @@
 ---
-title: Installation
+title: Installation - Gio documentation
 ---
 
 # Installation
