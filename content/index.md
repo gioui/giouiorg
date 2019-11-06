@@ -100,7 +100,7 @@ mailing list: [~eliasnaur/gio@lists.sr.ht](mailto:~eliasnaur/gio@lists.sr.ht).
 
 ## Contributing
 
-Post discussion and patches to the [gio-patches list](https://lists.sr.ht/~eliasnaur/gio-patches). No Sourcehut
+Post patches to the [gio-patches list](https://lists.sr.ht/~eliasnaur/gio-patches). No Sourcehut
 account is required and you can post without being subscribed.
 
 See the [contribution guide](/doc/contribute) for more details.

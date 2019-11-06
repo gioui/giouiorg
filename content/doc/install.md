@@ -50,4 +50,4 @@ command that comes with the SDK:
 
 To run Gio in a browser you need support for WebAssembly and WebGL.
 
-Building for webassembly requires Go 1.13.
+Building for webassembly requires Go 1.14.
