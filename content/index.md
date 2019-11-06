@@ -113,7 +113,7 @@ Dual-licensed under [UNLICENSE](https://unlicense.org) or the MIT.
 ## Sponsors
 
 <div class="sponsor">
-	<a href="https://orijtech.com/">
+	<a href="https://orijtech.com/?referrer=gioui.org">
 		<img srcset="/files/orijtech/orijtech.png,
 					 /files/orijtech/orijtech@2x.png 2x,
 					 /files/orijtech/orijtech@3x.png 3x"
