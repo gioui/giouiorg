@@ -15,7 +15,7 @@ statements to show your agreement. The `git commit --signoff` (or `-s`) command 
 your name and email address.
 
 Patches should be sent to
-[~eliasnaur/gio@lists.sr.ht](mailto:~eliasnaur/gio@lists.sr.ht)
+[~eliasnaur/gio-patches@lists.sr.ht](mailto:~eliasnaur/gio-patches@lists.sr.ht)
 mailing list with the `git send-email` command. See
 [git-send-email.io](https://git-send-email.io) for a thorough setup guide.
 
@@ -30,7 +30,7 @@ With `git send-email` configured, you can clone the project and set it up for su
 
     $ git clone https://git.sr.ht/~eliasnaur/gio
     $ cd gio
-    $ git config sendemail.to '~eliasnaur/gio@lists.sr.ht'
+    $ git config sendemail.to '~eliasnaur/gio-patches@lists.sr.ht'
     $ git config sendemail.annotate yes
 
 Configure your name and email address if you have not done so already:

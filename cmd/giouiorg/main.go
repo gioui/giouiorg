@@ -57,7 +57,7 @@ func subHandler(root string, handler http.Handler) {
 }
 
 func patchesHandler(w http.ResponseWriter, r *http.Request) {
-	url := "https://lists.sr.ht/~eliasnaur/gio/patches/" + r.URL.Path
+	url := "https://lists.sr.ht/~eliasnaur/gio-patches/patches/" + r.URL.Path
 	http.Redirect(w, r, url, http.StatusFound)
 }
 
