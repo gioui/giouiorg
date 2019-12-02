@@ -10,6 +10,13 @@ to support efficient animations, transformed drawing and pixel resolution indepe
 
 [![GoDoc](https://godoc.org/gioui.org?status.svg)](https://godoc.org/gioui.org)
 
+This is a screenshot of the [Kitchen
+example](https://git.sr.ht/~eliasnaur/gio/tree/master/example/kitchen/kitchen.go). If your browser
+supports WebAssembly and WebGL, run the example by pressing run.
+
+{data-run="wasm" data-pkg="gioui.org/example/kitchen" data-size="800x600"}
+<img src="/files/screenshots/kitchen.png" alt="Kitchen screenshot" width="800"/>
+
 
 ## Installation
 
