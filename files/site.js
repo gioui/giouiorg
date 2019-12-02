@@ -23,15 +23,40 @@ $(function() {
 		run.click(onRun);
 	})
 	$("[data-run=wasm]").each(function() {
-		var code = this;
-		var cont = $(code).parent();
+		var pkg = $(this).data("pkg")
+		var size = $(this).data("size");
+		var width = "";
+		var height = "";
+		if (size !== undefined) {
+			var spl = size.split("x");
+			width = spl[0];
+			if (spl.length == 2) {
+				height = spl[1];
+			}
+		}
+		var cont = $(this);
+		var replace = true;
+		// The markdown formatter puts the args on the inner <code>
+		// element for {{/path/code.go}} tags.
+		if ($(cont).prop("tagName") == "CODE") {
+			// For code snippets the wasm program should display after
+			// the snippet.
+			replace = false;
+			cont = $(cont).parent();
+		}
 		$(cont).addClass("play");
 		var run = $('<button class="run">Run</button>');
 		$(cont).append(run);
-		var args = $(code).data("args")
-		var win = $('<div class="window"><iframe src="/wasm/'+args+'"></iframe></div>');
+		var win = $('<div class="window"><iframe width="'+width+'" height="'+height+'" src="/wasm/'+pkg+'"></iframe></div>');
 		function onRun() {
-			$(win).insertAfter(cont);
+			if (replace) {
+				$(cont).empty();
+				$(cont).append(win);
+			} else {
+				var p = $('<p></p>');
+				$(p).append(win);
+				$(p).insertAfter(cont);
+			}
 		}
 		run.click(onRun);
 	})

@@ -110,7 +110,6 @@ pre.output {
   color: rgb(255, 209, 77);
 }
 .window {
-	margin: 1.25rem;
 	display: flex;
 }
 .window > iframe {
