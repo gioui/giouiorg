@@ -24,9 +24,8 @@ Hosting Gio on Sourcehut is an experiment just as Gio itself is.
 
 The most important feature of Sourcehut is that email contributions are first
 class citizens. Email has many problems, but it is permissionless, ubuitous and
-decentralized. For example, people banned from Github and people from Iran can
-contribute patches, use the mailing list and file issues if they can send and
-recieve email.
+decentralized. For example, people banned from GitHub can contribute patches,
+use the mailing list and file issues if they can send and recieve email.
 
 Second, Sourcehut encourages using Git in a more decentralized way. There is a
 canonical Gio repository, but contributors can work on their changes in ways
