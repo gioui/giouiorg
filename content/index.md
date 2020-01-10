@@ -103,7 +103,8 @@ sourcehut](https://git.sr.ht/~eliasnaur/gio).
 
 File bugs and TODOs through the [issue tracker](https://todo.sr.ht/~eliasnaur/gio) or send an email
 to [~eliasnaur/gio@todo.sr.ht](mailto:~eliasnaur/gio@todo.sr.ht). For general discussion, use the
-[~eliasnaur/gio@lists.sr.ht mailing list](https://lists.sr.ht/~eliasnaur/gio).
+[~eliasnaur/gio@lists.sr.ht mailing list](https://lists.sr.ht/~eliasnaur/gio) or the
+[#gioui](https://gophers.slack.com/archives/CM87SNCGM) Gophers Slack channel.
 
 
 ## Contributing
