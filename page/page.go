@@ -1,6 +1,6 @@
 // SPDX-License-Identifier: Unlicense OR MIT
 
-package main
+package page
 
 import (
 	"bufio"
@@ -19,8 +19,13 @@ import (
 
 	"github.com/gomarkdown/markdown"
 	"github.com/gomarkdown/markdown/parser"
+	"golang.org/x/tools/godoc/static"
 	"gopkg.in/yaml.v2"
 )
+
+type Site struct {
+	defaultTitle string
+}
 
 type frontMatter struct {
 	Title string `yaml:"title"`
@@ -47,12 +52,35 @@ func init() {
 		filepath.Join("template", "page.tmpl"),
 		filepath.Join("template", "root.tmpl"),
 	))
-	if err := loadDocs(filepath.Join(contentRoot)); err != nil {
-		log.Fatal(err)
-	}
 }
 
-func loadDocs(root string) error {
+func NewSite(defaultTitle string) (*Site, error) {
+	s := &Site{
+		defaultTitle: defaultTitle,
+	}
+	err := s.loadDocs(filepath.Join(contentRoot))
+	return s, err
+}
+
+func ScriptsHandler(w http.ResponseWriter, r *http.Request) {
+	var buf bytes.Buffer
+	for _, script := range []string{"jquery.js", "playground.js"} {
+		buf.WriteString(static.Files[script])
+	}
+	for _, script := range []string{"site.js"} {
+		path := filepath.Join("files", script)
+		content, err := ioutil.ReadFile(path)
+		if err != nil {
+			log.Printf("scriptsHandler: failed to find %q", path)
+			http.Error(w, "scriptsHandler failed", http.StatusInternalServerError)
+		}
+		buf.Write(content)
+	}
+	w.Header().Set("Content-type", "application/javascript")
+	w.Write(buf.Bytes())
+}
+
+func (s *Site) loadDocs(root string) error {
 	return filepath.Walk(root, func(path string, info os.FileInfo, err error) error {
 		if err != nil {
 			return err
@@ -62,7 +90,7 @@ func loadDocs(root string) error {
 		}
 		name := path[len(root):]
 		name = name[:len(name)-len(".md")]
-		content, err := loadMarkdown(name)
+		content, err := s.loadMarkdown(name)
 		if err != nil {
 			return err
 		}
@@ -71,7 +99,7 @@ func loadDocs(root string) error {
 	})
 }
 
-func servePage(w io.Writer, path string) error {
+func (s *Site) servePage(w io.Writer, path string) error {
 	var page []byte
 	if os.Getenv("GAE_APPLICATION") != "" {
 		p, ok := pages[path]
@@ -80,7 +108,7 @@ func servePage(w io.Writer, path string) error {
 		}
 		page = p
 	} else {
-		p, err := loadMarkdown(path)
+		p, err := s.loadMarkdown(path)
 		if err != nil {
 			return err
 		}
@@ -90,7 +118,7 @@ func servePage(w io.Writer, path string) error {
 	return err
 }
 
-func loadMarkdown(url string) ([]byte, error) {
+func (s *Site) loadMarkdown(url string) ([]byte, error) {
 	path := filepath.Join(contentRoot, url+".md")
 	content, err := ioutil.ReadFile(path)
 	if err != nil {
@@ -101,7 +129,7 @@ func loadMarkdown(url string) ([]byte, error) {
 		return nil, fmt.Errorf("%s: failed to parse front matter: %v", path, err)
 	}
 	if page.Front.Title == "" {
-		page.Front.Title = "Gio - immediate mode GUI in Go"
+		page.Front.Title = s.defaultTitle
 	}
 	mdp := parser.NewWithExtensions(parser.CommonExtensions | parser.Includes | parser.Attributes)
 	mdp.Opts.ReadIncludeFn = func(from, path string, addr []byte) []byte {
@@ -209,15 +237,15 @@ func loadPage(content []byte) (page, error) {
 	return page{front, md}, nil
 }
 
-// pageHandler serves a page from the content directory, or
-// falls back to a fallback handler if none were found.
-func pageHandler(fallback http.Handler) http.Handler {
+// Handler returns a http handler that serves a page from the content
+// directory, or falls back to a fallback handler if none were found.
+func (s *Site) Handler(fallback http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		path := r.URL.Path
 		if strings.HasSuffix(path, "/") {
 			path = path + "index"
 		}
-		if err := servePage(w, path); err != nil {
+		if err := s.servePage(w, path); err != nil {
 			if err == errNoPage {
 				fallback.ServeHTTP(w, r)
 			} else {

@@ -3,27 +3,28 @@
 package main
 
 import (
-	"bytes"
 	"fmt"
-	"io/ioutil"
 	"log"
 	"net/http"
 	"os"
-	"path/filepath"
 
 	_ "gioui.org/website/internal/playground"
-	"golang.org/x/tools/godoc/static"
+	"gioui.org/website/page"
 )
 
 func main() {
-	subHandler("/scripts.js", http.HandlerFunc(scriptsHandler))
+	subHandler("/scripts.js", http.HandlerFunc(page.ScriptsHandler))
 	subHandler("/wasm/", http.FileServer(http.Dir("wasm")))
 	subHandler("/files/", http.FileServer(http.Dir("files")))
 	subHandler("/issue/", http.HandlerFunc(issueHandler))
 	subHandler("/commit/", http.HandlerFunc(commitHandler))
 	subHandler("/patch/", http.HandlerFunc(patchesHandler))
+	site, err := page.NewSite("Gio - immediate mode GUI in Go")
+	if err != nil {
+		log.Fatal(err)
+	}
 	http.Handle("/", vanityHandler(
-		pageHandler(http.HandlerFunc(godocHandler)),
+		site.Handler(http.HandlerFunc(godocHandler)),
 	))
 
 	port := os.Getenv("PORT")
@@ -32,24 +33,6 @@ func main() {
 	}
 
 	log.Fatal(http.ListenAndServe(fmt.Sprintf(":%s", port), nil))
-}
-
-func scriptsHandler(w http.ResponseWriter, r *http.Request) {
-	var buf bytes.Buffer
-	for _, script := range []string{"jquery.js", "playground.js"} {
-		buf.WriteString(static.Files[script])
-	}
-	for _, script := range []string{"site.js"} {
-		path := filepath.Join("files", script)
-		content, err := ioutil.ReadFile(path)
-		if err != nil {
-			log.Printf("scriptsHandler: failed to find %q", path)
-			http.Error(w, "scriptsHandler failed", http.StatusInternalServerError)
-		}
-		buf.Write(content)
-	}
-	w.Header().Set("Content-type", "application/javascript")
-	w.Write(buf.Bytes())
 }
 
 func subHandler(root string, handler http.Handler) {
