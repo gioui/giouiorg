@@ -47,7 +47,7 @@ $(function() {
 		$(cont).addClass("play");
 		var run = $('<button class="run">Run</button>');
 		$(cont).append(run);
-		var win = $('<div class="window"><iframe width="'+width+'" height="'+height+'" src="/wasm/'+pkg+'"></iframe></div>');
+		var win = $('<div class="window"><iframe width="'+width+'" height="'+height+'" src="/files/wasm/'+pkg+'"></iframe></div>');
 		function onRun() {
 			if (replace) {
 				$(cont).empty();
