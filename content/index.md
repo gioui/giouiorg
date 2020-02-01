@@ -2,7 +2,7 @@
 
 Gio implements portable immediate mode GUI programs in Go. Gio programs run on
 all the major platforms: iOS/tvOS, Android, Linux (Wayland/X11), macOS,
-Windows, FreeBSD, and experimental support for browsers (Webassembly/WebGL).
+Windows, FreeBSD, OpenBSD, and experimental support for browsers (Webassembly/WebGL).
 
 Gio includes an efficient vector renderer based on the Pathfinder project (https://github.com/servo/pathfinder).
 Text and other shapes are rendered using only their outlines without baking them into texture images,
