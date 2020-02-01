@@ -23,9 +23,9 @@ interfacing with native code from Gio programs.
 Hosting Gio on Sourcehut is an experiment just as Gio itself is.
 
 The most important feature of Sourcehut is that email contributions are first
-class citizens. Email has many problems, but it is permissionless, ubuitous and
+class citizens. Email has many problems, but it is permissionless, ubiquitous and
 decentralized. For example, people banned from GitHub can contribute patches,
-use the mailing list and file issues if they can send and recieve email.
+use the mailing list and file issues if they can send and receive email.
 
 Second, Sourcehut encourages using Git in a more decentralized way. There is a
 canonical Gio repository, but contributors can work on their changes in ways
@@ -41,5 +41,5 @@ lowering the incentive to extract indirect value from users and keeps the
 feature set focused on its projects.
 
 Note that even ignoring the above arguments, there is not a clear alternative.
-For example, the Go project iself supports GitHub contributions, but only as a
+For example, the Go project itself supports GitHub contributions, but only as a
 bridge to its preferred code review tool Gerrit.
