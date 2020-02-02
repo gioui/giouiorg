@@ -131,7 +131,7 @@ func (s *Site) loadMarkdown(url string) ([]byte, error) {
 	if page.Front.Title == "" {
 		page.Front.Title = s.defaultTitle
 	}
-	mdp := parser.NewWithExtensions(parser.CommonExtensions | parser.Includes | parser.Attributes)
+	mdp := parser.NewWithExtensions(parser.CommonExtensions | parser.Includes | parser.Attributes | parser.Footnotes)
 	mdp.Opts.ReadIncludeFn = func(from, path string, addr []byte) []byte {
 		content, err := includeExample(path, string(addr))
 		if err != nil {
