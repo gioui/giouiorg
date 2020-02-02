@@ -86,6 +86,7 @@ Gio with existing projects.
 
 ## Resources
 
+- [Immediate Mode GUI Programming](https://eliasnaur.com/blog/immediate-mode-gui-programming)
 - [FAQ](/doc/faq).
 - [Gophercon 2019 talk](https://www.youtube.com/watch?v=9D6eWP4peYM) about Gio and [Scatter](https://scatter.im).
 [Slides](https://go-talks.appspot.com/github.com/eliasnaur/gophercon-2019-talk/gophercon-2019.slide),
