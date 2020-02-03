@@ -109,7 +109,10 @@ func (s *Site) servePage(w io.Writer, path string) error {
 		page = p
 	} else {
 		p, err := s.loadMarkdown(path)
-		if err != nil {
+		switch {
+		case os.IsNotExist(err):
+			return errNoPage
+		case err != nil:
 			return err
 		}
 		page = p
