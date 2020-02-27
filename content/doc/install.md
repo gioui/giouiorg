@@ -27,12 +27,6 @@ Building for tvOS requires Go 1.13.
 
 ## Windows {#windows}
 
-For Windows you need the ANGLE drivers for emulating OpenGL ES.
-
-You can build ANGLE yourself or use
-[a prebuilt version](https://drive.google.com/file/d/1k2950mHNtR2iwhweHS1rJ7reChTa3rki/view?usp=sharing).
-Leave the DLLs in the same directory as the Gio program.
-
 To avoid the console appearing when running Gio programs, use the `-H windowsgui` linker flag:
 
 	$ go build -ldflags="-H windowsgui" gioui.org/example/hello
