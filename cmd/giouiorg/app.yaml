@@ -4,10 +4,6 @@ runtime: go113
 
 handlers:
 
-- url: /files
-  static_dir: files
-  secure: always
-
 - url: .*
   script: auto
   secure: always
