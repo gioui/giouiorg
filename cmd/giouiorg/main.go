@@ -18,6 +18,8 @@ func main() {
 	subHandler("/issue/", http.HandlerFunc(issueHandler))
 	subHandler("/commit/", http.HandlerFunc(commitHandler))
 	subHandler("/patch/", http.HandlerFunc(patchesHandler))
+	subHandler("/include/files/", http.FileServer(http.Dir("include/files")))
+
 	site, err := page.NewSite("Gio - immediate mode GUI in Go")
 	if err != nil {
 		log.Fatal(err)
