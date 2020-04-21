@@ -97,6 +97,10 @@ Gio with existing projects.
 [Slides](https://go-talks.appspot.com/github.com/eliasnaur/gophercon-uk-2019-talk/gophercon-uk-2019-live.slide),
 [Demos](https://github.com/eliasnaur/gophercon-uk-2019-talk).
 
+## Community Calls
+
+- [2020-04-21](https://www.youtube.com/watch?v=4qiHYE81nIE)
+
 ## Source code
 
 The source code for Gio is [hosted on
