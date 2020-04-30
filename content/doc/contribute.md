@@ -19,7 +19,7 @@ Patches should be sent to
 mailing list with the `git send-email` command. See
 [git-send-email.io](https://git-send-email.io) for a thorough setup guide.
 
-If you have a [sourcehut](https://git.sr.ht) account, you can also
+If you have a [sourcehut](https://sr.ht) account, you can also
 email a patch in a browser from the front page of your forked version
 of the Gio repository.
 

@@ -103,8 +103,7 @@ Gio with existing projects.
 
 ## Source code
 
-The source code for Gio is [hosted on
-sourcehut](https://git.sr.ht/~eliasnaur/gio).
+The source code, mailing lists and issue tracker for Gio are [hosted on sourcehut](https://sr.ht/~eliasnaur/gio).
 
 ## Issues
 
