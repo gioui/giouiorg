@@ -31,11 +31,14 @@ window management, input and GPU drawing.
 - [Android](/doc/install#android)
 - [WebAssembly](/doc/install#wasm)
 
+Gio supports the latest released version of
+[Go](https://golang.org/dl) in module mode. Earlier versions of Go and
+GOPATH mode might work, but no effort is made to keep them working.
 
 ## Running Gio programs
 
-With [Go 1.13](https://golang.org/dl/) or newer, initialize a new module and run
-the "hello" example:
+Use the `go` tool to initialize a new module and run the "hello"
+example:
 
 	$ go mod init example.com
 	$ go run gioui.org/example/hello
