@@ -124,10 +124,6 @@ account is required and you can post without being subscribed.
 See the [contribution guide](/doc/contribute) for more details.
 
 
-## License
-
-Dual-licensed under [UNLICENSE](https://unlicense.org) or the MIT.
-
 ## Sponsors
 
 <div class="sponsor">
