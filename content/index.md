@@ -10,15 +10,43 @@ implemented on OpenGL ES and Direct3D 11.
 Text and other shapes are rendered using only their outlines without baking them into texture images,
 to support efficient animations, transformed drawing and pixel resolution independence.
 
-[![GoDoc](https://godoc.org/gioui.org?status.svg)](https://godoc.org/gioui.org)
-
 This is a screenshot of the [Kitchen
 example](https://git.sr.ht/~eliasnaur/gio/tree/master/example/kitchen/kitchen.go). If your browser
-supports WebAssembly and WebGL, run the example by pressing run.
+supports WebAssembly and WebGL, run the example by pressing the run
+button.
 
 {data-run="wasm" data-pkg="kitchen" data-size="800x600"}
 <img src="/files/wasm/kitchen.png" alt="Kitchen screenshot" width="800"/>
 
+
+## Documentation
+
+Documentation is sparse. The
+[examples](https://godoc.org/gioui.org/example) gives a feel of the
+structure of typical Gio programs.
+
+[Operations](https://godoc.org/gioui.org/op) and stateful operation
+lists are the low-level primitives of Gio. The important operations
+are for [drawing](https://godoc.org/gioui.org/op/paint) and
+[clipping](https://godoc.org/gioui.org/op/clip), as well as
+[pointer](https://godoc.org/gioui.org/io/pointer) and
+[keyboard](https://godoc.org/gioui.org/io/key) input.
+
+The [layout](https://godoc.org/gioui.org/layout) package implements
+useful layouts, while the [widget](https://godoc.org/gioui.org/widget)
+and [widget/material](https://godoc.org/gioui.org/widget/material)
+packages implement common user interface widgets. The
+[gesture](https://godoc.org/gioui.org/gesture) package detects common
+gestures from lower-level input events.
+
+Layouts, widgets and gestures are all implemented in terms of operations.
+
+Package [app](https://godoc.org/gioui.org/app) is for creating
+windows and apply operations to them. Only the app package and its
+sub-packages have native dependencies, making Gio [highly
+portable](https://godoc.org/gioui.org/example/glfw).
+
+[![GoDoc](https://godoc.org/gioui.org?status.svg)](https://godoc.org/gioui.org)
 
 ## Installation
 
