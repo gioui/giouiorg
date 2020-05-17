@@ -40,6 +40,8 @@ command that comes with the SDK:
 
 	$ sdkmanager ndk-bundle
 
+To run Gio programs on the emulator, you may need to [enable OpenGL ES 3](https://developer.android.com/studio/run/emulator-acceleration).
+
 ## Webassembly/WebGL {#wasm}
 
 To run Gio in a browser you need support for WebAssembly and WebGL.
