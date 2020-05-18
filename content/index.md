@@ -149,7 +149,9 @@ to [~eliasnaur/gio@todo.sr.ht](mailto:~eliasnaur/gio@todo.sr.ht). For general di
 Post patches to the [gio-patches list](https://lists.sr.ht/~eliasnaur/gio-patches). No Sourcehut
 account is required and you can post without being subscribed.
 
-See the [contribution guide](/doc/contribute) for more details.
+You can also use the Sourcehut web-based flow for submitting patches,
+similar to other source forges. See the [contribution
+guide](/doc/contribute) for more details.
 
 
 ## Sponsors
