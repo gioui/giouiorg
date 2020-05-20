@@ -198,7 +198,7 @@ func undent(text []byte) []byte {
 	scanner := bufio.NewScanner(bytes.NewReader(text))
 	for scanner.Scan() {
 		line := scanner.Text()
-		if strings.Contains(line, "OMIT") {
+		if strings.HasSuffix(line, "OMIT") {
 			continue
 		}
 		if first {
