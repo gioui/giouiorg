@@ -184,9 +184,13 @@ func includeExample(path string, addr string) ([]byte, error) {
 		}
 		_ = endR
 	}
+	// clear any leading and trailing whitespace
+	content = bytes.Trim(content, "\n\r")
+	content = undent(content)
+	// clear any leading and trailing whitespace left-over from omitting lines
 	content = bytes.Trim(content, "\n\r")
 	content = append(content, '\n')
-	return undent(content), err
+	return content, err
 }
 
 // undent removes the number of leading tab characters in the first
