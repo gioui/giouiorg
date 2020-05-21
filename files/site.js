@@ -23,8 +23,9 @@ $(function() {
 		run.click(onRun);
 	})
 	$("[data-run=wasm]").each(function() {
-		var pkg = $(this).data("pkg")
+		var pkg = $(this).data("pkg");
 		var size = $(this).data("size");
+		var args = $(this).data("args");
 		var width = "";
 		var height = "";
 		if (size !== undefined) {
@@ -47,7 +48,11 @@ $(function() {
 		$(cont).addClass("play");
 		var run = $('<button class="run">Run</button>');
 		$(cont).append(run);
-		var win = $('<div class="window"><iframe width="'+width+'" height="'+height+'" src="/files/wasm/'+pkg+'/index.html"></iframe></div>');
+		var src = "/files/wasm/"+pkg+"/index.html";
+		if (args) {
+			src = src + "#" + encodeURIComponent(args);
+		}
+		var win = $('<div class="window"><iframe width="'+width+'" height="'+height+'" src="'+src+'"></iframe></div>');
 		function onRun() {
 			if (replace) {
 				$(cont).empty();
