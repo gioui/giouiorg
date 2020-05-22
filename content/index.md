@@ -21,9 +21,18 @@ button.
 
 ## Documentation
 
-Documentation is sparse. The
-[examples](https://godoc.org/gioui.org/example) gives a feel of the
-structure of typical Gio programs.
+The [architecture
+document](/doc/architecture) is a good introduction to Gio concepts
+and API.
+
+The [examples](https://godoc.org/gioui.org/example) give a
+feel of the structure of typical Gio programs.
+
+The ["Immediate Mode GUI Programming"](https://eliasnaur.com/blog/immediate-mode-gui-programming)
+article compares Gio's immediate mode design with the traditional
+retained mode APIs such as the browser DOM.
+
+# Reference documentation
 
 [Operations](https://godoc.org/gioui.org/op) and stateful operation
 lists are the low-level primitives of Gio. The important operations
