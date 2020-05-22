@@ -7,6 +7,8 @@ gioui.org v0.0.0-20200521183411-67382bec3949/go.mod h1:AHI9rFr6AEEHCb8EPVtb/p5M+
 gioui.org v0.0.0-20200522093550-fc2a2ae61516 h1:K/GhL8LkRUiuMe6tQB2KCX93OGwBX8mIEnk3ZVlBJ5k=
 gioui.org/cmd v0.0.0-20200522093550-fc2a2ae61516 h1:TQy3yz+/HZfZmbzsolcKrVbB+18UKYcjQSO5QrE/6I8=
 gioui.org/cmd v0.0.0-20200522093550-fc2a2ae61516/go.mod h1:alCSFHg9sXxswG9nJDShVsJlVwv5RHXMrHEL7UYVlU8=
+gioui.org/cmd v0.0.0-20200522142208-60bed57cd7f4 h1:NQzcTN3ltr7eKp7w+sQjdnCttu1n4cyu82enM6sxis8=
+gioui.org/cmd v0.0.0-20200522142208-60bed57cd7f4/go.mod h1:alCSFHg9sXxswG9nJDShVsJlVwv5RHXMrHEL7UYVlU8=
 gioui.org/example v0.0.0-20200521181236-2104392a4532 h1:aW0X6gAxp51wPfhiQUspwGM0l1AQVq9lfrTemOeAb5o=
 gioui.org/example v0.0.0-20200521181236-2104392a4532/go.mod h1:dfcyBvN25RlQmwNmZDaWZLFmHmcWDkaoPEJNlwHnUFw=
 git.sr.ht/~eliasnaur/giouiorg v0.0.0-20200521183630-0c53824d2176 h1:Q4R+QyG1YXW5X6hg7JjgnY3o7eIs5qyFNWzJWpi6ceA=

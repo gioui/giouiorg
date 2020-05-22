@@ -50,7 +50,7 @@ $(function() {
 		$(cont).append(run);
 		var src = "/files/wasm/"+pkg+"/index.html";
 		if (args) {
-			src = src + "#" + encodeURIComponent(args);
+			src = src + "?argv=" + encodeURIComponent(args);
 		}
 		var win = $('<div class="window"><iframe width="'+width+'" height="'+height+'" src="'+src+'"></iframe></div>');
 		function onRun() {
