@@ -71,7 +71,7 @@ Since a GUI library needs to talk to some sort of display system to display info
 
 <{{files/architecture/main.go}}[/START DRAWLOOP OMIT/,/END DRAWLOOP OMIT/]
 
-[`app.NewWindow`](http://gioui.org/app#NewWindow) chooses the appropriate " driver" depending on the environment and build context. It might choose Wayland, Win32, Cocoa among several others.
+[`app.NewWindow`](http://gioui.org/app#NewWindow) chooses the appropriate "driver" depending on the environment and build context. It might choose Wayland, Win32, Cocoa among several others.
 
 An `app.Window` sends events from the display system to the [`windows.Events()`](https://gioui.org/app#Window.Events) channel. The system events are listed in [`gioui.org/io/system`](https://gioui.org/io/system). The input events, such as [`gioui.org/io/pointer`](https://gioui.org/io/pointer) and [`gioui.org/io/key`](https://gioui.org/io/key), are also sent into that channel.
 
@@ -130,7 +130,7 @@ For more complex clipping [`clip.Path`](https://gioui.org/op/clip#Path) can expr
 
 ### Push and Pop
 
-Some operations affect all operations that follow them. For example, `paint.ColorOp`(https://gioui.org/op/paint#ColorOp) sets the "brush" color that is used in subsequent [`op.PaintOp`](https://gioui.org/op/paint#PaintOp) operations. This drawing context also includes coordinate transformation (set by [`op.TransformOp`](https://gioui.org/op#TransformOp)) and clipping (set by [`clip.ClipOp`](https://gioui.org/op/clip#ClipOp)).
+Some operations affect all operations that follow them. For example, [`paint.ColorOp`](https://gioui.org/op/paint#ColorOp) sets the "brush" color that is used in subsequent [`op.PaintOp`](https://gioui.org/op/paint#PaintOp) operations. This drawing context also includes coordinate transformation (set by [`op.TransformOp`](https://gioui.org/op#TransformOp)) and clipping (set by [`clip.ClipOp`](https://gioui.org/op/clip#ClipOp)).
 
 We often need to set up some drawing context and then restore it to its previous state, leaving later operations unaffected. We can use [`op.StackOp`](https://gioui.org/op#StackOp) to do this. A Push operation saves the current drawing context; a Pop operation restores it.
 
@@ -391,7 +391,7 @@ The children can be:
 
 ## Themes
 
-The same abstract widget can have many visual representations, ranging from simple color color changes to entirely custom graphics. To give an application a consistent appearance it is useful to have an abstraction that represents a particular "theme".
+The same abstract widget can have many visual representations, ranging from simple color changes to entirely custom graphics. To give an application a consistent appearance it is useful to have an abstraction that represents a particular "theme".
 
 Package [`gioui.org/widget/material`](https://gioui.org/widget/material) implements a theme based on the [Material Design](https://material.io/design), and the [`Theme`](https://gioui.org/widget/material#Theme) struct encapsulates the parameters for varying colors, sizes and fonts.
 
