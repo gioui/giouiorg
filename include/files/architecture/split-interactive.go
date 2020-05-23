@@ -14,11 +14,11 @@ import (
 // START EXAMPLE OMIT
 var split Split
 
-func exampleSplit(gtx *layout.Context, th *material.Theme) {
-	split.Layout(gtx, func() {
-		FillWithLabel(gtx, th, "Left", red)
-	}, func() {
-		FillWithLabel(gtx, th, "Right", blue)
+func exampleSplit(gtx layout.Context, th *material.Theme) layout.Dimensions {
+	return split.Layout(gtx, func(gtx layout.Context) layout.Dimensions {
+		return FillWithLabel(gtx, th, "Left", red)
+	}, func(gtx layout.Context) layout.Dimensions {
+		return FillWithLabel(gtx, th, "Right", blue)
 	})
 }
 
@@ -42,13 +42,7 @@ type Split struct {
 
 var defaultBarWidth = unit.Dp(10)
 
-func (s *Split) Layout(gtx *layout.Context, left, right layout.Widget) {
-	savedConstraints := gtx.Constraints
-	defer func() {
-		gtx.Constraints = savedConstraints
-		gtx.Dimensions.Size = gtx.Constraints.Max
-	}()
-
+func (s *Split) Layout(gtx layout.Context, left, right layout.Widget) layout.Dimensions {
 	// START BAR OMIT
 	bar := gtx.Px(s.Bar)
 	if bar <= 1 {
@@ -117,8 +111,9 @@ func (s *Split) Layout(gtx *layout.Context, left, right layout.Widget) {
 		var stack op.StackOp
 		stack.Push(gtx.Ops)
 
-		gtx.Constraints.Min.X, gtx.Constraints.Max.X = leftsize, leftsize
-		left()
+		gtx := gtx
+		gtx.Constraints.Min = image.Pt(leftsize, leftsize)
+		left(gtx)
 
 		stack.Pop()
 	}
@@ -128,11 +123,14 @@ func (s *Split) Layout(gtx *layout.Context, left, right layout.Widget) {
 		stack.Push(gtx.Ops)
 
 		op.TransformOp{}.Offset(f32.Pt(float32(rightoffset), 0)).Add(gtx.Ops)
-		gtx.Constraints.Min.X, gtx.Constraints.Max.X = rightsize, rightsize
-		right()
+		gtx := gtx
+		gtx.Constraints.Min = image.Pt(rightsize, rightsize)
+		right(gtx)
 
 		stack.Pop()
 	}
+
+	return layout.Dimensions{Size: gtx.Constraints.Max}
 }
 
 // END WIDGET OMIT

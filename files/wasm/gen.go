@@ -3,6 +3,7 @@
 package wasm
 
 import (
+	_ "gioui.org/cmd/gogio"
 	_ "gioui.org/example/kitchen"
 )
 

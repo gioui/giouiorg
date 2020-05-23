@@ -11,7 +11,7 @@ import (
 // START EXAMPLE OMIT
 var isChecked widget.Bool
 
-func themedApplication(gtx *layout.Context, th *material.Theme) {
+func themedApplication(gtx layout.Context, th *material.Theme) layout.Dimensions {
 	var checkboxLabel string
 	if isChecked.Value {
 		checkboxLabel = "checked"
@@ -19,11 +19,11 @@ func themedApplication(gtx *layout.Context, th *material.Theme) {
 		checkboxLabel = "not-checked"
 	}
 
-	layout.Flex{
+	return layout.Flex{
 		Axis: layout.Vertical,
 	}.Layout(gtx,
-		layout.Rigid(func() { material.H3(th, "Hello, World!").Layout(gtx) }),
-		layout.Rigid(func() { material.CheckBox(th, checkboxLabel).Layout(gtx, &isChecked) }),
+		layout.Rigid(material.H3(th, "Hello, World!").Layout),
+		layout.Rigid(material.CheckBox(th, &isChecked, checkboxLabel).Layout),
 	)
 }
 

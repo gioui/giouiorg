@@ -22,11 +22,11 @@ var (
 )
 
 // ColorBox creates a widget with the specified dimensions and color.
-func ColorBox(gtx *layout.Context, size image.Point, color color.RGBA) {
-	gtx.Dimensions.Size = size
+func ColorBox(gtx layout.Context, size image.Point, color color.RGBA) layout.Dimensions {
 	bounds := f32.Rect(0, 0, float32(size.X), float32(size.Y))
 	paint.ColorOp{Color: color}.Add(gtx.Ops)
 	paint.PaintOp{Rect: bounds}.Add(gtx.Ops)
+	return layout.Dimensions{Size: size}
 }
 
 // END WIDGET OMIT

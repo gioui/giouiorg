@@ -55,8 +55,8 @@ func doButton(ops *op.Ops, q event.Queue) {
 
 var buttonVisual ButtonVisual
 
-func handleButtonVisual(gtx *layout.Context) {
-	buttonVisual.Layout(gtx)
+func handleButtonVisual(gtx layout.Context) layout.Dimensions {
+	return buttonVisual.Layout(gtx)
 }
 
 // START VISUAL OMIT
@@ -64,26 +64,27 @@ type ButtonVisual struct {
 	pressed bool
 }
 
-func (b *ButtonVisual) Layout(gtx *layout.Context) {
+func (b *ButtonVisual) Layout(gtx layout.Context) layout.Dimensions {
 	col := color.RGBA{R: 0x80, A: 0xFF}
 	if b.pressed {
 		col = color.RGBA{G: 0x80, A: 0xFF}
 	}
-	drawSquare(gtx.Ops, col)
+	return drawSquare(gtx.Ops, col)
 }
 
-func drawSquare(ops *op.Ops, color color.RGBA) {
+func drawSquare(ops *op.Ops, color color.RGBA) layout.Dimensions {
 	square := f32.Rect(0, 0, 100, 100)
 	paint.ColorOp{Color: color}.Add(ops)
 	paint.PaintOp{Rect: square}.Add(ops)
+	return layout.Dimensions{Size: image.Pt(100, 100)}
 }
 
 // END VISUAL OMIT
 
 var button Button
 
-func handleButton(gtx *layout.Context) {
-	button.Layout(gtx)
+func handleButton(gtx layout.Context) layout.Dimensions {
+	return button.Layout(gtx)
 }
 
 // START FINAL OMIT
@@ -91,7 +92,7 @@ type Button struct {
 	pressed bool
 }
 
-func (b *Button) Layout(gtx *layout.Context) {
+func (b *Button) Layout(gtx layout.Context) layout.Dimensions {
 	// Avoid affecting the input tree with pointer events.
 	var stack op.StackOp
 	stack.Push(gtx.Ops)
@@ -118,7 +119,7 @@ func (b *Button) Layout(gtx *layout.Context) {
 	if b.pressed {
 		col = color.RGBA{G: 0x80, A: 0xFF}
 	}
-	drawSquare(gtx.Ops, col)
+	return drawSquare(gtx.Ops, col)
 }
 
 // END FINAL OMIT

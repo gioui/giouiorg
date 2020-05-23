@@ -10,19 +10,17 @@ import (
 )
 
 // START EXAMPLE OMIT
-func exampleSplitVisual(gtx *layout.Context, th *material.Theme) {
-	SplitVisual{}.Layout(gtx, func() {
-		FillWithLabel(gtx, th, "Left", red)
-	}, func() {
-		FillWithLabel(gtx, th, "Right", blue)
+func exampleSplitVisual(gtx layout.Context, th *material.Theme) layout.Dimensions {
+	return SplitVisual{}.Layout(gtx, func(gtx layout.Context) layout.Dimensions {
+		return FillWithLabel(gtx, th, "Left", red)
+	}, func(gtx layout.Context) layout.Dimensions {
+		return FillWithLabel(gtx, th, "Right", blue)
 	})
 }
 
-func FillWithLabel(gtx *layout.Context, th *material.Theme, text string, backgroundColor color.RGBA) {
+func FillWithLabel(gtx layout.Context, th *material.Theme, text string, backgroundColor color.RGBA) layout.Dimensions {
 	ColorBox(gtx, gtx.Constraints.Max, backgroundColor)
-	layout.Center.Layout(gtx, func() {
-		material.H3(th, text).Layout(gtx)
-	})
+	return layout.Center.Layout(gtx, material.H3(th, text).Layout)
 }
 
 // END EXAMPLE OMIT
@@ -30,13 +28,7 @@ func FillWithLabel(gtx *layout.Context, th *material.Theme, text string, backgro
 // START WIDGET OMIT
 type SplitVisual struct{}
 
-func (s SplitVisual) Layout(gtx *layout.Context, left, right layout.Widget) {
-	savedConstraints := gtx.Constraints
-	defer func() {
-		gtx.Constraints = savedConstraints
-		gtx.Dimensions.Size = gtx.Constraints.Max
-	}()
-
+func (s SplitVisual) Layout(gtx layout.Context, left, right layout.Widget) layout.Dimensions {
 	leftsize := gtx.Constraints.Min.X / 2
 	rightsize := gtx.Constraints.Min.X - leftsize
 
@@ -44,9 +36,10 @@ func (s SplitVisual) Layout(gtx *layout.Context, left, right layout.Widget) {
 		var stack op.StackOp
 		stack.Push(gtx.Ops)
 
+		gtx := gtx
 		gtx.Constraints.Min.X = leftsize
 		gtx.Constraints.Max.X = leftsize
-		left()
+		left(gtx)
 
 		stack.Pop()
 	}
@@ -55,14 +48,17 @@ func (s SplitVisual) Layout(gtx *layout.Context, left, right layout.Widget) {
 		var stack op.StackOp
 		stack.Push(gtx.Ops)
 
+		gtx := gtx
 		gtx.Constraints.Min.X = rightsize
 		gtx.Constraints.Max.X = rightsize
 
 		op.TransformOp{}.Offset(f32.Pt(float32(leftsize), 0)).Add(gtx.Ops)
-		right()
+		right(gtx)
 
 		stack.Pop()
 	}
+
+	return layout.Dimensions{Size: gtx.Constraints.Max}
 }
 
 // END WIDGET OMIT

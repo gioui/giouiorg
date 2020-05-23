@@ -1,6 +1,8 @@
 package main
 
 import (
+	"image"
+
 	"gioui.org/f32"
 	"gioui.org/layout"
 	"gioui.org/op"
@@ -8,11 +10,11 @@ import (
 )
 
 // START EXAMPLE OMIT
-func exampleSplitRatio(gtx *layout.Context, th *material.Theme) {
-	SplitRatio{Ratio: -0.3}.Layout(gtx, func() {
-		FillWithLabel(gtx, th, "Left", red)
-	}, func() {
-		FillWithLabel(gtx, th, "Right", blue)
+func exampleSplitRatio(gtx layout.Context, th *material.Theme) layout.Dimensions {
+	return SplitRatio{Ratio: -0.3}.Layout(gtx, func(gtx layout.Context) layout.Dimensions {
+		return FillWithLabel(gtx, th, "Left", red)
+	}, func(gtx layout.Context) layout.Dimensions {
+		return FillWithLabel(gtx, th, "Right", blue)
 	})
 }
 
@@ -25,13 +27,7 @@ type SplitRatio struct {
 	Ratio float32
 }
 
-func (s SplitRatio) Layout(gtx *layout.Context, left, right layout.Widget) {
-	savedConstraints := gtx.Constraints
-	defer func() {
-		gtx.Constraints = savedConstraints
-		gtx.Dimensions.Size = gtx.Constraints.Max
-	}()
-
+func (s SplitRatio) Layout(gtx layout.Context, left, right layout.Widget) layout.Dimensions {
 	proportion := (s.Ratio + 1) / 2
 	leftsize := int(proportion * float32(gtx.Constraints.Max.X))
 
@@ -42,8 +38,9 @@ func (s SplitRatio) Layout(gtx *layout.Context, left, right layout.Widget) {
 		var stack op.StackOp
 		stack.Push(gtx.Ops)
 
-		gtx.Constraints.Min.X, gtx.Constraints.Max.X = leftsize, leftsize
-		left()
+		gtx := gtx
+		gtx.Constraints.Min = image.Pt(leftsize, leftsize)
+		left(gtx)
 
 		stack.Pop()
 	}
@@ -53,11 +50,14 @@ func (s SplitRatio) Layout(gtx *layout.Context, left, right layout.Widget) {
 		stack.Push(gtx.Ops)
 
 		op.TransformOp{}.Offset(f32.Pt(float32(rightoffset), 0)).Add(gtx.Ops)
-		gtx.Constraints.Min.X, gtx.Constraints.Max.X = rightsize, rightsize
-		right()
+		gtx := gtx
+		gtx.Constraints.Min = image.Pt(rightsize, rightsize)
+		right(gtx)
 
 		stack.Pop()
 	}
+
+	return layout.Dimensions{Size: gtx.Constraints.Max}
 }
 
 // END WIDGET OMIT

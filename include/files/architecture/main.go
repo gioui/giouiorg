@@ -134,10 +134,10 @@ func drawQueueLoop(draw func(*op.Ops, event.Queue)) func() error {
 	}
 }
 
-func contextLoop(draw func(*layout.Context)) func() error {
+func contextLoop(draw func(layout.Context) layout.Dimensions) func() error {
 	return func() error {
 		// START CONTEXTLOOP OMIT
-		gtx := new(layout.Context)
+		var ops op.Ops
 		window := app.NewWindow()
 		for {
 			select {
@@ -148,7 +148,7 @@ func contextLoop(draw func(*layout.Context)) func() error {
 					return e.Err
 				case system.FrameEvent:
 					// Reset the layout.Context for a new frame.
-					gtx.Reset(e.Queue, e.Config, e.Size)
+					gtx := layout.NewContext(&ops, e.Queue, e.Config, e.Size)
 
 					// Draw the state into ops based on events in e.Queue.
 					draw(gtx)
@@ -162,13 +162,13 @@ func contextLoop(draw func(*layout.Context)) func() error {
 	}
 }
 
-func themeLoop(draw func(*layout.Context, *material.Theme)) func() error {
+func themeLoop(draw func(layout.Context, *material.Theme) layout.Dimensions) func() error {
 	return func() error {
 		// START THEMELOOP OMIT
 		gofont.Register()
 		th := material.NewTheme()
 
-		gtx := new(layout.Context)
+		var ops op.Ops
 		window := app.NewWindow()
 		for {
 			select {
@@ -179,7 +179,7 @@ func themeLoop(draw func(*layout.Context, *material.Theme)) func() error {
 					return e.Err
 				case system.FrameEvent:
 					// Reset the layout.Context for a new frame.
-					gtx.Reset(e.Queue, e.Config, e.Size)
+					gtx := layout.NewContext(&ops, e.Queue, e.Config, e.Size)
 
 					// Draw the state into ops based on events in e.Queue.
 					draw(gtx, th)
