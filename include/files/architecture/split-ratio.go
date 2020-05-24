@@ -39,7 +39,7 @@ func (s SplitRatio) Layout(gtx layout.Context, left, right layout.Widget) layout
 		stack.Push(gtx.Ops)
 
 		gtx := gtx
-		gtx.Constraints.Min = image.Pt(leftsize, leftsize)
+		gtx.Constraints = layout.Exact(image.Pt(leftsize, gtx.Constraints.Max.Y))
 		left(gtx)
 
 		stack.Pop()
@@ -51,7 +51,7 @@ func (s SplitRatio) Layout(gtx layout.Context, left, right layout.Widget) layout
 
 		op.TransformOp{}.Offset(f32.Pt(float32(rightoffset), 0)).Add(gtx.Ops)
 		gtx := gtx
-		gtx.Constraints.Min = image.Pt(rightsize, rightsize)
+		gtx.Constraints = layout.Exact(image.Pt(rightsize, gtx.Constraints.Max.Y))
 		right(gtx)
 
 		stack.Pop()

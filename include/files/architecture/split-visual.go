@@ -1,6 +1,7 @@
 package main
 
 import (
+	"image"
 	"image/color"
 
 	"gioui.org/f32"
@@ -37,8 +38,7 @@ func (s SplitVisual) Layout(gtx layout.Context, left, right layout.Widget) layou
 		stack.Push(gtx.Ops)
 
 		gtx := gtx
-		gtx.Constraints.Min.X = leftsize
-		gtx.Constraints.Max.X = leftsize
+		gtx.Constraints = layout.Exact(image.Pt(leftsize, gtx.Constraints.Max.Y))
 		left(gtx)
 
 		stack.Pop()
@@ -49,9 +49,7 @@ func (s SplitVisual) Layout(gtx layout.Context, left, right layout.Widget) layou
 		stack.Push(gtx.Ops)
 
 		gtx := gtx
-		gtx.Constraints.Min.X = rightsize
-		gtx.Constraints.Max.X = rightsize
-
+		gtx.Constraints = layout.Exact(image.Pt(rightsize, gtx.Constraints.Max.Y))
 		op.TransformOp{}.Offset(f32.Pt(float32(leftsize), 0)).Add(gtx.Ops)
 		right(gtx)
 
