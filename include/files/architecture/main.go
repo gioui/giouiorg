@@ -28,6 +28,7 @@ func main() {
 		{name: "draw-paint", run: drawLoop(drawRedRect)},
 		{name: "draw-transformation", run: drawLoop(drawRedRect10PixelsRight)},
 		{name: "draw-clip", run: drawLoop(redButtonBackground)},
+		{name: "draw-clip-triangle", run: drawLoop(redTriangle)},
 		{name: "draw-stack", run: drawLoop(redButtonBackgroundStack)},
 		{name: "draw-draworder", run: drawLoop(drawOverlappingRectangles)},
 		{name: "draw-macro", run: drawLoop(drawFiveRectangles)},

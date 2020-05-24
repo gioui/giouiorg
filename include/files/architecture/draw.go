@@ -50,6 +50,20 @@ func redButtonBackground(ops *op.Ops) {
 
 // END CLIPPING OMIT
 
+// START CLIP TRIANGLE OMIT
+func redTriangle(ops *op.Ops) {
+	var path clip.Path
+	path.Begin(ops)
+	path.Move(f32.Pt(50, 0))
+	path.Quad(f32.Pt(0, 90), f32.Pt(50, 100))
+	path.Line(f32.Pt(-100, 0))
+	path.Line(f32.Pt(50, -100))
+	path.End().Add(ops)
+	drawRedRect(ops)
+}
+
+// END CLIP TRIANGLE OMIT
+
 // START STACK OMIT
 func redButtonBackgroundStack(ops *op.Ops) {
 	var stack op.StackOp

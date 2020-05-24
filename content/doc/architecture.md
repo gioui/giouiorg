@@ -125,8 +125,11 @@ In some cases we want the drawing to confined to a non-rectangular shape, for ex
 
 Note: that we first need to get the actual operation for the clipping with `Op` before calling `Add`. This level of indirection is useful if we want to use the same clipping operation multiple times. Under the hood, Op records a [macro](#Macros) that encodes the clipping path.
 
-For more complex clipping [`clip.Path`](https://gioui.org/op/clip#Path) can express shapes built from lines and bézier curves.
+For more complex clipping [`clip.Path`](https://gioui.org/op/clip#Path) can express shapes built from lines and bézier curves. This example draws a triangle with a curved edge:
 
+<{{files/architecture/draw.go}}[/START CLIP TRIANGLE OMIT/,/END CLIP TRIANGLE OMIT/]
+
+<pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="draw-clip-triangle" data-size="200x100"></pre>
 
 ### Push and Pop
 
