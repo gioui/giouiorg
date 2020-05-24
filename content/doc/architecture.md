@@ -93,7 +93,7 @@ You might be thinking that it would be more usual to have an `ops.Add(ColorOp{Co
 
 The [`paint`](https://gioui.org/op/paint) package provides operations for drawing graphics.
 
-Coordinates are based on the top-left corner, although it's possible to [transform the coordinate system](https://gioui.org/op#TransformOp). This means `f32.Point{X:0, Y:0}` is the top left corner of the window. All drawing operations use pixel units, see [Units](#Units) section for more information.
+Coordinates are based on the top-left corner, although it's possible to [transform the coordinate system](https://gioui.org/op#TransformOp). This means `f32.Point{X:0, Y:0}` is the top left corner of the window. All drawing operations use pixel units, see [Units](#units) section for more information.
 
 For example, the following code will draw a 10x10 pixel colored rectangle at the top level corner of the window:
 
@@ -123,7 +123,7 @@ In some cases we want the drawing to confined to a non-rectangular shape, for ex
 
 <pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="draw-clip" data-size="200x100"></pre>
 
-Note: that we first need to get the actual operation for the clipping with `Op` before calling `Add`. This level of indirection is useful if we want to use the same clipping operation multiple times. Under the hood, Op records a [macro](#Macros) that encodes the clipping path.
+Note: that we first need to get the actual operation for the clipping with `Op` before calling `Add`. This level of indirection is useful if we want to use the same clipping operation multiple times. Under the hood, Op records a [macro](#macros) that encodes the clipping path.
 
 For more complex clipping [`clip.Path`](https://gioui.org/op/clip#Path) can express shapes built from lines and bézier curves. This example draws a triangle with a curved edge:
 
@@ -143,7 +143,7 @@ For example, the `clipButtonOutline` function in the previous section has the un
 
 <pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="draw-stack" data-size="200x100"></pre>
 
-### Drawing Order and Macros
+### Drawing Order and Macros {#macros}
 
 Drawing happens from back to front. In this function the green rectangle is drawn on top of red rectangle:
 
