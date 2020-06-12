@@ -34,8 +34,7 @@ func (s SplitVisual) Layout(gtx layout.Context, left, right layout.Widget) layou
 	rightsize := gtx.Constraints.Min.X - leftsize
 
 	{
-		var stack op.StackOp
-		stack.Push(gtx.Ops)
+		stack := op.Push(gtx.Ops)
 
 		gtx := gtx
 		gtx.Constraints = layout.Exact(image.Pt(leftsize, gtx.Constraints.Max.Y))
@@ -45,8 +44,7 @@ func (s SplitVisual) Layout(gtx layout.Context, left, right layout.Widget) layou
 	}
 
 	{
-		var stack op.StackOp
-		stack.Push(gtx.Ops)
+		stack := op.Push(gtx.Ops)
 
 		gtx := gtx
 		gtx.Constraints = layout.Exact(image.Pt(rightsize, gtx.Constraints.Max.Y))

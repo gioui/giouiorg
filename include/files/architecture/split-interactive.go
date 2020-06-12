@@ -58,9 +58,7 @@ func (s *Split) Layout(gtx layout.Context, left, right layout.Widget) layout.Dim
 
 	{ // handle input
 		// Avoid affecting the input tree with pointer events.
-		var stack op.StackOp
-		stack.Push(gtx.Ops)
-		defer stack.Pop()
+		defer op.Push(gtx.Ops).Pop()
 
 		// START INPUTCODE OMIT
 		for _, ev := range gtx.Events(s) {
@@ -108,8 +106,7 @@ func (s *Split) Layout(gtx layout.Context, left, right layout.Widget) layout.Dim
 	}
 
 	{
-		var stack op.StackOp
-		stack.Push(gtx.Ops)
+		stack := op.Push(gtx.Ops)
 
 		gtx := gtx
 		gtx.Constraints = layout.Exact(image.Pt(leftsize, gtx.Constraints.Max.Y))
@@ -119,8 +116,7 @@ func (s *Split) Layout(gtx layout.Context, left, right layout.Widget) layout.Dim
 	}
 
 	{
-		var stack op.StackOp
-		stack.Push(gtx.Ops)
+		stack := op.Push(gtx.Ops)
 
 		op.TransformOp{}.Offset(f32.Pt(float32(rightoffset), 0)).Add(gtx.Ops)
 		gtx := gtx

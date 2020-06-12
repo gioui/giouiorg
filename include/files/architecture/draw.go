@@ -66,9 +66,7 @@ func redTriangle(ops *op.Ops) {
 
 // START STACK OMIT
 func redButtonBackgroundStack(ops *op.Ops) {
-	var stack op.StackOp
-	stack.Push(ops)
-	defer stack.Pop()
+	defer op.Push(ops).Pop()
 
 	const r = 1 // roundness
 	bounds := f32.Rect(0, 0, 100, 100)
@@ -94,15 +92,14 @@ func drawOverlappingRectangles(ops *op.Ops) {
 // START MACRO OMIT
 func drawFiveRectangles(ops *op.Ops) {
 	// Record drawRedRect operations into the macro.
-	var macro op.MacroOp
-	macro.Record(ops)
+	macro := op.Record(ops)
 	drawRedRect(ops)
-	macro.Stop()
+	c := macro.Stop()
 
 	// “Play back” the macro 5 times, each time
 	// translated vertically 20px and horizontally 110 pixels.
 	for i := 0; i < 5; i++ {
-		macro.Add()
+		c.Add(ops)
 		op.TransformOp{}.Offset(f32.Pt(110, 20)).Add(ops)
 	}
 }
@@ -140,11 +137,13 @@ func drawProgressBar(ops *op.Ops, now time.Time) {
 func drawWithCache(ops *op.Ops) {
 	// Save the operations in an independent ops value (the cache).
 	cache := new(op.Ops)
+	macro := op.Record(cache)
 	paint.ColorOp{Color: color.RGBA{G: 0x80, A: 0xFF}}.Add(cache)
 	paint.PaintOp{Rect: f32.Rect(0, 0, 100, 100)}.Add(cache)
+	call := macro.Stop()
 
 	// Draw the operations from the cache.
-	op.CallOp{Ops: cache}.Add(ops)
+	call.Add(ops)
 }
 
 // END CACHE OMIT

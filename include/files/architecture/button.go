@@ -20,8 +20,7 @@ var pressed = false
 
 func doButton(ops *op.Ops, q event.Queue) {
 	// Make sure we don’t pollute the graphics context.
-	var stack op.StackOp
-	stack.Push(ops)
+	stack := op.Push(ops)
 	defer stack.Pop()
 
 	// Process events that arrived between the last frame and this one.
@@ -94,9 +93,7 @@ type Button struct {
 
 func (b *Button) Layout(gtx layout.Context) layout.Dimensions {
 	// Avoid affecting the input tree with pointer events.
-	var stack op.StackOp
-	stack.Push(gtx.Ops)
-	defer stack.Pop()
+	defer op.Push(gtx.Ops).Pop()
 
 	// here we loop through all the events associated with this button.
 	for _, e := range gtx.Events(b) {

@@ -143,7 +143,7 @@ func contextLoop(draw func(layout.Context) layout.Dimensions) func() error {
 				return e.Err
 			case system.FrameEvent:
 				// Reset the layout.Context for a new frame.
-				gtx := layout.NewContext(&ops, e.Queue, e.Config, e.Size)
+				gtx := layout.NewContext(&ops, e)
 
 				// Draw the state into ops based on events in e.Queue.
 				draw(gtx)
@@ -160,8 +160,7 @@ func contextLoop(draw func(layout.Context) layout.Dimensions) func() error {
 func themeLoop(draw func(layout.Context, *material.Theme) layout.Dimensions) func() error {
 	return func() error {
 		// START THEMELOOP OMIT
-		gofont.Register()
-		th := material.NewTheme()
+		th := material.NewTheme(gofont.Collection())
 
 		var ops op.Ops
 		window := app.NewWindow()
@@ -172,7 +171,7 @@ func themeLoop(draw func(layout.Context, *material.Theme) layout.Dimensions) fun
 				return e.Err
 			case system.FrameEvent:
 				// Reset the layout.Context for a new frame.
-				gtx := layout.NewContext(&ops, e.Queue, e.Config, e.Size)
+				gtx := layout.NewContext(&ops, e)
 
 				// Draw the state into ops based on events in e.Queue.
 				draw(gtx, th)
