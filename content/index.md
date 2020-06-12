@@ -140,6 +140,7 @@ Gio with existing projects.
 ## Community Calls
 
 - [2020-04-21](https://www.youtube.com/watch?v=4qiHYE81nIE)
+- [2020-05-21](https://www.youtube.com/watch?v=zC-qffC7sz8)
 
 ## Source code
 
