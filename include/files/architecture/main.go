@@ -89,24 +89,22 @@ func drawLoop(draw func(*op.Ops)) func() error {
 	return func() error {
 		// START DRAWLOOP OMIT
 		window := app.NewWindow()
-		for {
-			select {
-			case e := <-window.Events():
-				switch e := e.(type) {
-				case system.DestroyEvent:
-					// The window was closed.
-					return e.Err
-				case system.FrameEvent:
-					// A request to draw the window state.
-					ops := new(op.Ops)
-					// Draw the state into ops.
-					draw(ops)
-					// Update the display.
-					e.Frame(ops)
-				}
+		for e := range window.Events() {
+			switch e := e.(type) {
+			case system.DestroyEvent:
+				// The window was closed.
+				return e.Err
+			case system.FrameEvent:
+				// A request to draw the window state.
+				ops := new(op.Ops)
+				// Draw the state into ops.
+				draw(ops)
+				// Update the display.
+				e.Frame(ops)
 			}
 		}
 		// END DRAWLOOP OMIT
+		return nil
 	}
 }
 
@@ -114,24 +112,22 @@ func drawQueueLoop(draw func(*op.Ops, event.Queue)) func() error {
 	return func() error {
 		// START DRAWQUEUELOOP OMIT
 		window := app.NewWindow()
-		for {
-			select {
-			case e := <-window.Events():
-				switch e := e.(type) {
-				case system.DestroyEvent:
-					// The window was closed.
-					return e.Err
-				case system.FrameEvent:
-					// A request to draw the window state.
-					ops := new(op.Ops)
-					// Draw the state into ops based on events in e.Queue.
-					draw(ops, e.Queue)
-					// Update the display.
-					e.Frame(ops)
-				}
+		for e := range window.Events() {
+			switch e := e.(type) {
+			case system.DestroyEvent:
+				// The window was closed.
+				return e.Err
+			case system.FrameEvent:
+				// A request to draw the window state.
+				ops := new(op.Ops)
+				// Draw the state into ops based on events in e.Queue.
+				draw(ops, e.Queue)
+				// Update the display.
+				e.Frame(ops)
 			}
 		}
 		// END DRAWQUEUELOOP OMIT
+		return nil
 	}
 }
 
@@ -140,26 +136,24 @@ func contextLoop(draw func(layout.Context) layout.Dimensions) func() error {
 		// START CONTEXTLOOP OMIT
 		var ops op.Ops
 		window := app.NewWindow()
-		for {
-			select {
-			case e := <-window.Events():
-				switch e := e.(type) {
-				case system.DestroyEvent:
-					// The window was closed.
-					return e.Err
-				case system.FrameEvent:
-					// Reset the layout.Context for a new frame.
-					gtx := layout.NewContext(&ops, e.Queue, e.Config, e.Size)
+		for e := range window.Events() {
+			switch e := e.(type) {
+			case system.DestroyEvent:
+				// The window was closed.
+				return e.Err
+			case system.FrameEvent:
+				// Reset the layout.Context for a new frame.
+				gtx := layout.NewContext(&ops, e.Queue, e.Config, e.Size)
 
-					// Draw the state into ops based on events in e.Queue.
-					draw(gtx)
+				// Draw the state into ops based on events in e.Queue.
+				draw(gtx)
 
-					// Update the display.
-					e.Frame(gtx.Ops)
-				}
+				// Update the display.
+				e.Frame(gtx.Ops)
 			}
 		}
 		// END CONTEXTLOOP OMIT
+		return nil
 	}
 }
 
@@ -171,25 +165,23 @@ func themeLoop(draw func(layout.Context, *material.Theme) layout.Dimensions) fun
 
 		var ops op.Ops
 		window := app.NewWindow()
-		for {
-			select {
-			case e := <-window.Events():
-				switch e := e.(type) {
-				case system.DestroyEvent:
-					// The window was closed.
-					return e.Err
-				case system.FrameEvent:
-					// Reset the layout.Context for a new frame.
-					gtx := layout.NewContext(&ops, e.Queue, e.Config, e.Size)
+		for e := range window.Events() {
+			switch e := e.(type) {
+			case system.DestroyEvent:
+				// The window was closed.
+				return e.Err
+			case system.FrameEvent:
+				// Reset the layout.Context for a new frame.
+				gtx := layout.NewContext(&ops, e.Queue, e.Config, e.Size)
 
-					// Draw the state into ops based on events in e.Queue.
-					draw(gtx, th)
+				// Draw the state into ops based on events in e.Queue.
+				draw(gtx, th)
 
-					// Update the display.
-					e.Frame(gtx.Ops)
-				}
+				// Update the display.
+				e.Frame(gtx.Ops)
 			}
 		}
 		// END THEMELOOP OMIT
+		return nil
 	}
 }
