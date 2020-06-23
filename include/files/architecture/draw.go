@@ -34,7 +34,7 @@ func drawRedRect(ops *op.Ops) {
 
 // START TRANSFORMATION OMIT
 func drawRedRect10PixelsRight(ops *op.Ops) {
-	op.TransformOp{}.Offset(f32.Pt(100, 0)).Add(ops)
+	op.Offset(f32.Pt(100, 0)).Add(ops)
 	drawRedRect(ops)
 }
 
@@ -100,7 +100,7 @@ func drawFiveRectangles(ops *op.Ops) {
 	// translated vertically 20px and horizontally 110 pixels.
 	for i := 0; i < 5; i++ {
 		c.Add(ops)
-		op.TransformOp{}.Offset(f32.Pt(110, 20)).Add(ops)
+		op.Offset(f32.Pt(110, 20)).Add(ops)
 	}
 }
 

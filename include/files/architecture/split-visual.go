@@ -48,7 +48,7 @@ func (s SplitVisual) Layout(gtx layout.Context, left, right layout.Widget) layou
 
 		gtx := gtx
 		gtx.Constraints = layout.Exact(image.Pt(rightsize, gtx.Constraints.Max.Y))
-		op.TransformOp{}.Offset(f32.Pt(float32(leftsize), 0)).Add(gtx.Ops)
+		op.Offset(f32.Pt(float32(leftsize), 0)).Add(gtx.Ops)
 		right(gtx)
 
 		stack.Pop()

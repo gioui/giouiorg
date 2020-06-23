@@ -31,7 +31,7 @@ func externalChanges() error {
 				ops.Reset()
 
 				// Offset the button based on state.
-				op.TransformOp{}.Offset(f32.Pt(buttonOffset, 0)).Add(ops)
+				op.Offset(f32.Pt(buttonOffset, 0)).Add(ops)
 
 				// Handle button input and draw.
 				doButton(ops, e.Queue)
