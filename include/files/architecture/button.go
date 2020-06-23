@@ -38,7 +38,10 @@ func doButton(ops *op.Ops, q event.Queue) {
 	// Confine the area of interest to a 100x100 rectangle.
 	pointer.Rect(image.Rect(0, 0, 100, 100)).Add(ops)
 	// Declare the tag.
-	pointer.InputOp{Tag: tag}.Add(ops)
+	pointer.InputOp{
+		Tag:   tag,
+		Types: pointer.Press | pointer.Release,
+	}.Add(ops)
 
 	var c color.RGBA
 	if pressed {
@@ -109,7 +112,10 @@ func (b *Button) Layout(gtx layout.Context) layout.Dimensions {
 
 	// Confine the area for pointer events.
 	pointer.Rect(image.Rect(0, 0, 100, 100)).Add(gtx.Ops)
-	pointer.InputOp{Tag: b}.Add(gtx.Ops)
+	pointer.InputOp{
+		Tag:   b,
+		Types: pointer.Press | pointer.Release,
+	}.Add(gtx.Ops)
 
 	// Draw the button.
 	col := color.RGBA{R: 0x80, A: 0xFF}

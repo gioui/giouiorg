@@ -73,12 +73,11 @@ func (s *Split) Layout(gtx layout.Context, left, right layout.Widget) layout.Dim
 					break
 				}
 
-				s.drag = true
 				s.dragID = e.PointerID
 				s.dragX = e.Position.X
 
-			case pointer.Move:
-				if !s.drag || s.dragID != e.PointerID {
+			case pointer.Drag:
+				if s.dragID != e.PointerID {
 					break
 				}
 
@@ -91,9 +90,6 @@ func (s *Split) Layout(gtx layout.Context, left, right layout.Widget) layout.Dim
 			case pointer.Release:
 				fallthrough
 			case pointer.Cancel:
-				if !s.drag || s.dragID != e.PointerID {
-					break
-				}
 				s.drag = false
 			}
 		}
@@ -101,7 +97,10 @@ func (s *Split) Layout(gtx layout.Context, left, right layout.Widget) layout.Dim
 		// register for input
 		barRect := image.Rect(leftsize, 0, rightoffset, gtx.Constraints.Max.X)
 		pointer.Rect(barRect).Add(gtx.Ops)
-		pointer.InputOp{Tag: s, Grab: s.drag}.Add(gtx.Ops)
+		pointer.InputOp{Tag: s,
+			Types: pointer.Press | pointer.Drag | pointer.Release,
+			Grab:  s.drag,
+		}.Add(gtx.Ops)
 		// END INPUTCODE OMIT
 	}
 
