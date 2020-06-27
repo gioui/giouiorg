@@ -136,11 +136,7 @@ Gio with existing projects.
 - [Gophercon UK 2019 talk](https://www.youtube.com/watch?v=PxnL3-Sex3o) demonstrating a Gio program built from scratch.
 [Slides](https://go-talks.appspot.com/github.com/eliasnaur/gophercon-uk-2019-talk/gophercon-uk-2019-live.slide),
 [Demos](https://github.com/eliasnaur/gophercon-uk-2019-talk).
-
-## Community Calls
-
-- [2020-04-21](https://www.youtube.com/watch?v=4qiHYE81nIE)
-- [2020-05-21](https://www.youtube.com/watch?v=zC-qffC7sz8)
+- [Community Calls](https://www.youtube.com/channel/UCzuKUnKK5gAFJKNyA1imIHw)
 
 ## Source code
 
