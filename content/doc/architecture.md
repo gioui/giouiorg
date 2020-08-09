@@ -205,7 +205,7 @@ For loading other fonts there is [`gioui.org/font/opentype`](https://gioui.org/f
 
 For converting strings to clip shapes there is the [`gioui.org/text`](https://gioui.org/text) package.
 
-It contains [`text.FontRegistry`](https://gioui.org/text#FontRegistry) that implements cached string to shape conversion, with appropriate fallbacks.
+It contains [`text.Cache`](https://gioui.org/text#Cache) that implements cached string to shape conversion, with appropriate fallbacks.
 
 In most cases you can use [`widget.Label`](https://gioui.org/widget#Label) which handles wrapping and layout constraints. Or when you are using material design then [`material.LabelStyle`](https://gioui.org/widget/material#LabelStyle).
 
