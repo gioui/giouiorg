@@ -218,7 +218,7 @@ Input is delivered to the widgets via a [`system.FrameEvent`](https://gioui.org/
 
 Some of the most common events in `FrameEvent.Queue` are:
 
-* [`key.Event`](https://gioui.org/io/key#Event), [`key.Focus`](https://gioui.org/io/key#Focus) - for keyboard input.
+* [`key.Event`](https://gioui.org/io/key#Event), [`key.FocusEvent`](https://gioui.org/io/key#FocusEvent) - for keyboard input.
 * [`key.EditEvent`](https://gioui.org/io/key#EditEvent) - for text editing.
 * [`pointer.Event`](https://gioui.org/io/pointer#Event) - for mouse and touch input.
 
@@ -281,8 +281,8 @@ It's possible to specify a layout statically, but display sizes vary greatly, so
 To summarise the terminology:
 
 * [`Constraints`](https://gioui.org/layout#Context.Constraints) are an "incoming" parameter to a widget. The constraints hold a widget's maximum (and minimum) size.
-* [`Dimensions`](https://gioui.org/layout#Context.Dimensions) are an "outgoing" return value from a widget, used for tracking or returning the most recent layout size.
-* [`Ops`](https://gioui.org/layout#Context.Ops) holds the generated draw operations.
+* [`Dimensions`](https://gioui.org/layout#Dimensions) are an "outgoing" return value from a widget, used for tracking or returning the most recent layout size.
+* [`Ops`](https://gioui.org/layout#Context) holds the generated draw operations.
 * [`Events`](https://gioui.org/layout#Context.Events) holds events generated since the last drawing operation.
 
 <{{files/architecture/main.go}}[/START CONTEXTLOOP OMIT/,/END CONTEXTLOOP OMIT/]
