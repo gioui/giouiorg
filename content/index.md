@@ -124,6 +124,7 @@ Gio with existing projects.
 ## Programs using Gio
 
 - [Scatter](https://scatter.im), an implementation of the Signal protocol over email.
+- [godcr](https://github.com/planetdecred/godcr), a cross-platform desktop wallet for the Decred cryptocurrency.
 
 
 ## Resources
