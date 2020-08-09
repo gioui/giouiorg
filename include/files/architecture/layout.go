@@ -12,7 +12,7 @@ import (
 
 // START INSET OMIT
 func inset(gtx layout.Context) layout.Dimensions {
-	// Draw rectangles inside of each other, with 20dp padding.
+	// Draw rectangles inside of each other, with 30dp padding.
 	return layout.UniformInset(unit.Dp(30)).Layout(gtx, func(gtx layout.Context) layout.Dimensions {
 		return ColorBox(gtx, gtx.Constraints.Max, red)
 	})
