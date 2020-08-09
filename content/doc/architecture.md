@@ -163,7 +163,7 @@ Sometimes you may want to change this order. For example, you may want to delay 
 
 Gio only issues FrameEvents when the window is resized or the user interacts with the window. However, animation requires continuous redrawing until the animation is completed. For that there is [`op.InvalidateOp`](https://gioui.org/op#InvalidateOp).
 
-The following code will animate a green "progress bar" that fills up from left to right over 5 seconds from when the program starts:
+The following code will animate a green "progress bar" that fills up from left to right over 10 seconds from when the program starts:
 
 <{{files/architecture/draw.go}}[/START ANIMATION OMIT/,/END ANIMATION OMIT/]
 
