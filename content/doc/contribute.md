@@ -10,7 +10,7 @@ Add `Fixes gio#nnn` or `Updates gio#nnn` if the change fixes or updates an exist
 issue.
 
 Contributors must agree to the [developer certificate of origin](https://developercertificate.org/),
-to ensure their work is compatible with the MIT and the UNLICENSE. Sign your commits with Signed-off-by
+to ensure their work is compatible with the MIT license and the UNLICENSE. Sign your commits with Signed-off-by
 statements to show your agreement. The `git commit --signoff` (or `-s`) command signs a commit with
 your name and email address.
 
