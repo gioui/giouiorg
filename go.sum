@@ -1,12 +1,13 @@
 cloud.google.com/go v0.34.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
 dmitri.shuralyov.com/gpu/mtl v0.0.0-20190408044501-666a987793e9/go.mod h1:H6x//7gZCb22OMCxBHrMx7a5I7Hp++hsVxbQ4BYO7hU=
 gioui.org v0.0.0-20200622101735-5368743478e0/go.mod h1:jiUwifN9cRl/zmco43aAqh0aV+s9GbhG13KcD+gEpkU=
+gioui.org v0.0.0-20200726090130-3b95e2918359/go.mod h1:jiUwifN9cRl/zmco43aAqh0aV+s9GbhG13KcD+gEpkU=
 gioui.org v0.0.0-20200809161702-a063febed977 h1:uE7dUtCS7ig7ny1gaZPz8Y7S6q4x4HjjTnvvKE5AEI8=
 gioui.org v0.0.0-20200809161702-a063febed977/go.mod h1:jiUwifN9cRl/zmco43aAqh0aV+s9GbhG13KcD+gEpkU=
 gioui.org/cmd v0.0.0-20200622185735-5bd0ecea5e43 h1:Wj8OoCIw06dNSSSPAAipnmcG7dbFn+7Et9IY37e1HBU=
 gioui.org/cmd v0.0.0-20200622185735-5bd0ecea5e43/go.mod h1:KrsGUGWoPetiRyuDmOd/GTNCBFi2u4UbESTFXZ5YqXY=
-gioui.org/example v0.0.0-20200622185735-5bd0ecea5e43 h1:Mh3cAimqo/PC9CKoAQON8ZfRwtQC7ZxqJ54fAbKcQ4I=
-gioui.org/example v0.0.0-20200622185735-5bd0ecea5e43/go.mod h1:+fPBaGHOSEZLP9Wp9CBjFsNjdL1VqoZJcrdKxCE0xXU=
+gioui.org/example v0.0.0-20200809161702-a063febed977 h1:89Tr+NjHVQXQOXMipo2p25AROFyAg/Icscg6v3+ByMY=
+gioui.org/example v0.0.0-20200809161702-a063febed977/go.mod h1:0+eQGf3hicwyyittvuku86oxBt0nhl0dpzSjkFedwVI=
 github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym/WlBOVXweHU+Q+/VP0lqqI8lqeDx9IjBqo=
 github.com/chromedp/cdproto v0.0.0-20191114225735-6626966fbae4 h1:QD3KxSJ59L2lxG6MXBjNHxiQO2RmxTQ3XcK+wO44WOg=
 github.com/chromedp/cdproto v0.0.0-20191114225735-6626966fbae4/go.mod h1:PfAWWKJqjlGFYJEidUM6aVIWPr0EpobeyVWEEmplX7g=
