@@ -125,6 +125,7 @@ Gio with existing projects.
 
 - [Scatter](https://scatter.im), an implementation of the Signal protocol over email.
 - [godcr](https://github.com/planetdecred/godcr), a cross-platform desktop wallet for the Decred cryptocurrency.
+- [sprig](https://git.sr.ht/~whereswaldon/sprig), a client for the [Arbor chat system](https://arbor.chat).
 
 
 ## Resources
