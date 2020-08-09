@@ -44,7 +44,7 @@ func drawRedRect10PixelsRight(ops *op.Ops) {
 func redButtonBackground(ops *op.Ops) {
 	const r = 10 // roundness
 	bounds := f32.Rect(0, 0, 100, 100)
-	clip.Rect{Rect: bounds, SE: r, SW: r, NW: r, NE: r}.Add(ops)
+	clip.RRect{Rect: bounds, SE: r, SW: r, NW: r, NE: r}.Add(ops)
 	drawRedRect(ops)
 }
 
@@ -70,7 +70,7 @@ func redButtonBackgroundStack(ops *op.Ops) {
 
 	const r = 1 // roundness
 	bounds := f32.Rect(0, 0, 100, 100)
-	clip.Rect{Rect: bounds, SE: r, SW: r, NW: r, NE: r}.Op(ops).Add(ops)
+	clip.RRect{Rect: bounds, SE: r, SW: r, NW: r, NE: r}.Add(ops)
 	drawRedRect(ops)
 }
 
