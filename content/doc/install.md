@@ -23,8 +23,6 @@ without Wayland support with the `nowayland` build tag.
 
 Xcode is required for Apple platforms.
 
-Building for tvOS requires Go 1.13.
-
 ## Windows {#windows}
 
 To avoid the console appearing when running Gio programs, use the `-H windowsgui` linker flag:
