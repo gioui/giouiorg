@@ -34,6 +34,15 @@ With `git send-email` configured, you can clone the project and set it up for su
     $ git config sendemail.to '~eliasnaur/gio-patches@lists.sr.ht'
     $ git config sendemail.annotate yes
 
+Include the project name in the mail subject:
+
+	$ git config format.subjectPrefix "PATCH gio"
+
+If you're contributing for a different project, replace "gio" with the
+repository name from https://sr.ht/~eliasnaur/gio/sources. For
+example, "giouiorg" is the repository for the
+[gioui.org](https://gioui.org) website.
+
 Configure your name and email address if you have not done so already:
 
     $ git config --global user.email "you@example.com"
