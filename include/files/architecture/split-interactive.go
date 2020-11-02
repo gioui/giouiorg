@@ -58,7 +58,7 @@ func (s *Split) Layout(gtx layout.Context, left, right layout.Widget) layout.Dim
 
 	{ // handle input
 		// Avoid affecting the input tree with pointer events.
-		defer op.Push(gtx.Ops).Pop()
+		stack := op.Push(gtx.Ops)
 
 		// START INPUTCODE OMIT
 		for _, ev := range gtx.Events(s) {
@@ -102,6 +102,8 @@ func (s *Split) Layout(gtx layout.Context, left, right layout.Widget) layout.Dim
 			Grab:  s.drag,
 		}.Add(gtx.Ops)
 		// END INPUTCODE OMIT
+
+		stack.Pop()
 	}
 
 	{
