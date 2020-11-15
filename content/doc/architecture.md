@@ -37,7 +37,7 @@ layoutCheckbox(keypress, checked) {
 }
 ```
 
-In the immediate mode model, the program is in control of clearing and updating the display, and directly draws widgets and handle input during the updates.
+In the immediate mode model, the program is in control of clearing and updating the display, and directly draws widgets and handles input during the updates.
 
 In contrast, traditional "retained mode" libraries own the widgets through implicit library-managed state, typically arranged in a tree-like structure such as a
 browser's [DOM](https://en.wikipedia.org/wiki/Document_Object_Model). As a result, the program must use the facilities given by the library to manipulate
@@ -95,7 +95,7 @@ The [`paint`](https://gioui.org/op/paint) package provides operations for drawin
 
 Coordinates are based on the top-left corner, although it's possible to [transform the coordinate system](https://gioui.org/op#TransformOp). This means `f32.Point{X:0, Y:0}` is the top left corner of the window. All drawing operations use pixel units, see [Units](#units) section for more information.
 
-For example, the following code will draw a 10x10 pixel colored rectangle at the top level corner of the window:
+For example, the following code will draw a 100x100 pixel colored rectangle at the top level corner of the window:
 
 <{{files/architecture/draw.go}}[/START DRAWING OMIT/,/END DRAWING OMIT/]
 
@@ -207,7 +207,7 @@ For converting strings to clip shapes there is the [`gioui.org/text`](https://gi
 
 It contains [`text.Cache`](https://gioui.org/text#Cache) that implements cached string to shape conversion, with appropriate fallbacks.
 
-In most cases you can use [`widget.Label`](https://gioui.org/widget#Label) which handles wrapping and layout constraints. Or when you are using material design then [`material.LabelStyle`](https://gioui.org/widget/material#LabelStyle).
+In most cases you can use [`widget.Label`](https://gioui.org/widget#Label) which handles wrapping and layout constraints. Or when you are using material design [`material.LabelStyle`](https://gioui.org/widget/material#LabelStyle).
 
 <!-- TODO: code example. -->
 
@@ -228,7 +228,7 @@ Event-processors, such as [`Click`](https://gioui.org/gesture#Click) and [`Scrol
 
 To distribute input among multiple different widgets, Gio needs to know about event handlers and their configuration. However, since the Gio framework is stateless, there's no direct way for the program to specify that.
 
-Instead, some operations associate input event types (for example, keyboard presses) with arbitrary [tags](https://gioui.org/io/event#Tag) (interface{} values) chosen by the program. A program creates these operations when it's processing the [`FrameEvent`](https://gioui.org/io/system#FrameEvent)- input operations are operations like any other. In return, an [event.Queue](https://gioui.org/io/event#Queue) supplies the events that arrived since the last frame, separated by tag.
+Instead, some operations associate input event types (for example, keyboard presses) with arbitrary [tags](https://gioui.org/io/event#Tag) (interface{} values) chosen by the program. A program creates these operations when it's processing the [`FrameEvent`](https://gioui.org/io/system#FrameEvent) -- input operations are operations like any other. In return, an [event.Queue](https://gioui.org/io/event#Queue) supplies the events that arrived since the last frame, separated by tag.
 
 The following example demonstrates pointer input handling:
 
@@ -258,7 +258,7 @@ Writing a program using these concepts could get really verbose, which is why Gi
 
 ## Widget
 
-We've been mentioning widgets quite a while now. In principle widgets are composable and drawable UI elements that may react to input. Or to put more concretely.
+We've been mentioning widgets for quite a while now. In principle widgets are composable and drawable UI elements that may react to input. More concretely:
 
 * They get input from an [`Queue`](https://gioui.org/io/system#FrameEvent.Queue).
 * They might hold some state.
@@ -315,7 +315,7 @@ The layout coordinate system is in integer pixels, because it's important that w
 
 As a bonus, integer coordinates are perfectly deterministic across all platforms which leads to easier debugging and testing of layouts.
 
-On the other hand, drawing commands need the generality of floating point coordinates for smooth animation and for expression inherently fractional shapes such as bézier curves.
+On the other hand, drawing commands need the generality of floating point coordinates for smooth animation and for expressing inherently fractional shapes such as bézier curves.
 
 It's possible to draw shapes that overlap at fractional pixel coordinates, but only intentionally: drawing commands directly derived from layout constraints have integer coordinates by construction.
 
