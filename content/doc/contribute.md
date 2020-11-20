@@ -52,3 +52,9 @@ Whenever you want to submit your work for review, use `git send-email` with the 
 changes. For example, to submit the most recent commit use
 
     $ git send-email HEAD^
+
+## Automatic patch testing
+
+Patches with the project name "gio" in the subject will be picked up by the automatic testers at
+[builds.sr.ht](https://builds.sr.ht). A report with the testing results will be sent to you, CC'ed
+to the mailing list.
