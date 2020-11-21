@@ -48,10 +48,14 @@ Configure your name and email address if you have not done so already:
     $ git config --global user.email "you@example.com"
     $ git config --global user.name "Your Name"
 
-Whenever you want to submit your work for review, use `git send-email` with the base revision of your
-changes. For example, to submit the most recent commit use
+Whenever you want to submit your work for review, use `git send-email` with the number of commit on the
+current branch you want to send. For example, to submit the most recent commit use
 
-    $ git send-email HEAD^
+    $ git send-email -1
+
+If you revise your patchset, add a version to the subject line with the `-vX` flag:
+
+    $ git send-email -v2 -1
 
 ## Automatic patch testing
 
