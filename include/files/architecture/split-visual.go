@@ -19,7 +19,7 @@ func exampleSplitVisual(gtx layout.Context, th *material.Theme) layout.Dimension
 	})
 }
 
-func FillWithLabel(gtx layout.Context, th *material.Theme, text string, backgroundColor color.RGBA) layout.Dimensions {
+func FillWithLabel(gtx layout.Context, th *material.Theme, text string, backgroundColor color.NRGBA) layout.Dimensions {
 	ColorBox(gtx, gtx.Constraints.Max, backgroundColor)
 	return layout.Center.Layout(gtx, material.H3(th, text).Layout)
 }

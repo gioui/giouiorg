@@ -6,8 +6,9 @@ import (
 	"image"
 	"image/color"
 
-	"gioui.org/f32"
 	"gioui.org/layout"
+	"gioui.org/op"
+	"gioui.org/op/clip"
 	"gioui.org/op/paint"
 )
 
@@ -15,17 +16,18 @@ import (
 
 // Test colors.
 var (
-	background = color.RGBA{R: 0xC0, G: 0xC0, B: 0xC0, A: 0xFF}
-	red        = color.RGBA{R: 0xC0, G: 0x40, B: 0x40, A: 0xFF}
-	green      = color.RGBA{R: 0x40, G: 0xC0, B: 0x40, A: 0xFF}
-	blue       = color.RGBA{R: 0x40, G: 0x40, B: 0xC0, A: 0xFF}
+	background = color.NRGBA{R: 0xC0, G: 0xC0, B: 0xC0, A: 0xFF}
+	red        = color.NRGBA{R: 0xC0, G: 0x40, B: 0x40, A: 0xFF}
+	green      = color.NRGBA{R: 0x40, G: 0xC0, B: 0x40, A: 0xFF}
+	blue       = color.NRGBA{R: 0x40, G: 0x40, B: 0xC0, A: 0xFF}
 )
 
 // ColorBox creates a widget with the specified dimensions and color.
-func ColorBox(gtx layout.Context, size image.Point, color color.RGBA) layout.Dimensions {
-	bounds := f32.Rect(0, 0, float32(size.X), float32(size.Y))
+func ColorBox(gtx layout.Context, size image.Point, color color.NRGBA) layout.Dimensions {
+	defer op.Push(gtx.Ops).Pop()
+	clip.Rect{Max: size}.Add(gtx.Ops)
 	paint.ColorOp{Color: color}.Add(gtx.Ops)
-	paint.PaintOp{Rect: bounds}.Add(gtx.Ops)
+	paint.PaintOp{}.Add(gtx.Ops)
 	return layout.Dimensions{Size: size}
 }
 

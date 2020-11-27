@@ -44,7 +44,7 @@ var list = layout.List{}
 
 func listing(gtx layout.Context) layout.Dimensions {
 	return list.Layout(gtx, 100, func(gtx layout.Context, i int) layout.Dimensions {
-		col := color.RGBA{R: byte(i * 20), G: 0x20, B: 0x20, A: 0xFF}
+		col := color.NRGBA{R: byte(i * 20), G: 0x20, B: 0x20, A: 0xFF}
 		return ColorBox(gtx, image.Pt(20, 100), col)
 	})
 }

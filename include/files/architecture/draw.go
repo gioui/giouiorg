@@ -18,7 +18,7 @@ import (
 
 // START OPERATIONS OMIT
 func addColorOperation(ops *op.Ops) {
-	red := color.RGBA{R: 0xFF, A: 0xFF}
+	red := color.NRGBA{R: 0xFF, A: 0xFF}
 	paint.ColorOp{Color: red}.Add(ops)
 }
 
@@ -26,8 +26,9 @@ func addColorOperation(ops *op.Ops) {
 
 // START DRAWING OMIT
 func drawRedRect(ops *op.Ops) {
-	paint.ColorOp{Color: color.RGBA{R: 0x80, A: 0xFF}}.Add(ops)
-	paint.PaintOp{Rect: f32.Rect(0, 0, 100, 100)}.Add(ops)
+	clip.Rect{Max: image.Pt(100, 100)}.Add(ops)
+	paint.ColorOp{Color: color.NRGBA{R: 0x80, A: 0xFF}}.Add(ops)
+	paint.PaintOp{}.Add(ops)
 }
 
 // END DRAWING OMIT
@@ -58,7 +59,7 @@ func redTriangle(ops *op.Ops) {
 	path.Quad(f32.Pt(0, 90), f32.Pt(50, 100))
 	path.Line(f32.Pt(-100, 0))
 	path.Line(f32.Pt(50, -100))
-	path.End().Add(ops)
+	path.Outline().Add(ops)
 	drawRedRect(ops)
 }
 
@@ -79,12 +80,18 @@ func redButtonBackgroundStack(ops *op.Ops) {
 // START DRAWORDER OMIT
 func drawOverlappingRectangles(ops *op.Ops) {
 	// Draw a red rectangle.
-	paint.ColorOp{Color: color.RGBA{R: 0x80, A: 0xFF}}.Add(ops)
-	paint.PaintOp{Rect: f32.Rect(0, 0, 100, 50)}.Add(ops)
+	stack := op.Push(ops)
+	clip.Rect{Max: image.Pt(100, 50)}.Add(ops)
+	paint.ColorOp{Color: color.NRGBA{R: 0x80, A: 0xFF}}.Add(ops)
+	paint.PaintOp{}.Add(ops)
+	stack.Pop()
 
 	// Draw a green rectangle.
-	paint.ColorOp{Color: color.RGBA{G: 0x80, A: 0xFF}}.Add(ops)
-	paint.PaintOp{Rect: f32.Rect(0, 0, 50, 100)}.Add(ops)
+	stack = op.Push(ops)
+	clip.Rect{Max: image.Pt(50, 100)}.Add(ops)
+	paint.ColorOp{Color: color.NRGBA{G: 0x80, A: 0xFF}}.Add(ops)
+	paint.PaintOp{}.Add(ops)
+	stack.Pop()
 }
 
 // END DRAWORDER OMIT
@@ -126,9 +133,12 @@ func drawProgressBar(ops *op.Ops, now time.Time) {
 		progress = 1
 	}
 
-	paint.ColorOp{Color: color.RGBA{G: 0x80, A: 0xFF}}.Add(ops)
+	defer op.Push(ops).Pop()
 	width := 200 * float32(progress)
-	paint.PaintOp{Rect: f32.Rect(0, 0, width, 20)}.Add(ops)
+	clip.Rect{Max: image.Pt(int(width), 20)}.Add(ops)
+	paint.ColorOp{Color: color.NRGBA{R: 0x80, A: 0xFF}}.Add(ops)
+	paint.ColorOp{Color: color.NRGBA{G: 0x80, A: 0xFF}}.Add(ops)
+	paint.PaintOp{}.Add(ops)
 }
 
 // END ANIMATION OMIT
@@ -138,8 +148,12 @@ func drawWithCache(ops *op.Ops) {
 	// Save the operations in an independent ops value (the cache).
 	cache := new(op.Ops)
 	macro := op.Record(cache)
-	paint.ColorOp{Color: color.RGBA{G: 0x80, A: 0xFF}}.Add(cache)
-	paint.PaintOp{Rect: f32.Rect(0, 0, 100, 100)}.Add(cache)
+
+	stack := op.Push(cache)
+	clip.Rect{Max: image.Pt(100, 100)}.Add(cache)
+	paint.ColorOp{Color: color.NRGBA{G: 0x80, A: 0xFF}}.Add(cache)
+	paint.PaintOp{}.Add(cache)
+	stack.Pop()
 	call := macro.Stop()
 
 	// Draw the operations from the cache.
@@ -166,7 +180,7 @@ func drawImageInternal(ops *op.Ops) {
 		var err error
 		exampleImage, err = createExampleImage()
 		if err != nil {
-			exampleImage = image.NewUniform(color.RGBA{R: 0xFF, A: 0xFF})
+			exampleImage = image.NewUniform(color.NRGBA{R: 0xFF, A: 0xFF})
 		}
 	}
 	drawImage(ops, exampleImage)
@@ -176,7 +190,8 @@ func drawImageInternal(ops *op.Ops) {
 func drawImage(ops *op.Ops, img image.Image) {
 	imageOp := paint.NewImageOp(img)
 	imageOp.Add(ops)
-	paint.PaintOp{Rect: f32.Rect(0, 0, 100, 100)}.Add(ops)
+	op.Affine(f32.Affine2D{}.Scale(f32.Pt(0, 0), f32.Pt(4, 4)))
+	paint.PaintOp{}.Add(ops)
 }
 
 // END IMAGE OMIT
