@@ -166,22 +166,14 @@ guide](/doc/contribute) for more details.
 ## Sponsors
 
 <div class="sponsor">
-	<a href="https://orijtech.com/?referrer=gioui.org">
-		<img srcset="/files/orijtech/orijtech.png,
-					 /files/orijtech/orijtech@2x.png 2x,
-					 /files/orijtech/orijtech@3x.png 3x"
-					 src="/files/orijtech/orijtech@3x.png" alt="Orijtech, Inc." width="350">
-		<em>"Observability and infrastructure for high performance systems and the cloud."</em>
+	<a href="https://decred.org/">
+		<img srcset="/files/decred/decred.png,
+					 /files/decred/decred@2x.png 2x"
+					 src="/files/decred/decred@2x.png" alt="decred.org" width="450">
+		<em>"Decred - Secure. Adaptable. Sustainable."</em>
 	</a>
 </div>
 
 
-Gio's main developer is working full-time on Gio, 100% supported by
-sponsorships. Please consider [sponsoring Gio](https://github.com/sponsors/eliasnaur) if you find it
-useful. Sponsorships are handled by GitHub Sponsors and are easy to
-set up.
-
-## Donations
-
-Bitcoin donations are gladly accepted to [bc1q8xw95urett00f4xs3v66p2l6xp2mfk5erpe5ug](bitcoin:bc1q8xw95urett00f4xs3v66p2l6xp2mfk5erpe5ug).
-Donations will go toward hosting expenses and for supporting the author's full time work on Gio.
+Development of Gio is funded by sponsorships. If you find Gio useful, please consider sponsoring one
+or more of its developers.
