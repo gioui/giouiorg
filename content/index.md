@@ -11,7 +11,7 @@ Text and other shapes are rendered using only their outlines without baking them
 to support efficient animations, transformed drawing and pixel resolution independence.
 
 This is a screenshot of the [Kitchen
-example](https://git.sr.ht/~eliasnaur/gio/tree/master/example/kitchen/kitchen.go). If your browser
+example](https://git.sr.ht/~eliasnaur/gio-example/tree/main/example/kitchen/kitchen.go). If your browser
 supports WebAssembly and WebGL, run the example by pressing the run
 button.
 
@@ -123,10 +123,14 @@ Gio with existing projects.
 
 ## Programs using Gio
 
-- [Scatter](https://scatter.im), an implementation of the Signal protocol over email.
 - [godcr](https://github.com/planetdecred/godcr), a cross-platform desktop wallet for the Decred cryptocurrency.
 - [sprig](https://git.sr.ht/~whereswaldon/sprig), a client for the [Arbor chat system](https://arbor.chat).
+- [Tailscale](https://github.com/tailscale/tailscale-android), a [Tailscale](https://tailscale.com) Android client.
 
+## Source code
+
+The source code, mailing lists and issue tracker for Gio are [hosted on sourcehut](https://sr.ht/~eliasnaur/gio).
+The examples are in the [gio-example](https://sr.ht/~eliasnaur/gio-example) repository.
 
 ## Resources
 
@@ -140,10 +144,6 @@ Gio with existing projects.
 [Slides](https://go-talks.appspot.com/github.com/eliasnaur/gophercon-uk-2019-talk/gophercon-uk-2019-live.slide),
 [Demos](https://github.com/eliasnaur/gophercon-uk-2019-talk).
 - [Community Calls](https://www.youtube.com/channel/UCzuKUnKK5gAFJKNyA1imIHw)
-
-## Source code
-
-The source code, mailing lists and issue tracker for Gio are [hosted on sourcehut](https://sr.ht/~eliasnaur/gio).
 
 ## Issues
 

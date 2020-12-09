@@ -408,7 +408,7 @@ Then in your application use the provided widgets:
 
 <pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="theme" data-size="200x100"></pre>
 
-[Kitchen example](https://git.sr.ht/~eliasnaur/gio/tree/master/example/kitchen/kitchen.go) shows all the different widgets available.
+[Kitchen example](https://git.sr.ht/~eliasnaur/gio-example/tree/main/example/kitchen/kitchen.go) shows all the different widgets available.
 
 ## Custom Layout
 

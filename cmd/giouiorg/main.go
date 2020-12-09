@@ -81,6 +81,9 @@ func vanityHandler(fallback http.Handler) http.Handler {
 		if r.URL.Query().Get("go-get") == "1" {
 			var repo, root string
 			switch r.URL.Path {
+			case "/example":
+				root = "gioui.org/example"
+				repo = "https://git.sr.ht/~eliasnaur/gio-example"
 			case "/website":
 				root = "gioui.org/website"
 				repo = "https://git.sr.ht/~eliasnaur/giouiorg"
@@ -90,7 +93,7 @@ func vanityHandler(fallback http.Handler) http.Handler {
 			}
 			fmt.Fprintf(w, `<html><head>
 <meta name="go-import" content="%[1]s git %[2]s">
-<meta name="go-source" content="%[1]s _ %[2]s/tree/master{/dir} %[2]s/tree/master{/dir}/{file}#L{line}">
+<meta name="go-source" content="%[1]s _ %[2]s/tree/main{/dir} %[2]s/tree/main{/dir}/{file}#L{line}">
 </head></html>`, root, repo)
 			return
 		}
