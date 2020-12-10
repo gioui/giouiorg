@@ -59,7 +59,7 @@ func redTriangle(ops *op.Ops) {
 	path.Quad(f32.Pt(0, 90), f32.Pt(50, 100))
 	path.Line(f32.Pt(-100, 0))
 	path.Line(f32.Pt(50, -100))
-	path.Outline().Add(ops)
+	clip.Outline{Path: path.End()}.Op().Add(ops)
 	drawRedRect(ops)
 }
 

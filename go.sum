@@ -1,12 +1,12 @@
 cloud.google.com/go v0.34.0/go.mod h1:aQUYkXzVsufM+DwF1aE+0xfcU+56JwCaLick0ClmMTw=
 dmitri.shuralyov.com/gpu/mtl v0.0.0-20190408044501-666a987793e9/go.mod h1:H6x//7gZCb22OMCxBHrMx7a5I7Hp++hsVxbQ4BYO7hU=
 gioui.org v0.0.0-20201119103011-21ef492cc9df/go.mod h1:Y+uS7hHMvku1Q+ooaoq6fYD5B2LGoT8JtFgvmYmRzTw=
-gioui.org v0.0.0-20201204171901-1ed77292a64a h1:YBM/i/hbzSx+BdAW6VfqTfA6aFfSooZ13O+JnAcR2vw=
-gioui.org v0.0.0-20201204171901-1ed77292a64a/go.mod h1:Y+uS7hHMvku1Q+ooaoq6fYD5B2LGoT8JtFgvmYmRzTw=
+gioui.org v0.0.0-20201209164149-679bf092cb83 h1:7JOxhbydBpEBdA4sKAIW9vy+PYcR1KH4U0q74TzugIA=
+gioui.org v0.0.0-20201209164149-679bf092cb83/go.mod h1:Y+uS7hHMvku1Q+ooaoq6fYD5B2LGoT8JtFgvmYmRzTw=
 gioui.org/cmd v0.0.0-20201126101740-9b54892cc4e3 h1:WljgIPO0LPLOUhi92gMK7kacyWefdTtAamOFul0NxVI=
 gioui.org/cmd v0.0.0-20201126101740-9b54892cc4e3/go.mod h1:wLdMwDGN/6zG8SRs7QBEUXf096UcKwco7sSlzehIYho=
-gioui.org/example v0.0.0-20201126101740-9b54892cc4e3 h1:fiRDEgEW+F9LgIXS3HE28fnnlYHwnhA5BBSZfytp1nQ=
-gioui.org/example v0.0.0-20201126101740-9b54892cc4e3/go.mod h1:Yt2WxtKcxdHXsSQqDQHFQ2UXctN7WT8cZhZZHyX+/oE=
+gioui.org/example v0.0.0-20201209203410-8d6bccdaac64 h1:0lisOzQ5I/zyBQ20a4iXVqh7XbfHBFnLuo52wr1YUxk=
+gioui.org/example v0.0.0-20201209203410-8d6bccdaac64/go.mod h1:j2S4KNLDu9TeZ1WPtmt+q+YvhHTqVBUaOwwcKbVTArI=
 github.com/BurntSushi/xgb v0.0.0-20160522181843-27f122750802/go.mod h1:IVnqGOEym/WlBOVXweHU+Q+/VP0lqqI8lqeDx9IjBqo=
 github.com/chromedp/cdproto v0.0.0-20191114225735-6626966fbae4 h1:QD3KxSJ59L2lxG6MXBjNHxiQO2RmxTQ3XcK+wO44WOg=
 github.com/chromedp/cdproto v0.0.0-20191114225735-6626966fbae4/go.mod h1:PfAWWKJqjlGFYJEidUM6aVIWPr0EpobeyVWEEmplX7g=
