@@ -11,7 +11,7 @@ Text and other shapes are rendered using only their outlines without baking them
 to support efficient animations, transformed drawing and pixel resolution independence.
 
 This is a screenshot of the [Kitchen
-example](https://git.sr.ht/~eliasnaur/gio-example/tree/main/example/kitchen/kitchen.go). If your browser
+example](https://git.sr.ht/~eliasnaur/gio-example/tree/main/kitchen/kitchen.go). If your browser
 supports WebAssembly and WebGL, run the example by pressing the run
 button.
 
@@ -25,8 +25,8 @@ The [architecture
 document](/doc/architecture) is a good introduction to Gio concepts
 and API.
 
-The [examples](https://godoc.org/gioui.org/example) give a
-feel of the structure of typical Gio programs.
+The [examples](https://pkg.go.dev/gioui.org/example) give a feel of the
+structure of typical Gio programs.
 
 The ["Immediate Mode GUI Programming"](https://eliasnaur.com/blog/immediate-mode-gui-programming)
 article compares Gio's immediate mode design with the traditional
@@ -130,7 +130,7 @@ Gio with existing projects.
 ## Source code
 
 The source code, mailing lists and issue tracker for Gio are [hosted on sourcehut](https://sr.ht/~eliasnaur/gio).
-The examples are in the [gio-example](https://sr.ht/~eliasnaur/gio-example) repository.
+The examples are in the [gio-example](https://git.sr.ht/~eliasnaur/gio-example) repository.
 
 ## Resources
 
