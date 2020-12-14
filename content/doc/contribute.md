@@ -24,6 +24,10 @@ the Gio repository, push your changes to that and use the web-based
 flow for emailing the patch. Start the process by click the "Prepare a
 patchset" button on the front page of your fork.
 
+# GitHub contributions
+
+The official [GitHub mirror](https://github.com/gioui/gio) is open for pull requests if you prefer that workflow
+to `git send-email`.
 
 ## git send-email setup
 
