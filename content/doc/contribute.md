@@ -26,7 +26,7 @@ patchset" button on the front page of your fork.
 
 # GitHub contributions
 
-The official [GitHub mirror](https://github.com/gioui/gio) is open for pull requests if you prefer that workflow
+The official [GitHub mirrors](https://github.com/gioui) are open for pull requests if you prefer that workflow
 to `git send-email`.
 
 ## git send-email setup
