@@ -3,6 +3,11 @@
 runtime: go114
 
 handlers:
+- url: /include/files
+  static_dir: include/files
+
+- url: /files
+  static_dir: files
 
 - url: .*
   script: auto
