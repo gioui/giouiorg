@@ -1,0 +1,66 @@
+# SPDX-License-Identifier: Unlicense OR MIT
+
+image: debian/testing
+packages:
+ - curl
+ - python3
+ - pkg-config
+ - libwayland-dev
+ - libx11-dev
+ - libx11-xcb-dev
+ - libxkbcommon-dev
+ - libxkbcommon-x11-dev
+ - libgles2-mesa-dev
+ - libegl1-mesa-dev
+ - libffi-dev
+ - libxcursor-dev
+ - libxrandr-dev
+ - libxinerama-dev
+ - libxi-dev
+ - libxxf86vm-dev
+sources:
+ - https://git.sr.ht/~eliasnaur/giouiorg
+environment:
+ PATH: /home/build/sdk/go/bin:/usr/bin:/home/build/sdk/google-cloud-sdk/bin
+ EGL_PLATFORM: surfaceless # for generating screenshots headless
+ gcloud_key_file: /home/build/gcloud-key.json
+secrets:
+ - 5c619053-c361-4285-b5a6-1bde645d82db
+tasks:
+ - install_go: |
+     mkdir -p /home/build/sdk
+     cd /home/build/sdk
+     curl -Lso go.tar.gz https://golang.org/dl/go1.15.6.linux-amd64.tar.gz
+     echo "3918e6cc85e7eaaa6f859f1bdbaac772e7a825b0eb423c63d3ae68b21f84b844 go.tar.gz" | sha256sum -c -
+     tar xzf go.tar.gz
+ - generate: |
+     cd giouiorg
+     go generate ./...
+ - check_gofmt: |
+     cd giouiorg
+     test -z "$(gofmt -s -l .)"
+ - check_sign_off: |
+     set +x -e
+     cd giouiorg
+     for hash in $(git log -n 10 --format="%H"); do
+        message=$(git log -1 --format=%B $hash)
+        if [[ ! "$message" =~ "Signed-off-by: " ]]; then
+            echo "Missing 'Signed-off-by' in commit $hash"
+            exit 1
+        fi
+     done
+ - install_gcloud: |
+     cd /home/build/sdk
+     curl -Lso gcloud.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-321.0.0-linux-x86_64.tar.gz
+     echo "673f8d4af5e524dcf06547f6c2debcc02ff6678f47f67812d7f90c696cd76e96 gcloud.tar.gz" | sha256sum -c -
+     tar xzf gcloud.tar.gz
+     if [ -f "$gcloud_key_file" ]; then
+         gcloud auth activate-service-account --key-file "$gcloud_key_file"
+     fi
+ - deploy: |
+     cd giouiorg
+     main_commit=$(git rev-parse main)
+     head_commit=$(git rev-parse HEAD)
+     if [ -f "$gcloud_key_file" -a "$main_commit" = "$head_commit" ]; then
+         gcloud --project giouiorg app deploy ./cmd/giouiorg --quiet
+     fi
