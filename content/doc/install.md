@@ -14,7 +14,7 @@ On Fedora 28 and newer, install the dependencies with the command
 
 On Ubuntu 18.04 and newer, use
 
-    $ apt install libwayland-dev libx11-dev libx11-xcb-dev libxkbcommon-x11-dev libgles2-mesa-dev libegl1-mesa-dev libffi-dev
+    $ apt install libwayland-dev libx11-dev libx11-xcb-dev libxkbcommon-x11-dev libgles2-mesa-dev libegl1-mesa-dev libffi-dev libxcursor-dev
 
 You can build Gio programs without X11 support with the `nox11` build tag, and
 without Wayland support with the `nowayland` build tag.
