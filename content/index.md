@@ -106,7 +106,7 @@ See the [running on mobile](/doc/mobile) page for more information.
 ## Webassembly/WebGL
 
 To run a Gio program in a compatible browser, the `gogio` tool can output a directory ready to
-serve. With the `goxec` tool you don't even need a web server:
+serve. With the `goexec` tool you don't even need a web server:
 
 	$ go run gioui.org/cmd/gogio -target js gioui.org/example/gophers
 	$ go get github.com/shurcooL/goexec
