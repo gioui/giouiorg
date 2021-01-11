@@ -22,10 +22,12 @@ sources:
  - https://git.sr.ht/~eliasnaur/giouiorg
 environment:
  PATH: /home/build/sdk/go/bin:/usr/bin:/home/build/sdk/google-cloud-sdk/bin
+ github_mirror: git@github.com:gioui/giouiorg
  EGL_PLATFORM: surfaceless # for generating screenshots headless
  gcloud_key_file: /home/build/gcloud-key.json
 secrets:
  - 5c619053-c361-4285-b5a6-1bde645d82db
+ - 3d895431-fcce-43d0-8ab9-3cfc91e63fc5
 tasks:
  - install_go: |
      mkdir -p /home/build/sdk
@@ -49,6 +51,8 @@ tasks:
             exit 1
         fi
      done
+ - mirror: |
+     ssh-keyscan github.com > "$HOME"/.ssh/known_hosts && cd giouiorg && git push --mirror "$github_mirror" || echo "failed mirroring"
  - install_gcloud: |
      cd /home/build/sdk
      curl -Lso gcloud.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-321.0.0-linux-x86_64.tar.gz
