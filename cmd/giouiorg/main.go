@@ -62,7 +62,7 @@ func commitHandler(w http.ResponseWriter, r *http.Request) {
 }
 
 func godocHandler(w http.ResponseWriter, r *http.Request) {
-	godocURL := "https://godoc.org/gioui.org" + r.URL.Path
+	godocURL := "https://pkg.go.dev/gioui.org" + r.URL.Path
 	resp, err := http.Head(godocURL)
 	switch {
 	case err != nil:
