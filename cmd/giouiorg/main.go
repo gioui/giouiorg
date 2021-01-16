@@ -93,7 +93,7 @@ func vanityHandler(fallback http.Handler) http.Handler {
 				repo = "https://git.sr.ht/~eliasnaur/giouiorg"
 			case "/x":
 				root = "gioui.org/x"
-				repo = "https://git.sr.ht/~whereswaldon/gio-incoming"
+				repo = "https://git.sr.ht/~whereswaldon/gio-x"
 			default:
 				root = "gioui.org"
 				repo = "https://git.sr.ht/~eliasnaur/gio"
