@@ -69,6 +69,10 @@ func godocHandler(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "failed to HEAD godoc.org", http.StatusInternalServerError)
 	case resp.StatusCode == http.StatusOK:
 		http.Redirect(w, r, godocURL, http.StatusFound)
+	case resp.StatusCode == http.StatusMethodNotAllowed:
+		// Because of https://github.com/golang/go/issues/43739, we can't HEAD
+		// the pkg.go.dev site. Redirect blindly.
+		http.Redirect(w, r, godocURL, http.StatusFound)
 	default:
 		http.NotFound(w, r)
 	}
