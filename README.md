@@ -2,6 +2,11 @@
 
 Source for the [gioui.org](https://gioui.org) website.
 
+# Run locally
+
+Start the website on http://localhost:8080 with the command `go run ./cmd/giouiorg`. The WebAssembly
+program binaries are not included because of their size; generate them with `go generate ./...`.
+
 ## Issues
 
 File bugs and TODOs through the [issue tracker](https://todo.sr.ht/~eliasnaur/gio) or send an email
