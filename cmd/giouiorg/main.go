@@ -94,6 +94,12 @@ func vanityHandler(fallback http.Handler) http.Handler {
 			case "/x":
 				root = "gioui.org/x"
 				repo = "https://git.sr.ht/~whereswaldon/gio-x"
+			case "/x/notify":
+				root = "gioui.org/x/notify"
+				repo = "https://git.sr.ht/~whereswaldon/gio-x"
+			case "/x/haptic":
+				root = "gioui.org/x/haptic"
+				repo = "https://git.sr.ht/~whereswaldon/gio-x"
 			default:
 				root = "gioui.org"
 				repo = "https://git.sr.ht/~eliasnaur/gio"
