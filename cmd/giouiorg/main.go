@@ -7,6 +7,7 @@ import (
 	"log"
 	"net/http"
 	"os"
+	"strings"
 
 	_ "gioui.org/website/internal/playground"
 	"gioui.org/website/page"
@@ -84,14 +85,15 @@ func vanityHandler(fallback http.Handler) http.Handler {
 	return http.HandlerFunc(func(w http.ResponseWriter, r *http.Request) {
 		if r.URL.Query().Get("go-get") == "1" {
 			var repo, root string
-			switch r.URL.Path {
-			case "/example":
+			p := r.URL.Path
+			switch {
+			case p == "/example":
 				root = "gioui.org/example"
 				repo = "https://git.sr.ht/~eliasnaur/gio-example"
-			case "/website":
+			case p == "/website":
 				root = "gioui.org/website"
 				repo = "https://git.sr.ht/~eliasnaur/giouiorg"
-			case "/x":
+			case strings.HasPrefix(p, "/x"):
 				root = "gioui.org/x"
 				repo = "https://git.sr.ht/~whereswaldon/gio-x"
 			default:
