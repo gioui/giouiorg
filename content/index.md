@@ -34,28 +34,28 @@ retained mode APIs such as the browser DOM.
 
 # Reference documentation
 
-[Operations](https://godoc.org/gioui.org/op) and stateful operation
+[Operations](https://pkg.go.dev/gioui.org/op) and stateful operation
 lists are the low-level primitives of Gio. The important operations
-are for [drawing](https://godoc.org/gioui.org/op/paint) and
-[clipping](https://godoc.org/gioui.org/op/clip), as well as
-[pointer](https://godoc.org/gioui.org/io/pointer) and
-[keyboard](https://godoc.org/gioui.org/io/key) input.
+are for [drawing](https://pkg.go.dev/gioui.org/op/paint) and
+[clipping](https://pkg.go.dev/gioui.org/op/clip), as well as
+[pointer](https://pkg.go.dev/gioui.org/io/pointer) and
+[keyboard](https://pkg.go.dev/gioui.org/io/key) input.
 
-The [layout](https://godoc.org/gioui.org/layout) package implements
-useful layouts, while the [widget](https://godoc.org/gioui.org/widget)
-and [widget/material](https://godoc.org/gioui.org/widget/material)
+The [layout](https://pkg.go.dev/gioui.org/layout) package implements
+useful layouts, while the [widget](https://pkg.go.dev/gioui.org/widget)
+and [widget/material](https://pkg.go.dev/gioui.org/widget/material)
 packages implement common user interface widgets. The
-[gesture](https://godoc.org/gioui.org/gesture) package detects common
+[gesture](https://pkg.go.dev/gioui.org/gesture) package detects common
 gestures from lower-level input events.
 
 Layouts, widgets and gestures are all implemented in terms of operations.
 
-Package [app](https://godoc.org/gioui.org/app) is for creating
+Package [app](https://pkg.go.dev/gioui.org/app) is for creating
 windows and apply operations to them. Only the app package and its
 sub-packages have native dependencies, making Gio [highly
-portable](https://godoc.org/gioui.org/example/glfw).
+portable](https://pkg.go.dev/gioui.org/example/glfw).
 
-[![GoDoc](https://godoc.org/gioui.org?status.svg)](https://godoc.org/gioui.org)
+[![GoDoc](https://pkg.go.dev/gioui.org?status.svg)](https://pkg.go.dev/gioui.org)
 
 ## Installation
 
