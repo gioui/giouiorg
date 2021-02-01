@@ -24,7 +24,7 @@ var (
 
 // ColorBox creates a widget with the specified dimensions and color.
 func ColorBox(gtx layout.Context, size image.Point, color color.NRGBA) layout.Dimensions {
-	defer op.Push(gtx.Ops).Pop()
+	defer op.Save(gtx.Ops).Load()
 	clip.Rect{Max: size}.Add(gtx.Ops)
 	paint.ColorOp{Color: color}.Add(gtx.Ops)
 	paint.PaintOp{}.Add(gtx.Ops)

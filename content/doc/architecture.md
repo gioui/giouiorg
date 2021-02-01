@@ -131,11 +131,11 @@ For more complex clipping [`clip.Path`](https://gioui.org/op/clip#Path) can expr
 
 <pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="draw-clip-triangle" data-size="200x100"></pre>
 
-### Push and Pop
+### Save and Load
 
 Some operations affect all operations that follow them. For example, [`paint.ColorOp`](https://gioui.org/op/paint#ColorOp) sets the "brush" color that is used in subsequent [`op.PaintOp`](https://gioui.org/op/paint#PaintOp) operations. This drawing context also includes coordinate transformation (set by [`op.TransformOp`](https://gioui.org/op#TransformOp)) and clipping (set by [`clip.ClipOp`](https://gioui.org/op/clip#ClipOp)).
 
-We often need to set up some drawing context and then restore it to its previous state, leaving later operations unaffected. We can use [`op.StackOp`](https://gioui.org/op#StackOp) to do this. A Push operation saves the current drawing context; a Pop operation restores it.
+We often need to set up some drawing context and then restore it to its previous state, leaving later operations unaffected. We can use [`op.StateOp`](https://gioui.org/op#StateOp) to do this. A Save operation saves the current drawing context; a Load operation restores it.
 
 For example, the `clipButtonOutline` function in the previous section has the unfortunate side-effect of clipping all later operations to the outline of the button background! Let's make a version of it that doesn't affect any callers:
 
@@ -414,12 +414,12 @@ Then in your application use the provided widgets:
 
 Sometimes the builtin layouts are not sufficient. To create a custom layout for widgets there are special functions and structures to manipulate layout.Context. In general, layouting code performs the following steps for each sub-widget:
 
-* Use `StackOp.Push`.
+* Use `op.Save`.
 * Set `layout.Context.Constraints`.
 * Set `op.TransformOp`.
 * Call `widget.Layout(gtx, ...)`.
 * Use dimensions returned by widget.
-* Use `StackOp.Pop`.
+* Use `StateOp.Load`.
 
 For complicated layouts you would also need to use macros. As an example take a look at [layout.Flex](https://gioui.org/layout#Flex). Which roughly implements:
 

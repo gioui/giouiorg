@@ -67,7 +67,7 @@ func redTriangle(ops *op.Ops) {
 
 // START STACK OMIT
 func redButtonBackgroundStack(ops *op.Ops) {
-	defer op.Push(ops).Pop()
+	defer op.Save(ops).Load()
 
 	const r = 1 // roundness
 	bounds := f32.Rect(0, 0, 100, 100)
@@ -80,18 +80,18 @@ func redButtonBackgroundStack(ops *op.Ops) {
 // START DRAWORDER OMIT
 func drawOverlappingRectangles(ops *op.Ops) {
 	// Draw a red rectangle.
-	stack := op.Push(ops)
+	stack := op.Save(ops)
 	clip.Rect{Max: image.Pt(100, 50)}.Add(ops)
 	paint.ColorOp{Color: color.NRGBA{R: 0x80, A: 0xFF}}.Add(ops)
 	paint.PaintOp{}.Add(ops)
-	stack.Pop()
+	stack.Load()
 
 	// Draw a green rectangle.
-	stack = op.Push(ops)
+	stack = op.Save(ops)
 	clip.Rect{Max: image.Pt(50, 100)}.Add(ops)
 	paint.ColorOp{Color: color.NRGBA{G: 0x80, A: 0xFF}}.Add(ops)
 	paint.PaintOp{}.Add(ops)
-	stack.Pop()
+	stack.Load()
 }
 
 // END DRAWORDER OMIT
@@ -133,7 +133,7 @@ func drawProgressBar(ops *op.Ops, now time.Time) {
 		progress = 1
 	}
 
-	defer op.Push(ops).Pop()
+	defer op.Save(ops).Load()
 	width := 200 * float32(progress)
 	clip.Rect{Max: image.Pt(int(width), 20)}.Add(ops)
 	paint.ColorOp{Color: color.NRGBA{R: 0x80, A: 0xFF}}.Add(ops)
@@ -149,11 +149,11 @@ func drawWithCache(ops *op.Ops) {
 	cache := new(op.Ops)
 	macro := op.Record(cache)
 
-	stack := op.Push(cache)
+	stack := op.Save(cache)
 	clip.Rect{Max: image.Pt(100, 100)}.Add(cache)
 	paint.ColorOp{Color: color.NRGBA{G: 0x80, A: 0xFF}}.Add(cache)
 	paint.PaintOp{}.Add(cache)
-	stack.Pop()
+	stack.Load()
 	call := macro.Stop()
 
 	// Draw the operations from the cache.

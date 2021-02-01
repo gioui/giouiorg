@@ -20,7 +20,7 @@ var pressed = false
 
 func doButton(ops *op.Ops, q event.Queue) {
 	// Make sure we don’t pollute the graphics context.
-	defer op.Push(ops).Pop()
+	defer op.Save(ops).Load()
 
 	// Process events that arrived between the last frame and this one.
 	for _, ev := range q.Events(tag) {
@@ -75,7 +75,7 @@ func (b *ButtonVisual) Layout(gtx layout.Context) layout.Dimensions {
 }
 
 func drawSquare(ops *op.Ops, color color.NRGBA) layout.Dimensions {
-	defer op.Push(ops).Pop()
+	defer op.Save(ops).Load()
 	clip.Rect{Max: image.Pt(100, 100)}.Add(ops)
 	paint.ColorOp{Color: color}.Add(ops)
 	paint.PaintOp{}.Add(ops)
@@ -97,7 +97,7 @@ type Button struct {
 
 func (b *Button) Layout(gtx layout.Context) layout.Dimensions {
 	// Avoid affecting the input tree with pointer events.
-	defer op.Push(gtx.Ops).Pop()
+	defer op.Save(gtx.Ops).Load()
 
 	// here we loop through all the events associated with this button.
 	for _, e := range gtx.Events(b) {
