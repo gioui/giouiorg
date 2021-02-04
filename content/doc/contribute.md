@@ -21,7 +21,7 @@ mailing list with the `git send-email` command. See
 
 If you have a [sourcehut](https://sr.ht) account, you can also fork
 the Gio repository, push your changes to that and use the web-based
-flow for emailing the patch. Start the process by click the "Prepare a
+flow for emailing the patch. Start the process by clicking the "Prepare a
 patchset" button on the front page of your fork.
 
 # GitHub contributions
