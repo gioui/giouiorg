@@ -95,24 +95,45 @@ func lipo() error {
 }
 
 func clang(platform string) error {
-	var rtlib string
+	var rtlib, defArch, defSDK string
 	switch platform {
 	case "ios":
 		rtlib = "clang_rt.ios"
+		defArch = "arm64"
+		defSDK = "iPhoneOS.sdk"
 	case "macos":
 		rtlib = "clang_rt.osx"
+		defArch = "x86_64"
+		defSDK = "MacOSX.sdk"
 	default:
 		return fmt.Errorf("unsupported platform: %s", platform)
 	}
 	clangArgs := os.Args[1:]
+	hasArch := false
+	hasSysroot := false
+	for _, a := range clangArgs {
+		switch a {
+		case "-arch":
+			hasArch = true
+		case "-isysroot":
+			hasSysroot = true
+		}
+	}
 	clangArgs = append(clangArgs,
 		"-target", "unknown-apple-darwin19",
 		"-L"+filepath.Join(sdkRoot, "XcodeDefault.xctoolchain/usr/lib/clang/11.0.0/lib/darwin"),
+		"-B", filepath.Join(sdkRoot, "tools"),
 		// Link the clang runtime for runtime symbols such as
 		// __isOSVersionAtLeast.
 		"-l"+rtlib,
 		"-Wno-unused-command-line-argument",
 	)
+	if !hasArch {
+		clangArgs = append(clangArgs, "-arch", defArch)
+	}
+	if !hasSysroot {
+		clangArgs = append(clangArgs, "-isysroot", filepath.Join(sdkRoot, defSDK))
+	}
 	cmd := exec.Command(
 		"clang",
 		clangArgs...)
