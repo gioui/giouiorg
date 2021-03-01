@@ -126,6 +126,7 @@ Gio with existing projects.
 - [godcr](https://github.com/planetdecred/godcr), a cross-platform desktop wallet for the Decred cryptocurrency.
 - [sprig](https://git.sr.ht/~whereswaldon/sprig), a client for the [Arbor chat system](https://arbor.chat).
 - [Tailscale](https://github.com/tailscale/tailscale-android), a [Tailscale](https://tailscale.com) Android client.
+- [Protonet](https://play.google.com/store/apps/details?id=live.protonet), a peer-to-peer chat application.
 
 ## Source code
 
