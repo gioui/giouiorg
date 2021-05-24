@@ -129,6 +129,7 @@ Gio with existing projects.
 - [Protonet](https://play.google.com/store/apps/details?id=live.protonet), a peer-to-peer chat application. [GitHub Repo](https://github.com/mearaj/protonet)
 - [Wormhole William](https://play.google.com/store/apps/details?id=io.sanford.wormhole_william), an end-to-end encrypted file transfer application using the Magic Wormhole protocol. [GitHub repository](https://github.com/psanford/wormhole-william-mobile).
 - [Sointu](https://github.com/vsariola/sointu/), a modular software synthesizer to easily produce music for 4k intros.
+- [Photon](https://gitlab.com/microo8/photon), a fast RSS reader as light as a photon.
 
 ## Source code
 
