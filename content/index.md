@@ -138,7 +138,7 @@ The examples are in the [gio-example](https://git.sr.ht/~eliasnaur/gio-example) 
 
 ## Resources
 
-- [gio-extras](https://sr.ht/~whereswaldon/gio-extras/) extends Gio with features not (yet) available in the core library.
+- [gio-x](https://git.sr.ht/~whereswaldon/gio-x) extends Gio with features not (yet) available in the core library.
 - [Immediate Mode GUI Programming](https://eliasnaur.com/blog/immediate-mode-gui-programming)
 - [FAQ](/doc/faq).
 - [Gophercon 2019 talk](https://www.youtube.com/watch?v=9D6eWP4peYM) about Gio and [Scatter](https://scatter.im).
