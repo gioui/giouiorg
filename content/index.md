@@ -179,5 +179,5 @@ guide](/doc/contribute) for more details.
 </div>
 
 
-Development of Gio is funded by sponsorships. If you find Gio useful, please consider sponsoring one
-or more of its developers.
+Development of Gio is funded by sponsorships. If you find Gio useful, please consider sponsoring the
+[project on OpenCollective](https://opencollective.com/gioui) or one or more of its developers directly.
