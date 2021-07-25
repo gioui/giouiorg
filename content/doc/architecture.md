@@ -73,7 +73,7 @@ Since a GUI library needs to talk to some sort of display system to display info
 
 [`app.NewWindow`](http://gioui.org/app#NewWindow) chooses the appropriate "driver" depending on the environment and build context. It might choose Wayland, Win32, Cocoa among several others.
 
-An `app.Window` sends events from the display system to the [`windows.Events()`](https://gioui.org/app#Window.Events) channel. The system events are listed in [`gioui.org/io/system`](https://gioui.org/io/system). The input events, such as [`gioui.org/io/pointer`](https://gioui.org/io/pointer) and [`gioui.org/io/key`](https://gioui.org/io/key), are also sent into that channel.
+An `app.Window` sends events from the display system to the [`window.Events()`](https://gioui.org/app#Window.Events) channel. The system events are listed in [`gioui.org/io/system`](https://gioui.org/io/system). The input events, such as [`gioui.org/io/pointer`](https://gioui.org/io/pointer) and [`gioui.org/io/key`](https://gioui.org/io/key), are also sent into that channel.
 
 
 ## Operations
@@ -95,7 +95,7 @@ The [`paint`](https://gioui.org/op/paint) package provides operations for drawin
 
 Coordinates are based on the top-left corner, although it's possible to [transform the coordinate system](https://gioui.org/op#TransformOp). This means `f32.Point{X:0, Y:0}` is the top left corner of the window. All drawing operations use pixel units, see [Units](#units) section for more information.
 
-For example, the following code will draw a 100x100 pixel colored rectangle at the top level corner of the window:
+For example, the following code will draw a 100x100 pixel colored rectangle at the top left corner of the window:
 
 <{{files/architecture/draw.go}}[/START DRAWING OMIT/,/END DRAWING OMIT/]
 
@@ -111,13 +111,11 @@ For example, the following function offsets the red rectangle 100 pixels to the 
 
 <pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="draw-transformation" data-size="200x100"></pre>
 
-Note: in the future, TransformOp will allow other transformations such as scaling and rotation.
-
 ### Clipping
 
-In some cases we want the drawing to confined to a non-rectangular shape, for example to avoid overlapping drawings. Package [`gioui.org/op/clip`](https://gioui.org/op/clip) provides exactly that.
+In some cases we want the drawing to be confined to a non-rectangular shape, for example to avoid overlapping drawings. Package [`gioui.org/op/clip`](https://gioui.org/op/clip) provides exactly that.
 
-[`clip.Rect`](https://gioui.org/op/clip#Rect) clips all subsequent drawing operations to a rectangle with rounded corners. This is useful as a basis for a button background:
+[`clip.RRect`](https://gioui.org/op/clip#RRect) clips all subsequent drawing operations to a rectangle with rounded corners. This is useful as a basis for a button background:
 
 <{{files/architecture/draw.go}}[/START CLIPPING OMIT/,/END CLIPPING OMIT/]
 
@@ -181,7 +179,7 @@ While `op.MacroOp` allows you to record and replay operations on a single operat
 
 [`paint.ImageOp`](https://gioui.org/op/paint#ImageOp) is used to draw images. Like [`paint.ColorOp`](https://gioui.org/op/paint#ColorOp), it sets part of the drawing context (the "brush") that's used for subsequent [`PaintOp`](https://gioui.org/op/paint#PaintOp). [`ImageOp`](https://gioui.org/op/paint#ImageOp) is used similarly to [`ColorOp`](https://gioui.org/op/paint#ColorOp).
 
-Note that [`image.RGBA`](https://golang.org/pkg/image#RGBA) and [`image.Uniform`](https://golang.org/pkg/image#Uniform) images are efficient and treated specially. Other [`Image`](https://golang.org/pkg/image#Image) implementations will undergo a more expensive copy and conversion to the underlying image model.
+Note that [`image.NRGBA`](https://golang.org/pkg/image#NRGBA) and [`image.Uniform`](https://golang.org/pkg/image#Uniform) images are efficient and treated specially. Other [`Image`](https://golang.org/pkg/image#Image) implementations will undergo a more expensive copy and conversion to the underlying image model.
 
 <{{files/architecture/draw.go}}[/START IMAGE OMIT/,/END IMAGE OMIT/]
 
@@ -281,9 +279,10 @@ It's possible to specify a layout statically, but display sizes vary greatly, so
 To summarise the terminology:
 
 * [`Constraints`](https://gioui.org/layout#Context.Constraints) are an "incoming" parameter to a widget. The constraints hold a widget's maximum (and minimum) size.
-* [`Dimensions`](https://gioui.org/layout#Dimensions) are an "outgoing" return value from a widget, used for tracking or returning the most recent layout size.
-* [`Ops`](https://gioui.org/layout#Context) holds the generated draw operations.
+* [`Ops`](https://gioui.org/layout#Context.Ops) holds the generated draw operations.
 * [`Events`](https://gioui.org/layout#Context.Events) holds events generated since the last drawing operation.
+
+By convention, functions that accept a `layout.Context` return [`layout.Dimensions`](https://gioui.org/layout#Dimensions) which provides both the dimensions of the laid-out widget and the baseline of any text content within that widget.
 
 <{{files/architecture/main.go}}[/START CONTEXTLOOP OMIT/,/END CONTEXTLOOP OMIT/]
 
@@ -339,7 +338,7 @@ Then handle pointer clicks:
 
 ## Layout
 
-Package [`gioui.org/layout`](https://gioui.org/layout) provides support for common layout operations such as spacing, lists and stacks.
+Package [`gioui.org/layout`](https://gioui.org/layout) provides support for common layout operations such as spacing, lists and stacks of overlapping widgets.
 
 In the layout examples we'll use this `ColorBox` widget to visualize layouts:
 
@@ -357,7 +356,7 @@ In the layout examples we'll use this `ColorBox` widget to visualize layouts:
 
 ### Stack
 
-[`layout.Stack`](https://gioui.org/layout#Stack) lays out child elements on top of each other, according to the alignment direction. The child of a stack layout can be:
+[`layout.Stack`](https://gioui.org/layout#Stack) lays out overlapping child elements according to the alignment direction. The child of a stack layout can be:
 
 * [`Stacked`](https://gioui.org/layout#Stacked) - which doesn't have minimum constraints and the maximum constraints passed to Stack.Layout.
 * [`Expanded`](https://gioui.org/layout#Expanded) - which uses the largest Stacked item as the minimum constraint and maximum is the maximum constraints passed to Stack.Layout.
@@ -385,7 +384,7 @@ For example, this draws green and blue rectangles on top of a red background:
 The children can be:
 
 * [`Rigid`](https://gioui.org/layout#Rigid) - are laid out with as much space left over from other rigid children.
-* [`Flexed`](https://gioui.org/layout#Flexed) - children are sized according to their weights and thespace left over from rigid children.
+* [`Flexed`](https://gioui.org/layout#Flexed) - children are sized according to their weights and the space left over from rigid children.
 
 <{{files/architecture/layout.go}}[/START FLEX OMIT/,/END FLEX OMIT/]
 
@@ -398,7 +397,7 @@ The same abstract widget can have many visual representations, ranging from simp
 
 Package [`gioui.org/widget/material`](https://gioui.org/widget/material) implements a theme based on the [Material Design](https://material.io/design), and the [`Theme`](https://gioui.org/widget/material#Theme) struct encapsulates the parameters for varying colors, sizes and fonts.
 
-To use a theme, you must first initialize in your application loop:
+To use a theme, you must first initialize it in your application loop:
 
 <{{files/architecture/main.go}}[/START THEMELOOP OMIT/,/END THEMELOOP OMIT/]
 
@@ -412,7 +411,7 @@ Then in your application use the provided widgets:
 
 ## Custom Layout
 
-Sometimes the builtin layouts are not sufficient. To create a custom layout for widgets there are special functions and structures to manipulate layout.Context. In general, layouting code performs the following steps for each sub-widget:
+Sometimes the builtin layouts are not sufficient. To create a custom layout for widgets there are special functions and structures to manipulate layout.Context. In general, layout code performs the following steps for each sub-widget:
 
 * Use `op.Save`.
 * Set `layout.Context.Constraints`.
@@ -482,9 +481,9 @@ And an example:
 
 The problem: You've created a nice new widget. You lay it out, say, in a Flex Rigid. The next Rigid draws on top of it.
 
-The explanation: Gio communicates the size of widgets dynamically via layout.Context.Dimensions (commonly "gtx.Dimensions"). High level widgets (such as Labels) "return" or pass on their dimensions in gtx.Dimensions, but lower-level operations, such as paint.PaintOp, do not set Dimensions.
+The explanation: Gio communicates the size of widgets dynamically via returned `layout.Dimensions`. High level widgets (such as Labels) return or pass on their dimensions, but lower-level operations, such as paint.PaintOp, do not automatically provide their dimensions.
 
-The solution: Update gtx.Dimensions in your widget's Layout function before you return.
+The solution: calculate the proper dimensions of the content you drew with your custom operations, and return that in your `layout.Dimension`.
 
 ### My list.List won't scroll
 
@@ -496,7 +495,7 @@ The solution: Declare your List once outside the event handling loop and reuse i
 
 ### The system is ignoring updates to a widget
 
-The problem: You define a field in your widget struct with the widget. You update the child widget state, either implicitly or explicitly. The child widget stubbornly refuses to reflect your updates.
+The problem: You define a field in your widget struct that contains one of the provided types in `gioui.org/widget`. You update the child widget state, either implicitly or explicitly. The child widget stubbornly refuses to reflect your updates.
 
 This is related to the problem with Lists that won't scroll.
 
