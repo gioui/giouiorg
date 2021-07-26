@@ -87,6 +87,9 @@ func vanityHandler(fallback http.Handler) http.Handler {
 			var repo, root string
 			p := r.URL.Path
 			switch {
+			case p == "/cpu":
+				root = "gioui.org/cpu"
+				repo = "https://git.sr.ht/~eliasnaur/gio-cpu"
 			case p == "/example":
 				root = "gioui.org/example"
 				repo = "https://git.sr.ht/~eliasnaur/gio-example"
