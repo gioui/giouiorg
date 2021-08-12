@@ -28,6 +28,9 @@ and API.
 The [examples](https://pkg.go.dev/gioui.org/example) give a feel of the
 structure of typical Gio programs.
 
+Jon Strand's [tutorial](https://jonegil.github.io/gui-with-gio/) is an great
+step-by-step guide to writing Gio programs.
+
 The ["Immediate Mode GUI Programming"](https://eliasnaur.com/blog/immediate-mode-gui-programming)
 article compares Gio's immediate mode design with the traditional
 retained mode APIs such as the browser DOM.
