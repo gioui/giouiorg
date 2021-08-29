@@ -95,13 +95,13 @@ is another example that demonstrates the material design widgets.
 
 For Android, iOS, tvOS the `gogio` tool can build and package a Gio program for you.
 
-To build an Android .apk file from the `gophers` example:
+To build an Android .apk file from the `kitchen` example:
 
 	$ go run gioui.org/cmd/gogio -target android gioui.org/example/kitchen
 
 To build for the iOS simulator:
 
-	$ go run gioui.org/cmd/gogio -target ios -appid <bundle-id> gioui.org/example/gophers
+	$ go run gioui.org/cmd/gogio -target ios -appid <bundle-id> gioui.org/example/kitchen
 
 See the [running on mobile](/doc/mobile) page for more information.
 
@@ -111,9 +111,9 @@ See the [running on mobile](/doc/mobile) page for more information.
 To run a Gio program in a compatible browser, the `gogio` tool can output a directory ready to
 serve. With the `goexec` tool you don't even need a web server:
 
-	$ go run gioui.org/cmd/gogio -target js gioui.org/example/gophers
+	$ go run gioui.org/cmd/gogio -target js gioui.org/example/kitchen
 	$ go get github.com/shurcooL/goexec
-	$ goexec 'http.ListenAndServe(":8080", http.FileServer(http.Dir("gophers")))'
+	$ goexec 'http.ListenAndServe(":8080", http.FileServer(http.Dir("kitchen")))'
 
 Open http://localhost:8080 in a browser to run the program.
 

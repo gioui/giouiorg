@@ -4,9 +4,9 @@ Gio includes very basic support for integrating with existing mobile and browser
 
 To build a Gio program as an .aar package, use the `-buildmode=archive` flag. For example,
 
-    $ go run gioui.org/cmd/gogio -target android -buildmode archive gioui.org/example/gophers
+    $ go run gioui.org/cmd/gogio -target android -buildmode archive gioui.org/example/kitchen
 
-produces gophers.aar, ready to include in an Android project.
+produces kitchen.aar, ready to include in an Android project.
 
 To display the Gio Android Activity, declare it in your AndroidManifest.xml:
 
@@ -36,9 +36,9 @@ and launch it from another Activity with
 The `gogio` tool can also produce a framework ready to include in an iOS or tvOS Xcode project.
 The command
 
-    $ go run gioui.org/cmd/gogio -target ios -buildmode archive gioui.org/example/gophers
+    $ go run gioui.org/cmd/gogio -target ios -buildmode archive gioui.org/example/kitchen
 
-outputs Gophers.framework with the demo program built for iOS.
+outputs Kitchen.framework with the demo program built for iOS.
 
 To run the Gio program, use the GioAppDelegate class from your program:
 
