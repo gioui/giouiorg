@@ -20,8 +20,6 @@ interfacing with native code from Gio programs.
 
 ## Why Sourcehut?
 
-Hosting Gio on Sourcehut is an experiment just as Gio itself is.
-
 The most important feature of Sourcehut is that email contributions are first
 class citizens. Email has many problems, but it is permissionless, ubiquitous and
 decentralized. For example, people banned from GitHub can contribute patches,
