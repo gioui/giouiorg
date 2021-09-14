@@ -22,6 +22,8 @@
 	--accent-bg-transparent: #078aea20;
 	--accent-border: 3px solid var(--accent-bg);
 
+	--target-highlight: #3cbeff;
+
 	--subtle-fg: #333;
 	--highlight-fg: #000;
 	--highlight-bg: #f0f0f0;
@@ -221,12 +223,14 @@ nav h2 {
 #toc {
 	opacity: 0.6;
 	transition: opacity 0.1s ease-in-out;
+	font-size: var(--font-size-small);
+	line-height: 1.2;
 }
 #toc:hover {
 	opacity: 1;
 }
 #toc a {
-	padding: var(--s-5) var(--s-1);
+	padding: var(--s-3) var(--s-1);
 }
 #toc a:hover {
 	background: none;
@@ -299,6 +303,16 @@ nav h2 {
 }
 .big-links a p {
 	font-size: var(--font-size-small);
+}
+
+/* Highlight target caption */
+
+:target {
+	padding-left: var(--s0);
+	border-radius: 3px;
+	box-shadow:
+		0 0 10px var(--target-highlight),
+		inset 0 0 2px var(--target-highlight);
 }
 
 /* Footer */
@@ -399,7 +413,7 @@ pre.output {
 /* Sponsor styling */
 
 .sponsor {
-	width: 25rem;
+	width: 25rem; /* TODO Fix the grid */
 	display: flex;
 	flex-direction: column;
 	font-size: 1.1rem;

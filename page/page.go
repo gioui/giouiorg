@@ -18,6 +18,8 @@ import (
 	"strings"
 
 	"github.com/gomarkdown/markdown"
+	"github.com/gomarkdown/markdown/ast"
+	"github.com/gomarkdown/markdown/html"
 	"github.com/gomarkdown/markdown/parser"
 	"golang.org/x/tools/godoc/static"
 	"gopkg.in/yaml.v2"
@@ -35,6 +37,13 @@ type frontMatter struct {
 type page struct {
 	Front   frontMatter
 	Content []byte
+
+	TableOfContents []internalLink
+}
+
+type internalLink struct {
+	Title     string
+	HeadingID string
 }
 
 var (
@@ -144,16 +153,38 @@ func (s *Site) loadMarkdown(url string) ([]byte, error) {
 		}
 		return content
 	}
-	html := markdown.ToHTML(page.Content, mdp, nil)
-	args := struct {
-		Front   frontMatter
-		Content template.HTML
-	}{page.Front, template.HTML(html)}
+
+	doc := markdown.Parse(page.Content, mdp)
+	for _, node := range doc.GetChildren() {
+		if h, ok := node.(*ast.Heading); ok {
+			page.TableOfContents = append(page.TableOfContents,
+				internalLink{
+					Title:     renderCaption(h),
+					HeadingID: h.HeadingID,
+				})
+		}
+	}
+	html := markdown.Render(doc, html.NewRenderer(html.RendererOptions{Flags: html.CommonFlags}))
+	args := map[string]interface{}{
+		"Front":           page.Front,
+		"Content":         template.HTML(html),
+		"TableOfContents": page.TableOfContents,
+	}
 	var buf bytes.Buffer
 	if err := docTmpl.ExecuteTemplate(&buf, "root", args); err != nil {
 		return nil, err
 	}
 	return buf.Bytes(), nil
+}
+
+func renderCaption(h *ast.Heading) string {
+	var s string
+	for _, c := range h.Children {
+		if t, ok := c.(*ast.Text); ok {
+			s += string(t.Literal)
+		}
+	}
+	return s
 }
 
 func includeExample(path string, addr string) ([]byte, error) {
@@ -237,13 +268,13 @@ func loadPage(content []byte) (page, error) {
 	split := bytes.SplitN(content, []byte("---"), 3)
 	if len(split) < 3 || len(split[0]) > 0 {
 		// No front matter available.
-		return page{front, content}, nil
+		return page{Front: front, Content: content}, nil
 	}
 	header, md := split[1], split[2]
 	if err := yaml.Unmarshal(header, &front); err != nil {
 		return page{}, err
 	}
-	return page{front, md}, nil
+	return page{Front: front, Content: md}, nil
 }
 
 // Handler returns a http handler that serves a page from the content

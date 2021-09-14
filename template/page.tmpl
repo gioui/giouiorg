@@ -16,15 +16,13 @@
 {{define "toc"}}
 <aside id="toc">
 	<div class="sticky-toc">
-	    <nav id="nav-toc">
-		    <ul>
-		        <li><a href="#">Demo</a></li>
-		        <li><a href="#">Get Started</a></li>
-		        <li><a href="#">Showcase</a></li>
-		        <li><a href="#">Why?</a></li>
-		        <li><a href="#">Sponsors</a></li>
-		    </ul>
-	    </nav>
-    </div>
+		<nav id="nav-toc">
+			<ul>
+				{{ range $link := .TableOfContents }}
+				<li><a href="#{{$link.HeadingID}}">{{$link.Title}}</a></li>
+				{{ end }}
+			</ul>
+		</nav>
+	</div>
 </aside>
 {{end}}
