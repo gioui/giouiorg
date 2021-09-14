@@ -61,7 +61,7 @@ windows and apply operations to them. Only the app package and its
 sub-packages have native dependencies, making Gio [highly
 portable](https://pkg.go.dev/gioui.org/example/glfw).
 
-[![GoDoc](https://pkg.go.dev/gioui.org?status.svg)](https://pkg.go.dev/gioui.org)
+[![GoDoc](https://pkg.go.dev/badge/gioui.org.svg)](https://pkg.go.dev/gioui.org)
 
 ## Installation
 
