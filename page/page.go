@@ -52,17 +52,46 @@ var (
 	errNoPage = errors.New("no such page")
 )
 
+type menuEntry struct {
+	Title string
+	Link  string
+}
+
+var (
+	topMenu = []menuEntry{
+		{"Home", "/"},
+		{"Install", "/doc/install"},
+		{"Mobile", "/doc/mobile"},
+		{"Integrate", "/doc/integrate"},
+		{"Architecture", "/doc/architecture"},
+		{"Contribute", "/doc/contribute"},
+		{"FAQ", "/doc/faq"},
+	}
+)
+
 const (
 	contentRoot = "content"
 	includeRoot = "include"
 )
 
 func init() {
-	docTmpl = template.Must(template.ParseFiles(
-		filepath.Join("template", "nav.tmpl"),
-		filepath.Join("template", "page.tmpl"),
-		filepath.Join("template", "root.tmpl"),
-	))
+	docTmpl = template.Must(
+		template.New("").Funcs(template.FuncMap{
+			"IsSubPage": func(url, link string) bool {
+				if url == "/index" {
+					return link == "/"
+				}
+				if link == "/" {
+					return false
+				}
+
+				return strings.HasPrefix(url, link)
+			},
+		}).ParseFiles(
+			filepath.Join("template", "nav.tmpl"),
+			filepath.Join("template", "page.tmpl"),
+			filepath.Join("template", "root.tmpl"),
+		))
 }
 
 func NewSite(defaultTitle string) (*Site, error) {
@@ -138,6 +167,7 @@ func (s *Site) loadMarkdown(url string) ([]byte, error) {
 	if err != nil {
 		return nil, err
 	}
+
 	page, err := loadPage(content)
 	if err != nil {
 		return nil, fmt.Errorf("%s: failed to parse front matter: %v", path, err)
@@ -145,6 +175,7 @@ func (s *Site) loadMarkdown(url string) ([]byte, error) {
 	if page.Front.Title == "" {
 		page.Front.Title = s.defaultTitle
 	}
+
 	mdp := parser.NewWithExtensions(parser.CommonExtensions | parser.Includes | parser.Attributes | parser.Footnotes | parser.HeadingIDs | parser.AutoHeadingIDs)
 	mdp.Opts.ReadIncludeFn = func(from, path string, addr []byte) []byte {
 		content, err := includeExample(path, string(addr))
@@ -164,8 +195,11 @@ func (s *Site) loadMarkdown(url string) ([]byte, error) {
 				})
 		}
 	}
+
 	html := markdown.Render(doc, html.NewRenderer(html.RendererOptions{Flags: html.CommonFlags}))
 	args := map[string]interface{}{
+		"Menu":            topMenu,
+		"URL":             url,
 		"Front":           page.Front,
 		"Content":         template.HTML(html),
 		"TableOfContents": page.TableOfContents,

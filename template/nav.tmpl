@@ -1,4 +1,5 @@
 {{ define "nav" }}
+{{- $url := .URL -}}
 <aside id="nav">
 	<header class="logo">
 		<a href="/">
@@ -8,13 +9,9 @@
 
 	<nav id="nav-main">
 		<ul>
-			<li><a href="/" aria-describedby="current">Home</a></li>
-			<li><a href="/doc/install">Install</a></li>
-			<li><a href="/doc/mobile">Mobile</a></li>
-			<li><a href="/doc/integrate">Integrate</a></li>
-			<li><a href="/doc/architecture">Architecture</a></li>
-			<li><a href="/doc/contribute">Contribute</a></li>
-			<li><a href="/doc/faq">FAQ</a></li>
+			{{ range $item := .Menu }}
+			<li><a href="{{$item.Link}}" {{if IsSubPage $url $item.Link }}aria-describedby="current"{{end}}>{{$item.Title}}</a></li>
+			{{ end }}
 		</ul>
 	</nav>
 </aside>
