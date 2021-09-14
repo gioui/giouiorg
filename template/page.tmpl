@@ -1,4 +1,30 @@
 {{define "content"}}
 {{.Content}}
 {{end}}
-{{define "title"}}{{.Front.Title}}{{end}}
+
+{{define "title"}}{{ .Front.Title }}{{end}}
+
+{{define "caption"}}
+<header>
+	<h1>
+		<div>{{ .Front.Title }}</div>
+		{{ with .Front.Subtitle }}<div class="subtitle">{{.}}</div>{{end}}
+	</h1>
+</header>
+{{end}}
+
+{{define "toc"}}
+<aside id="toc">
+	<div class="sticky-toc">
+	    <nav id="nav-toc">
+		    <ul>
+		        <li><a href="#">Demo</a></li>
+		        <li><a href="#">Get Started</a></li>
+		        <li><a href="#">Showcase</a></li>
+		        <li><a href="#">Why?</a></li>
+		        <li><a href="#">Sponsors</a></li>
+		    </ul>
+	    </nav>
+    </div>
+</aside>
+{{end}}

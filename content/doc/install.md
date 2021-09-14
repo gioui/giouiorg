@@ -1,8 +1,6 @@
 ---
-title: Installation - Gio documentation
+title: Installation
 ---
-
-# Installation
 
 ## Linux {#linux}
 

@@ -1,8 +1,6 @@
 ---
-title: Running on mobiles - Gio documentation
+title: Running on Mobile
 ---
-
-## Running on mobiles
 
 For Android, iOS, tvOS the `gogio` tool can build and package a Gio program for you.
 

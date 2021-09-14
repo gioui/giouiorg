@@ -1,4 +1,7 @@
-# Gio
+---
+title: Gio UI
+subtitle: Cross-Platform GUI for Go
+---
 
 Gio implements portable immediate mode GUI programs in Go. Gio programs run on
 all the major platforms: iOS/tvOS, Android, Linux (Wayland/X11), macOS,

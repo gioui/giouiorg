@@ -8,22 +8,22 @@
 	<meta name="viewport" content="width=device-width, initial-scale=1">
 	<link rel="icon" type="image/png" href="/files/favicon196.png" sizes="196x196"/>
 	<link rel="icon" type="image/png" href="/files/favicon32.png" sizes="32x32"/>
-	<link rel="stylesheet" href="/files/style.css?v=2"/>
+	<link rel="stylesheet" href="/files/style.css?v=3"/>
 </head>
 	<body>
-	<header>
-		<nav>
-			<a href="/">
-				<img class="logo" src="/files/logo.svg" alt="Gio">
-			</a>
-		</nav>
-	</header>
-		<main>
-			<div class="container">
-			{{template "content" .}}
+	<div class="side-by-side">
+		{{ template "nav" . }}
+
+		<div id="content">
+			{{ template "caption" . }}
+			<div class="main-and-toc">
+				<main>
+				{{ template "content" . }}
+				</main>
 			</div>
-		</main>
-	<script src="/scripts.js"></script>
+		</div>
+
+		<script src="/scripts.js"></script>
 	</body>
 </html>
 {{end}}

@@ -64,7 +64,6 @@ The rest of this document tries to answer how Gio does it. If you wish to know m
 * https://github.com/ocornut/imgui
 * https://eliasnaur.com/blog/immediate-mode-gui-programming
 
-
 ## Window
 
 Since a GUI library needs to talk to some sort of display system to display information:

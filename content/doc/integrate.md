@@ -1,3 +1,7 @@
+---
+title: Integrate with Mobile and Browser
+---
+
 Gio includes very basic support for integrating with existing mobile and browser projects.
 
 ## Android

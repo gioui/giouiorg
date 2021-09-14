@@ -28,7 +28,8 @@ type Site struct {
 }
 
 type frontMatter struct {
-	Title string `yaml:"title"`
+	Title    string `yaml:"title"`
+	Subtitle string `yaml:"subtitle"`
 }
 
 type page struct {
@@ -49,6 +50,7 @@ const (
 
 func init() {
 	docTmpl = template.Must(template.ParseFiles(
+		filepath.Join("template", "nav.tmpl"),
 		filepath.Join("template", "page.tmpl"),
 		filepath.Join("template", "root.tmpl"),
 	))
