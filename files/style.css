@@ -35,6 +35,9 @@
 	--play-border: 1px solid #fff;
 	--play-border-radius: 0.5rem;
 	--play-shadow: 0px 3px 5px rgba(0, 0, 0, 0.15);
+
+	--run-shadow: 0 2px 5px rgb(0, 0, 0, 0.5);
+	--run-shadow-hi: 0 4px 10px rgba(0, 0, 0, 0.6);
 }
 
 /* Modular Scale */
@@ -383,9 +386,30 @@ pre {
 	justify-content: center;
 }
 .run {
+	--radius: 2rem;
+
 	position: absolute;
-	right: var(--s0);
-	bottom: var(--s0);
+	top: 50%;
+	left: 50%;
+
+	cursor: pointer;
+
+	font-weight: bold;
+	color: var(--primary-fg);
+	background-color: var(--primary-bg);
+	border: var(--play-border);
+	border-radius: var(--radius);
+	box-shadow: var(--run-shadow);
+
+	width: calc(var(--radius) * 2);
+	height: calc(var(--radius) * 2);
+	margin-top: calc(-1 * var(--radius));
+	margin-left: calc(-1 * var(--radius));
+
+	transition: background 0.15s ease-in-out, box-shadow 0.15s ease-in-out;
+}
+.play img {
+	filter: blur(3px) brightness(0.98);
 }
 .output {
 	background: #380f16; /* TODO: Fix the color */
