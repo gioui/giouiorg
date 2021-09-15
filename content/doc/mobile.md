@@ -4,7 +4,7 @@ title: Running on Mobile
 
 For Android, iOS, tvOS the `gogio` tool can build and package a Gio program for you.
 
-### Android
+## Android
 
 To build an Android .apk file from the `kitchen` example:
 
@@ -19,7 +19,7 @@ The `gogio` tool passes command line arguments to os.Args at runtime:
 	$ go run gioui.org/cmd/gogio -target android gioui.org/example/gophers -token <github token>
 
 
-### iOS, tvOS
+## iOS, tvOS
 
 The `-appid` flag specifies the iOS bundle id or Android package id. The flag is required
 for creating signed .ipa files for iOS and tvOS devices, because the bundle id must match an id
@@ -43,7 +43,7 @@ Install the app to a running simulator with simctl:
 	$ xcrun simctl install booted kitchen.app
 
 
-### App Icon
+## App Icon
 
 The `gogio` tool will use the `appicon.png` file in your main package
 directory, if present, as the app icon.
