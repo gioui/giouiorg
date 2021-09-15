@@ -5,7 +5,7 @@
 {{define "title"}}{{ .Front.Title }}{{end}}
 
 {{define "caption"}}
-<header>
+<header id="caption" class="layout-caption">
 	<h1>
 		<div>{{ .Front.Title }}</div>
 		{{ with .Front.Subtitle }}<div class="subtitle">{{.}}</div>{{end}}
@@ -14,15 +14,13 @@
 {{end}}
 
 {{define "toc"}}
-<aside id="toc">
-	<div class="sticky-toc">
-		<nav id="nav-toc">
-			<ul>
-				{{ range $link := .TableOfContents }}
-				<li><a href="#{{$link.HeadingID}}">{{$link.Title}}</a></li>
-				{{ end }}
-			</ul>
-		</nav>
-	</div>
+<aside class="layout-toc">
+	<nav id="toc" class="sticky-toc">
+		<ul>
+			{{ range $link := .TableOfContents }}
+			<li><a href="#{{$link.HeadingID}}">{{$link.Title}}</a></li>
+			{{ end }}
+		</ul>
+	</nav>
 </aside>
 {{end}}

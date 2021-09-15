@@ -179,7 +179,7 @@ guide](/doc/contribute) for more details.
 	<a href="https://decred.org/">
 		<img srcset="/files/decred/decred.png,
 					 /files/decred/decred@2x.png 2x"
-					 src="/files/decred/decred@2x.png" alt="decred.org" width="450">
+					 src="/files/decred/decred@2x.png" alt="decred.org">
 		<em>"Decred - Secure. Adaptable. Sustainable."</em>
 	</a>
 </div>

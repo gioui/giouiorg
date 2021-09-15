@@ -1,13 +1,13 @@
 {{ define "nav" }}
 {{- $url := .URL -}}
-<aside id="nav">
+<aside id="sidebar" class="layout-sidebar">
 	<header class="logo">
 		<a href="/">
 			<img class="icon" src="/files/logo-text.svg" alt="Gio logo">
 		</a>
 	</header>
 
-	<nav id="nav-main">
+	<nav id="menu">
 		<ul>
 			{{ range $item := .Menu }}
 			<li><a href="{{$item.Link}}" {{if IsSubPage $url $item.Link }}aria-describedby="current"{{end}}>{{$item.Title}}</a></li>
