@@ -26,8 +26,8 @@ environment:
  EGL_PLATFORM: surfaceless # for generating screenshots headless
  gcloud_key_file: /home/build/gcloud-key.json
 secrets:
- - 5c619053-c361-4285-b5a6-1bde645d82db
- - 3d895431-fcce-43d0-8ab9-3cfc91e63fc5
+ - 5c619053-c361-4285-b5a6-1bde645d82db # App Engine gcloud-key.json (~eliasnaur)
+ - 3d895431-fcce-43d0-8ab9-3cfc91e63fc5 # github mirror SSH key (~eliasnaur)
 tasks:
  - install_go: |
      mkdir -p /home/build/sdk
