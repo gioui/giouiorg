@@ -8,10 +8,14 @@ all the major platforms: iOS/tvOS, Android, Linux (Wayland/X11), macOS,
 Windows, FreeBSD, OpenBSD, and experimental support for browsers (Webassembly/WebGL).
 There is a [unikernel port](https://eliasnaur.com/unik) for running Gio programs in virtual machines.
 
-Gio includes an efficient vector renderer based on the Pathfinder project (https://github.com/servo/pathfinder),
-implemented on OpenGL ES and Direct3D 11.
+Gio includes an efficient vector renderer based on the [Pathfinder
+project](https://github.com/servo/pathfinder), and an experimental renderer
+based on the [piet-gpu project](https://github.com/linebender/piet-gpu). Both
+renderers support Vulkan, Metal, Direct3D 11, and OpenGL ES. For low-end
+devices there is a CPU fallback that runs on unextended OpenGL ES 2.0.
+
 Text and other shapes are rendered using only their outlines without baking them into texture images,
-to support efficient animations, transformed drawing and pixel resolution independence.
+to support efficient animations, transformed drawing and display resolution independence.
 
 This is a screenshot of the [Kitchen
 example](https://git.sr.ht/~eliasnaur/gio-example/tree/main/kitchen/kitchen.go). If your browser
