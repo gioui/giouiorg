@@ -68,6 +68,6 @@ tasks:
      if [ -f "$gcloud_key_file" -a "$main_commit" = "$head_commit" ]; then
          gcloud --project giouiorg app deploy ./cmd/giouiorg --quiet
          # Delete all but latest 2 versions.
-         VERSIONS=$(gcloud app versions list --format="value(version.id)" --sort-by="~version.createTime" | tail -n +2 )
-         gcloud app versions delete --quiet $VERSIONS
+         VERSIONS=$(gcloud --project giouiorg app versions list --format="value(version.id)" --sort-by="~version.createTime" | tail -n +2 )
+         gcloud --project giouiorg app versions delete --quiet $VERSIONS
      fi
