@@ -227,6 +227,8 @@ To distribute input among multiple different widgets, Gio needs to know about ev
 
 Instead, some operations associate input event types (for example, keyboard presses) with arbitrary [tags](https://gioui.org/io/event#Tag) (interface{} values) chosen by the program. A program creates these operations when it's processing the [`FrameEvent`](https://gioui.org/io/system#FrameEvent) -- input operations are operations like any other. In return, an [event.Queue](https://gioui.org/io/event#Queue) supplies the events that arrived since the last frame, separated by tag.
 
+You can think about the tag as a unique key for a given input area. The Gio event router will associate input events on in that area with the tag provided for that area. Then you can get those events the next frame by supplying the same tag to `event.Queue`. Often widgets will encapsulate this event logic by supplying a pointer to their persistent state as the tag for their input area.
+
 The following example demonstrates pointer input handling:
 
 <{{files/architecture/button.go}}[/START LOWLEVEL OMIT/,/END LOWLEVEL OMIT/]
