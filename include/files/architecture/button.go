@@ -19,9 +19,6 @@ var tag = new(bool) // We could use &pressed for this instead.
 var pressed = false
 
 func doButton(ops *op.Ops, q event.Queue) {
-	// Make sure we don’t pollute the graphics context.
-	defer op.Save(ops).Load()
-
 	// Process events that arrived between the last frame and this one.
 	for _, ev := range q.Events(tag) {
 		if x, ok := ev.(pointer.Event); ok {
@@ -35,14 +32,15 @@ func doButton(ops *op.Ops, q event.Queue) {
 	}
 
 	// Confine the area of interest to a 100x100 rectangle.
-	pointer.Rect(image.Rect(0, 0, 100, 100)).Add(ops)
+	area := pointer.Rect(image.Rect(0, 0, 100, 100)).Push(ops)
 	// Declare the tag.
 	pointer.InputOp{
 		Tag:   tag,
 		Types: pointer.Press | pointer.Release,
 	}.Add(ops)
+	area.Pop()
 
-	clip.Rect{Max: image.Pt(100, 100)}.Add(ops)
+	defer clip.Rect{Max: image.Pt(100, 100)}.Push(ops).Pop()
 	var c color.NRGBA
 	if pressed {
 		c = color.NRGBA{R: 0xFF, A: 0xFF}
@@ -75,8 +73,7 @@ func (b *ButtonVisual) Layout(gtx layout.Context) layout.Dimensions {
 }
 
 func drawSquare(ops *op.Ops, color color.NRGBA) layout.Dimensions {
-	defer op.Save(ops).Load()
-	clip.Rect{Max: image.Pt(100, 100)}.Add(ops)
+	defer clip.Rect{Max: image.Pt(100, 100)}.Push(ops).Pop()
 	paint.ColorOp{Color: color}.Add(ops)
 	paint.PaintOp{}.Add(ops)
 	return layout.Dimensions{Size: image.Pt(100, 100)}
@@ -96,9 +93,6 @@ type Button struct {
 }
 
 func (b *Button) Layout(gtx layout.Context) layout.Dimensions {
-	// Avoid affecting the input tree with pointer events.
-	defer op.Save(gtx.Ops).Load()
-
 	// here we loop through all the events associated with this button.
 	for _, e := range gtx.Events(b) {
 		if e, ok := e.(pointer.Event); ok {
@@ -112,11 +106,12 @@ func (b *Button) Layout(gtx layout.Context) layout.Dimensions {
 	}
 
 	// Confine the area for pointer events.
-	pointer.Rect(image.Rect(0, 0, 100, 100)).Add(gtx.Ops)
+	area := pointer.Rect(image.Rect(0, 0, 100, 100)).Push(gtx.Ops)
 	pointer.InputOp{
 		Tag:   b,
 		Types: pointer.Press | pointer.Release,
 	}.Add(gtx.Ops)
+	area.Pop()
 
 	// Draw the button.
 	col := color.NRGBA{R: 0x80, A: 0xFF}

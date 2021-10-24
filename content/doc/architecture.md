@@ -128,13 +128,13 @@ For more complex clipping [`clip.Path`](https://gioui.org/op/clip#Path) can expr
 
 <pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="draw-clip-triangle" data-size="200x100"></pre>
 
-### Save and Load
+### The transformation and clip stacks
 
-Some operations affect all operations that follow them. For example, [`paint.ColorOp`](https://gioui.org/op/paint#ColorOp) sets the "brush" color that is used in subsequent [`op.PaintOp`](https://gioui.org/op/paint#PaintOp) operations. This drawing context also includes coordinate transformation (set by [`op.TransformOp`](https://gioui.org/op#TransformOp)) and clipping (set by [`clip.ClipOp`](https://gioui.org/op/clip#ClipOp)).
+Some operations affect all operations that follow them. For example, [`paint.ColorOp`](https://gioui.org/op/paint#ColorOp) sets the "brush" color that is used in subsequent [`paint.PaintOp`](https://gioui.org/op/paint#PaintOp) operations. This drawing context also includes coordinate transformation (set by [`op.TransformOp`](https://gioui.org/op#TransformOp)) and clipping (set by [`clip.Op`](https://gioui.org/op/clip#Op)).
 
-We often need to set up some drawing context and then restore it to its previous state, leaving later operations unaffected. We can use [`op.StateOp`](https://gioui.org/op#StateOp) to do this. A Save operation saves the current drawing context; a Load operation restores it.
+Some operations, such as clips and transformations, allow you to temporarily apply them and later restore the previous state.
 
-For example, the `clipButtonOutline` function in the previous section has the unfortunate side-effect of clipping all later operations to the outline of the button background! Let's make a version of it that doesn't affect any callers:
+For example, the `redButtonBackground` function in the previous section has the unfortunate side-effect of clipping all later operations to the outline of the button background! Let's make a version of it that doesn't affect any callers:
 
 <{{files/architecture/draw.go}}[/START STACK OMIT/,/END STACK OMIT/]
 

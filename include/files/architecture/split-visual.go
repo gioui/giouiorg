@@ -34,24 +34,17 @@ func (s SplitVisual) Layout(gtx layout.Context, left, right layout.Widget) layou
 	rightsize := gtx.Constraints.Min.X - leftsize
 
 	{
-		stack := op.Save(gtx.Ops)
-
 		gtx := gtx
 		gtx.Constraints = layout.Exact(image.Pt(leftsize, gtx.Constraints.Max.Y))
 		left(gtx)
-
-		stack.Load()
 	}
 
 	{
-		stack := op.Save(gtx.Ops)
-
 		gtx := gtx
 		gtx.Constraints = layout.Exact(image.Pt(rightsize, gtx.Constraints.Max.Y))
-		op.Offset(f32.Pt(float32(leftsize), 0)).Add(gtx.Ops)
+		trans := op.Offset(f32.Pt(float32(leftsize), 0)).Push(gtx.Ops)
 		right(gtx)
-
-		stack.Load()
+		trans.Pop()
 	}
 
 	return layout.Dimensions{Size: gtx.Constraints.Max}

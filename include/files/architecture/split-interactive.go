@@ -57,9 +57,6 @@ func (s *Split) Layout(gtx layout.Context, left, right layout.Widget) layout.Dim
 	// END BAR OMIT
 
 	{ // handle input
-		// Avoid affecting the input tree with pointer events.
-		stack := op.Save(gtx.Ops)
-
 		// START INPUTCODE OMIT
 		for _, ev := range gtx.Events(s) {
 			e, ok := ev.(pointer.Event)
@@ -96,35 +93,27 @@ func (s *Split) Layout(gtx layout.Context, left, right layout.Widget) layout.Dim
 
 		// register for input
 		barRect := image.Rect(leftsize, 0, rightoffset, gtx.Constraints.Max.X)
-		pointer.Rect(barRect).Add(gtx.Ops)
+		area := pointer.Rect(barRect).Push(gtx.Ops)
 		pointer.InputOp{Tag: s,
 			Types: pointer.Press | pointer.Drag | pointer.Release,
 			Grab:  s.drag,
 		}.Add(gtx.Ops)
+		area.Pop()
 		// END INPUTCODE OMIT
-
-		stack.Load()
 	}
 
 	{
-		stack := op.Save(gtx.Ops)
-
 		gtx := gtx
 		gtx.Constraints = layout.Exact(image.Pt(leftsize, gtx.Constraints.Max.Y))
 		left(gtx)
-
-		stack.Load()
 	}
 
 	{
-		stack := op.Save(gtx.Ops)
-
-		op.Offset(f32.Pt(float32(rightoffset), 0)).Add(gtx.Ops)
+		off := op.Offset(f32.Pt(float32(rightoffset), 0)).Push(gtx.Ops)
 		gtx := gtx
 		gtx.Constraints = layout.Exact(image.Pt(rightsize, gtx.Constraints.Max.Y))
 		right(gtx)
-
-		stack.Load()
+		off.Pop()
 	}
 
 	return layout.Dimensions{Size: gtx.Constraints.Max}
