@@ -17,6 +17,8 @@ On Ubuntu 18.04 and newer, use
 You can build Gio programs without X11 support with the `nox11` build tag, and
 without Wayland support with the `nowayland` build tag.
 
+Depending on your distribution, you may also need to install a Vulkan driver for best performance (Distributions like Arch do not do this automatically). You can check if you have working Vulkan support with the `vulkaninfo` command.
+
 ## macOS, iOS, tvOS {#apple}
 
 Xcode is required for Apple platforms.
