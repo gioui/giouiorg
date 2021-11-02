@@ -1,0 +1,34 @@
+{{define "root"}}
+<body>
+	<title>{{ .Page.Title }}</title>
+	<slug>{{ .Page.Slug }}</slug>
+
+	<parent>{{ with .Page.Parent }}{{ .Slug }}{{end}}</parent>
+	<before>{{ with .Page.Before }}{{ .Slug }}{{end}}</before>
+	<after>{{ with .Page.After }}{{ .Slug }}{{end}}</after>
+
+	<toc>
+	{{- range .Page.TOC }}
+		<entry>level:{{.Level}} title:{{.Title}} id:#{{.HeadingID}}</entry>
+	{{- end }}
+	</toc>
+
+	<children>
+	{{- range .Page.Children }}
+		<child>{{.Slug}}</child>
+	{{- end }}
+	</children>
+
+	<content>{{ .Page.Content }}</content>
+
+	<nav>{{template "nav" .Nav}}</nav>
+</body>
+{{end}}
+
+{{define "nav"}}
+<ul {{if .Active}}active{{end}}>{{if .Page}}{{.Page.Slug}}{{end}}
+{{- range .Children }}
+	<li>{{template "nav" .}}</li>
+{{- end }}
+</ul>
+{{end}}

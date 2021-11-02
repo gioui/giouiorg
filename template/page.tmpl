@@ -1,5 +1,5 @@
 {{define "content"}}
-{{.Content}}
+{{.Page.Content}}
 {{end}}
 
 {{define "title"}}{{ .Front.Title }}{{end}}
@@ -17,7 +17,7 @@
 <aside class="layout-toc">
 	<nav id="toc" class="sticky-toc">
 		<ul>
-			{{ range $link := .TableOfContents }}
+			{{ range $link := .TOC }}
 			<li><a href="#{{$link.HeadingID}}">{{$link.Title}}</a></li>
 			{{ end }}
 		</ul>

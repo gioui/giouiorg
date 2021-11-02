@@ -1,6 +1,13 @@
 ---
 title: Gio UI
 subtitle: Cross-Platform GUI for Go
+children:
+    - doc/install
+    - doc/mobile
+    - doc/integrate
+    - doc/architecture
+    - doc/contribute
+    - doc/faq
 ---
 
 Gio implements portable immediate mode GUI programs in Go. Gio programs run on

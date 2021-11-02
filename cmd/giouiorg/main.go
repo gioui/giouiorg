@@ -10,24 +10,41 @@ import (
 	"strings"
 
 	_ "gioui.org/website/internal/playground"
-	"gioui.org/website/page"
+	"gioui.org/website/site"
 )
 
 func main() {
-	subHandler("/scripts.js", http.HandlerFunc(page.ScriptsHandler))
 	subHandler("/files/", http.FileServer(http.Dir("files")))
 	subHandler("/issue/", http.HandlerFunc(issueHandler))
 	subHandler("/commit/", http.HandlerFunc(commitHandler))
 	subHandler("/patch/", http.HandlerFunc(patchesHandler))
-	subHandler("/include/files/", http.FileServer(http.Dir("include/files")))
 
-	site, err := page.NewSite("Gio - immediate mode GUI in Go")
-	if err != nil {
-		log.Fatal(err)
+	config := site.Config{
+		Content:   os.DirFS("content"),
+		Templates: os.DirFS("template"),
+		Includes:  os.DirFS("include"),
+		Files:     os.DirFS("files"),
+		Fallback:  godocHandler,
 	}
-	http.Handle("/", vanityHandler(
-		site.Handler(http.HandlerFunc(godocHandler)),
-	))
+
+	devmode := os.Getenv("GAE_APPLICATION") == ""
+	if devmode {
+		http.Handle("/", vanityHandler(http.HandlerFunc(
+			func(w http.ResponseWriter, r *http.Request) {
+				loaded, err := config.Parse()
+				if err != nil {
+					http.Error(w, err.Error(), http.StatusInternalServerError)
+					return
+				}
+				loaded.ServeHTTP(w, r)
+			})))
+	} else {
+		loaded, err := config.Parse()
+		if err != nil {
+			log.Fatal(err)
+		}
+		http.Handle("/", vanityHandler(loaded))
+	}
 
 	port := os.Getenv("PORT")
 	if port == "" {
