@@ -20,6 +20,13 @@
 				{{ template "toc" . }}
 				<main>{{ template "content" . }}</main>
 			</div>
+
+			{{ if .Page.Before }}
+			<div><a href="{{.Page.Before.URL}}">{{.Page.Before.Title}}</a></li></div>
+			{{ end }}
+			{{ if .Page.After }}
+			<div><a href="{{.Page.After.URL}}">{{.Page.After.Title}}</a></li></div>
+			{{ end }}
 		</div>
 
 		<script type="text/javascript">

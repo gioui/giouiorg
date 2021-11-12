@@ -1,6 +1,7 @@
 ---
 title: Gio UI
 subtitle: Cross-Platform GUI for Go
+childrennolink: true
 children:
     - doc/install
     - doc/mobile

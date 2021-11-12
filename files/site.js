@@ -1,6 +1,16 @@
 $(function() {
 	'use strict';
 
+	// preserve sidebar scroll position between page changes.
+	var sidebar = document.querySelector(".layout-sidebar");
+	var top = sessionStorage.getItem("sidebar-scroll");
+	if (top !== null) {
+		sidebar.scrollTop = parseInt(top, 10);
+	}
+	window.addEventListener("beforeunload", function() {
+		sessionStorage.setItem("sidebar-scroll", sidebar.scrollTop);
+	});
+
 	$("[data-run=playground]").each(function() {
 		var code = this;
 		$(code).attr("contenteditable", "true");
