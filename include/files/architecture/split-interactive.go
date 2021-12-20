@@ -7,6 +7,7 @@ import (
 	"gioui.org/io/pointer"
 	"gioui.org/layout"
 	"gioui.org/op"
+	"gioui.org/op/clip"
 	"gioui.org/unit"
 	"gioui.org/widget/material"
 )
@@ -93,7 +94,7 @@ func (s *Split) Layout(gtx layout.Context, left, right layout.Widget) layout.Dim
 
 		// register for input
 		barRect := image.Rect(leftsize, 0, rightoffset, gtx.Constraints.Max.X)
-		area := pointer.Rect(barRect).Push(gtx.Ops)
+		area := clip.Rect(barRect).Push(gtx.Ops)
 		pointer.InputOp{Tag: s,
 			Types: pointer.Press | pointer.Drag | pointer.Release,
 			Grab:  s.drag,

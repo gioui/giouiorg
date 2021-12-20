@@ -32,7 +32,7 @@ func doButton(ops *op.Ops, q event.Queue) {
 	}
 
 	// Confine the area of interest to a 100x100 rectangle.
-	area := pointer.Rect(image.Rect(0, 0, 100, 100)).Push(ops)
+	area := clip.Rect(image.Rect(0, 0, 100, 100)).Push(ops)
 	// Declare the tag.
 	pointer.InputOp{
 		Tag:   tag,
@@ -106,7 +106,7 @@ func (b *Button) Layout(gtx layout.Context) layout.Dimensions {
 	}
 
 	// Confine the area for pointer events.
-	area := pointer.Rect(image.Rect(0, 0, 100, 100)).Push(gtx.Ops)
+	area := clip.Rect(image.Rect(0, 0, 100, 100)).Push(gtx.Ops)
 	pointer.InputOp{
 		Tag:   b,
 		Types: pointer.Press | pointer.Release,
