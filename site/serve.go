@@ -53,5 +53,5 @@ func (site *Site) handleScripts(w http.ResponseWriter, r *http.Request) {
 		buf.Write(content)
 	}
 	w.Header().Set("Content-type", "application/javascript")
-	w.Write(buf.Bytes())
+	_, _ = w.Write(buf.Bytes())
 }

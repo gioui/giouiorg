@@ -35,5 +35,5 @@ func proxy(w http.ResponseWriter, r *http.Request) {
 		http.Error(w, "failed to proxy playground request", http.StatusInternalServerError)
 	}
 	defer resp.Body.Close()
-	io.Copy(w, resp.Body)
+	_, _ = io.Copy(w, resp.Body)
 }

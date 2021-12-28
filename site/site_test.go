@@ -29,7 +29,7 @@ func TestParse(t *testing.T) {
 	for _, page := range site.Pages {
 		path := filepath.FromSlash("testdata/ref/"+page.Slug) + ".html"
 		if *updateRender {
-			os.MkdirAll(filepath.Dir(path), 0600)
+			_ = os.MkdirAll(filepath.Dir(path), 0600)
 			if err := os.WriteFile(path, page.Rendered, 0600); err != nil {
 				t.Errorf("failed to write %q: %v", path, err)
 			}
