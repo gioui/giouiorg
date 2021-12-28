@@ -18,15 +18,28 @@
 			{{ template "caption" . }}
 			<div class="layout-with-toc">
 				{{ template "toc" . }}
-				<main>{{ template "content" . }}</main>
+				<main>
+					{{ template "content" . }}
+					<div class="layout-pagination">
+						{{ if .Page.Before }}
+						<a class="before" href="{{.Page.Before.URL}}">
+							<div>Prev</div>
+							<div>{{.Page.Before.Title}}</div>
+						</a>
+						{{ else }}
+						<span class="before"></span>
+						{{ end }}
+						{{ if .Page.After }}
+						<a class="after" href="{{.Page.After.URL}}">
+							<div>Next</div>
+							<div>{{.Page.After.Title}}</div>
+						</a>
+						{{ else }}
+						<span class="after"></span>
+						{{ end }}
+					</div>
+				</main>
 			</div>
-
-			{{ if .Page.Before }}
-			<div><a href="{{.Page.Before.URL}}">{{.Page.Before.Title}}</a></li></div>
-			{{ end }}
-			{{ if .Page.After }}
-			<div><a href="{{.Page.After.URL}}">{{.Page.After.Title}}</a></li></div>
-			{{ end }}
 		</div>
 
 		<script type="text/javascript">
