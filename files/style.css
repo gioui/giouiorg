@@ -161,6 +161,7 @@ html {
 }
 #caption h1 {
 	font-size: var(--font-size-biggest);
+	margin-bottom: var(--s0);
 }
 #caption .subtitle {
 	font-size: var(--font-size-biggish);
@@ -335,6 +336,7 @@ nav .nav-toggle:checked~ul {
 .layout-pagination {
 	display: flex;
 	margin-top: var(--s2);
+	margin-bottom: var(--s2);
 	justify-content: space-between;
 }
 
