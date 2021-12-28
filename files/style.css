@@ -248,6 +248,10 @@ html {
 nav {
 }
 
+nav ul, nav li {
+	position: relative;
+}
+
 nav ul {
 	list-style: none;
 	margin-left: 0;
@@ -286,6 +290,44 @@ nav h2 {
 	font-size: inherit;
 	font-weight: 500;
 	margin: var(--s0);
+}
+
+nav .nav-toggle {
+	position: absolute;
+	display: none;
+}
+nav .nav-toggle~label {
+	cursor: pointer;
+	position: absolute;
+	top: 0;
+	right: 0;
+	width: 2em;
+	height: 2.7em;
+
+	display: flex;
+	justify-content: center;
+	align-items: center;
+
+	user-select: none;
+}
+nav .nav-toggle~label:hover {
+	color: var(--highlight-fg);
+	background: var(--accent-bg-transparent);
+}
+nav .nav-toggle~label span {
+	display: block;
+	transform: scaleY(1);
+	transition: transform 0.3s;
+}
+nav .nav-toggle:checked~label span {
+	transform: scaleY(-1);
+}
+
+nav .nav-toggle~ul {
+	display: none;
+}
+nav .nav-toggle:checked~ul {
+	display: block
 }
 
 /* Pagination styling */
