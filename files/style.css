@@ -180,6 +180,8 @@ html {
 	padding: var(--s-1);
 
 	display: flex;
+
+	z-index: 1000;
 }
 
 #sidebar header.logo {
@@ -373,6 +375,7 @@ nav .nav-toggle:checked~ul {
 	transition: opacity 0.1s ease-in-out;
 	font-size: var(--font-size-small);
 	line-height: 1.2;
+	width: var(--toc);
 }
 #toc:hover {
 	opacity: 1;
@@ -400,6 +403,10 @@ main h2 {
 }
 main h2:first-child {
 	margin-top: 0;
+}
+
+.layout-stretch {
+	width: var(--measure);
 }
 
 /* Showcase styling */
