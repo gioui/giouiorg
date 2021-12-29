@@ -4,8 +4,6 @@ subtitle: Cross-Platform GUI for Go
 childrennolink: true
 children:
     - doc/install
-    - doc/mobile
-    - doc/integrate
     - doc/architecture
     - doc/contribute
     - doc/faq
@@ -77,67 +75,23 @@ portable](https://pkg.go.dev/gioui.org/example/glfw).
 
 ## Installation
 
-Gio is designed to work with very few dependencies. It depends only on the platform libraries for
-window management, input and GPU drawing.
+Gio is designed to work with very few dependencies. It depends only on the
+platform libraries for window management, input and GPU drawing.
 
-- [Linux](/doc/install#linux)
-- [macOS, iOS, tvOS](/doc/install#apple)
-- [Windows](/doc/install#windows)
-- [Android](/doc/install#android)
-- [WebAssembly](/doc/install#wasm)
+<div class="big-links">
+    <a href="/doc/install/linux">Linux</a>
+    <a href="/doc/install/windows">Windows</a>
+    <a href="/doc/install/macos">macOS</a>
+    <a href="/doc/install/android">Android</a>
+    <a href="/doc/install/ios">iOS / tvOS</a>
+    <a href="/doc/install/wasm">WebAssembly</a>
+</div>
 
-Gio supports the latest released version of
-[Go](https://golang.org/dl) in module mode. Earlier versions of Go and
-GOPATH mode might work, but no effort is made to keep them working.
+Currently Gio targets the latest released version of [Go](https://golang.org/dl)
+in module mode. Earlier versions of Go and `GOPATH` mode might work, but no
+effort is made to keep them working.
 
-## Running Gio programs
-
-Use the `go` tool to initialize a new module and run the "hello"
-example:
-
-	$ go mod init example.com
-	$ go run gioui.org/example/hello
-
-should display a simple message in a window.
-
-The command
-
-	$ go run gioui.org/example/kitchen
-
-is another example that demonstrates the material design widgets.
-
-## Running on mobiles
-
-For Android, iOS, tvOS the `gogio` tool can build and package a Gio program for you.
-
-To build an Android .apk file from the `kitchen` example:
-
-	$ go run gioui.org/cmd/gogio -target android gioui.org/example/kitchen
-
-To build for the iOS simulator:
-
-	$ go run gioui.org/cmd/gogio -target ios -appid <bundle-id> gioui.org/example/kitchen
-
-See the [running on mobile](/doc/mobile) page for more information.
-
-
-## Webassembly/WebGL
-
-To run a Gio program in a compatible browser, the `gogio` tool can output a directory ready to
-serve. With the `goexec` tool you don't even need a web server:
-
-	$ go run gioui.org/cmd/gogio -target js gioui.org/example/kitchen
-	$ go get github.com/shurcooL/goexec
-	$ goexec 'http.ListenAndServe(":8080", http.FileServer(http.Dir("kitchen")))'
-
-Open http://localhost:8080 in a browser to run the program.
-
-
-## Integration with existing projects
-
-See the [integration guide](/doc/integrate) for details on using
-Gio with existing projects.
-
+See [Installation](/doc/install) for further information.
 
 ## Programs using Gio
 
