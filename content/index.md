@@ -4,6 +4,7 @@ subtitle: Cross-Platform GUI for Go
 childrennolink: true
 children:
     - doc/install
+    - doc/learn
     - doc/architecture
     - doc/contribute
     - doc/faq

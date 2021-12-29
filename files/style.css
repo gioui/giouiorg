@@ -438,7 +438,7 @@ main h2:first-child {
 }
 .big-links a {
     position: relative;
-    padding: var(--s0);
+    padding: var(--s-2) var(--s0);
     text-align: center;
     border: 1px solid #ccc;
     border-bottom: 5px solid #ccc;
@@ -457,6 +457,7 @@ main h2:first-child {
 }
 .big-links a p {
 	font-size: var(--font-size-small);
+	margin-bottom: 0;
 }
 
 /* Highlight target caption */

@@ -1,5 +1,5 @@
 ---
-title: Custom Widget
+title: Split Widget
 subtitle: Tailoring things to your own needs
 ---
 
