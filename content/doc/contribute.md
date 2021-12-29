@@ -6,8 +6,9 @@ Commit messages follow [the Go project style](https://golang.org/doc/contribute.
 the first line is prefixed with the package and a short summary. The rest of the message provides context
 for the change and what it does. See
 [an example](https://gioui.org/commit/abb9d291e954f3b80384046d7d4487e1ead6bd6a).
-Add `Fixes gio#nnn` or `Updates gio#nnn` if the change fixes or updates an existing
-issue.
+Add `Fixes https://todo.sr.ht/~eliasnaur/gio#nnn` or `Updates https://todo.sr.ht/~eliasnaur/gio#nnn` (matching
+the syntax described [here](https://man.sr.ht/git.sr.ht/#referencing-tickets-in-git-commit-messages))
+if the change fixes or updates an existing issue.
 
 Contributors must agree to the [developer certificate of origin](https://developercertificate.org/),
 to ensure their work is compatible with the MIT license and the UNLICENSE. Sign your commits with Signed-off-by
