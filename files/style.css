@@ -74,6 +74,7 @@
 
 /* Utilities */
 
+.font-size\:small   { font-size: var(--font-size-small) !important; }
 .font-size\:base    { font-size: var(--font-size-base) !important; }
 .font-size\:biggish { font-size: var(--font-size-biggish) !important; }
 .font-size\:big     { font-size: var(--font-size-big) !important; }

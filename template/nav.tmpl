@@ -22,7 +22,7 @@
 	<a href="{{$item.Page.URL}}" {{if .Active}}aria-describedby="current"{{end}}>{{$item.Page.Title}}</a>
 	{{if $item.Children}}
 	<input class="nav-toggle" id="{{$item.Page.Slug}}" type="checkbox" {{if .Active}}checked{{end}}>
-	<label for="{{$item.Page.Slug}}"><span>⯆</span></label>
+	<label for="{{$item.Page.Slug}}"><span class="font-size:small">▼</span></label>
 	<ul>{{ template "nav-children" $item }}</ul>
 	{{end}}
 </li>
