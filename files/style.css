@@ -59,6 +59,8 @@
 
 :root {
 	--measure: 51rem;
+	--measure-half: 25rem;
+	--measure-third: 16rem;
 	--sidebar: 12rem;
 	--toc: 12rem;
 }
@@ -436,7 +438,7 @@ main h2:first-child {
 	display: grid;
 	grid-gap: var(--s0);
 	grid-auto-rows: 1fr;
-	grid-template-columns: repeat(auto-fit, minmax(calc(var(--measure) * 0.3), 1fr));
+	grid-template-columns: repeat(auto-fit, minmax(var(--measure-third), 1fr));
 }
 .big-links a {
     position: relative;
@@ -588,16 +590,17 @@ pre.output {
 
 /* Sponsor styling */
 
+.sponsors {
+	display: grid;
+	grid-gap: var(--s0);
+	grid-auto-rows: 1fr;
+	grid-template-columns: repeat(auto-fit, minmax(calc(var(--measure-half) - var(--s0)), 1fr));
+}
 .sponsor {
-	max-width: 25rem; /* TODO Fix the grid */
-	display: flex;
-	flex-direction: column;
-	font-size: 1.1rem;
-	margin: 1.25rem;
-}
-.sponsor a {
+	margin: var(--s0);
 	text-align: center;
+	max-width: var(--measure-half);
 }
-.sponsor a img {
+.sponsor img {
 	max-width: 100%;
 }

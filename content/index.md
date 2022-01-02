@@ -107,15 +107,12 @@ See [Installation](/doc/install) for further information.
 
 ## Sponsors
 
-<div class="sponsor">
-	<a href="https://decred.org/">
-		<img srcset="/files/decred/decred.png,
-					 /files/decred/decred@2x.png 2x"
-					 src="/files/decred/decred@2x.png" alt="decred.org">
+<div class="sponsors">
+	<a class="sponsor" href="https://decred.org/">
+		<img src="/files/sponsors/decred.png" alt="decred.org">
 		<em>"Decred - Secure. Adaptable. Sustainable."</em>
 	</a>
 </div>
-
 
 Development of Gio is funded by sponsorships. If you find Gio useful, please consider sponsoring the
 [project on OpenCollective](https://opencollective.com/gioui) or one or more of its developers directly.
