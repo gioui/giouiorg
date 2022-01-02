@@ -1,6 +1,9 @@
 ---
 title: FAQ
+subtitle: Frequently Asked Questions
 ---
+
+See also [Common Errors](/doc/learn/common-errors) for usual mistakes.
 
 ## What is the difference between Gio and Gomobile?
 

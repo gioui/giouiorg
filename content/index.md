@@ -105,16 +105,6 @@ See [Installation](/doc/install) for further information.
 - [Sointu](https://github.com/vsariola/sointu/), a modular software synthesizer to easily produce music for 4k intros.
 - [Photon](https://gitlab.com/microo8/photon), a fast RSS reader as light as a photon.
 
-## Contributing
-
-Post patches to the [gio-patches list](https://lists.sr.ht/~eliasnaur/gio-patches). No Sourcehut
-account is required and you can post without being subscribed.
-
-You can also use the Sourcehut web-based flow for submitting patches,
-similar to other source forges. See the [contribution
-guide](/doc/contribute) for more details.
-
-
 ## Sponsors
 
 <div class="sponsor">

@@ -1,19 +1,24 @@
 ---
 title: Contributing
+subtitle: Helping out the project
 ---
 
-Commit messages follow [the Go project style](https://golang.org/doc/contribute.html#commit_messages):
-the first line is prefixed with the package and a short summary. The rest of the message provides context
-for the change and what it does. See
-[an example](https://gioui.org/commit/abb9d291e954f3b80384046d7d4487e1ead6bd6a).
-Add `Fixes https://todo.sr.ht/~eliasnaur/gio#nnn` or `Updates https://todo.sr.ht/~eliasnaur/gio#nnn` (matching
-the syntax described [here](https://man.sr.ht/git.sr.ht/#referencing-tickets-in-git-commit-messages))
-if the change fixes or updates an existing issue.
+## Sponsoring
 
-Contributors must agree to the [developer certificate of origin](https://developercertificate.org/),
-to ensure their work is compatible with the MIT license and the UNLICENSE. Sign your commits with Signed-off-by
-statements to show your agreement. The `git commit --signoff` (or `-s`) command signs a commit with
-your name and email address.
+One good way to support the project is via sponsoring. If you find Gio useful,
+please consider sponsoring the [project on OpenCollective](https://opencollective.com/gioui) or one or more of its developers directly.
+
+## Reporting Issues
+
+Bugs or feature requests can be submitted through the
+[**issue tracker**](https://todo.sr.ht/~eliasnaur/gio) or send an email
+to [~eliasnaur/gio@todo.sr.ht](mailto:~eliasnaur/gio@todo.sr.ht).
+
+## Sending Patches
+
+The primary development platform is [sourcehut](https://sr.ht/~eliasnaur/gio/)
+with the [main repository here](https://git.sr.ht/~eliasnaur/gio). Sourcehut is used due to a few reasons [elaborated here](/doc/faq#why-sourcehut).
+No Sourcehut account is required and you can post without being subscribed.
 
 Patches should be sent to
 [~eliasnaur/gio-patches@lists.sr.ht](mailto:~eliasnaur/gio-patches@lists.sr.ht)
@@ -25,12 +30,38 @@ the Gio repository, push your changes to that and use the web-based
 flow for emailing the patch. Start the process by clicking the "Prepare a
 patchset" button on the front page of your fork.
 
-# GitHub contributions
+### Style
 
-The official [GitHub mirrors](https://github.com/gioui) are open for pull requests if you prefer that workflow
-to `git send-email`.
+Commit messages follow [the Go project style](https://golang.org/doc/contribute.html#commit_messages):
+the first line is prefixed with the package and a short summary. The rest of the message provides context
+for the change and what it does. See
+[an example](https://gioui.org/commit/abb9d291e954f3b80384046d7d4487e1ead6bd6a).
+
+Add `Fixes https://todo.sr.ht/~eliasnaur/gio#nnn` or `Updates https://todo.sr.ht/~eliasnaur/gio#nnn` (matching
+the syntax described [here](https://man.sr.ht/git.sr.ht/#referencing-tickets-in-git-commit-messages))
+if the change fixes or updates an existing issue.
+
+Contributors must agree to the [developer certificate of origin](https://developercertificate.org/),
+to ensure their work is compatible with the MIT license and the UNLICENSE.
+Sign your commits with Signed-off-by statements to show your agreement.
+The `git commit --signoff` (or `-s`) command signs a commit with your name
+and email address.
+
+### Automated Tests
+
+Patches with the project name "gio" in the subject will be picked up by the automatic testers at
+[builds.sr.ht](https://builds.sr.ht). A report with the testing results will be sent to you, CC'ed
+to the mailing list.
+
+### Github
+
+If using sourcehut is problematic the project is mirrored on
+[**Github**](https://github.com/gioui) and does accept pull-requests. However, signing the commits with `--signoff` is still required.
 
 ## git send-email setup
+
+For a thorough setup guide see
+[git-send-email.io](https://git-send-email.io).
 
 With `git send-email` configured, you can clone the project and set it up for submitting your changes:
 
@@ -71,9 +102,3 @@ If you revise your patchset, add a version to the subject line with the `-vX` fl
 ``` sh
 git send-email -v2 -1
 ```
-
-## Automatic patch testing
-
-Patches with the project name "gio" in the subject will be picked up by the automatic testers at
-[builds.sr.ht](https://builds.sr.ht). A report with the testing results will be sent to you, CC'ed
-to the mailing list.
