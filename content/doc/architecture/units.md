@@ -20,7 +20,7 @@ For more information on pixel-density see:
 * https://material.io/design/layout/pixel-density.html.
 * https://webplatform.github.io/docs/tutorials/understanding-css-units/
 
-3## Coordinate systems
+## Coordinate systems
 
 You may have noticed that widget constraints and dimensions sizes are in integer units, while drawing commands such as [`PaintOp`](https://gioui.org/op/paint#PaintOp) use floating point units. That's because they refer to two distinct coordinate systems, the layout coordinate system and the drawing coordinate system. The distinction is subtle, but important.
 
