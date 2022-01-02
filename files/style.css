@@ -6,38 +6,75 @@
 	--primary-fg: #000;
 	--primary-fg-lo: #333;
 	--primary-bg: #fff;
-	--primary-bg-lo: #fbfbfb;
 
 	--thumb: #bbb;
 	--thumb-glass: rgba(0.95, 0.95, 0.95, 0.05);
-	--border: 1px solid var(--thumb);
+	--border-color: var(--thumb);
+	--border: 1px solid var(--border-color);
 	--border-radius: 0.5rem;
-
-	--shadow: rgba(0, 0, 0, 0.3);
-	--shadow-nav-left: rgba(0, 0, 0, 0.1);
 
 	--accent-fg: #fff;
 	--accent-bg: #078AEA;
 	--accent-bg-hi: #26a3ff;
-	--accent-bg-transparent: #078aea20;
+	--accent-bg-transparent: rgb(7 138 234 / 15%);
 	--accent-border: 3px solid var(--accent-bg);
 
 	--target-highlight: #3cbeff;
 
-	--subtle-fg: #333;
+	--subtle-fg: #ccc;
 	--highlight-fg: #000;
-	--highlight-bg: #f0f0f0;
+	--highlight-bg: var(--accent-bg-transparent);
 
-	--code-fg: #fff;
-	--code-bg: #333;
+	--code-fg: #000;
+	--code-bg: #efefef;
 
 	--play-background: #fff;
+	--play-background-pattern: repeating-linear-gradient(45deg, #e8e8e8, #e8e8e8 1rem, #f8f8f8 1rem, #f8f8f8 2rem);
 	--play-border: 1px solid #fff;
 	--play-border-radius: 0.5rem;
 	--play-shadow: 0px 3px 5px rgba(0, 0, 0, 0.15);
 
 	--run-shadow: 0 2px 5px rgb(0, 0, 0, 0.5);
 	--run-shadow-hi: 0 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+@media (prefers-color-scheme: dark) {
+:root {
+	--background: #000;
+
+	--primary-fg: #eee;
+	--primary-fg-lo: #ccc;
+	--primary-bg: #000;
+
+	--thumb: #666;
+	--thumb-glass: rgba(0.95, 0.95, 0.95, 0.10);
+
+	--accent-fg: #eee;
+	--accent-bg: #078AEA;
+	--accent-bg-hi: #26a3ff;
+	--accent-bg-transparent: rgb(7 138 234 / 30%);
+
+	--target-highlight: #3cbeff;
+
+	--subtle-fg: #333;
+	--highlight-fg: var(--accent-fg);
+	--highlight-bg: var(--accent-bg-transparent);;
+
+	--code-fg: #fff;
+	--code-bg: #333;
+
+	--play-background: #eee;
+	--play-background-pattern: repeating-linear-gradient(45deg, #181818, #181818 1rem, #282828 1rem, #282828 2rem);
+	--play-border: 1px solid #282828;
+	--play-border-radius: 0.5rem;
+	--play-shadow: 0px 3px 5px rgba(0, 0, 0, 0.15);
+
+	--run-shadow: 0 2px 5px rgb(0, 0, 0, 0.5);
+	--run-shadow-hi: 0 4px 10px rgba(0, 0, 0, 0.6);
+}
+
+a       { color: #9dc7e5; }
+a:hover { color: #4db4ff; }
 }
 
 /* Modular Scale */
@@ -95,6 +132,7 @@ html {
 	font-family: Roboto, Arial, sans-serif;
 	line-height: 1.65;
 
+	color: var(--primary-fg);
 	background: var(--background);
 	scroll-behavior: smooth;
 }
@@ -166,9 +204,13 @@ html {
 	font-size: var(--font-size-biggest);
 	margin-bottom: var(--s0);
 }
+@media (prefers-color-scheme: dark) {
+	#caption h1 {
+		font-weight: normal;
+	}
+}
 #caption .subtitle {
 	font-size: var(--font-size-biggish);
-	font-weight: lighter;
 }
 
 #sidebar {
@@ -289,7 +331,7 @@ nav a[aria-describedby="current"] {
 nav a:hover {
 	text-decoration: underline;
 	color: var(--highlight-fg);
-	background: var(--accent-bg-transparent);
+	background: var(--highlight-bg);
 }
 
 nav h2 {
@@ -318,7 +360,7 @@ nav .nav-toggle~label {
 }
 nav .nav-toggle~label:hover {
 	color: var(--highlight-fg);
-	background: var(--accent-bg-transparent);
+	background: var(--highlight-bg);
 }
 nav .nav-toggle~label span {
 	display: block;
@@ -358,7 +400,7 @@ nav .nav-toggle:checked~ul {
 }
 .layout-pagination > a:hover {
 	color: var(--highlight-fg);
-	background: var(--accent-bg-transparent);
+	background: var(--highlight-bg);
 }
 .layout-pagination > * > :nth-child(2) {
 	text-decoration: underline;
@@ -374,7 +416,7 @@ nav .nav-toggle:checked~ul {
 /* Table of Content styling */
 
 #toc {
-	opacity: 0.6;
+	opacity: 0.7;
 	transition: opacity 0.1s ease-in-out;
 	font-size: var(--font-size-small);
 	line-height: 1.2;
@@ -387,7 +429,7 @@ nav .nav-toggle:checked~ul {
 	padding: var(--s-3) var(--s-1);
 }
 #toc a:hover {
-	background: none;
+	background: var(--highlight-bg);
 }
 
 /* Search */
@@ -418,12 +460,12 @@ main h2:first-child {
 .card {
 	display: flex;
 
-	background: white;
-    box-shadow: 0 2px 3px rgb(0 0 0 / 10%);
-    border: 1px solid #ddd;
-    margin-top: var(--s2);
-    padding: var(--s0);
-    border-radius: 3px;
+	background: var(--background);
+	box-shadow: 0 2px 3px rgb(0 0 0 / 10%);
+	border: var(--border);
+	margin-top: var(--s2);
+	padding: var(--s0);
+	border-radius: 3px;
 
 	gap: var(--s0);
 }
@@ -441,19 +483,19 @@ main h2:first-child {
 	grid-template-columns: repeat(auto-fit, minmax(var(--measure-third), 1fr));
 }
 .big-links a {
-    position: relative;
-    padding: var(--s-2) var(--s0);
-    text-align: center;
-    border: 1px solid #ccc;
-    border-bottom: 5px solid #ccc;
-    border-radius: 3px;
-    color: var(--main-fg);
-    text-decoration: none !important;
+	position: relative;
+	padding: var(--s-2) var(--s0);
+	text-align: center;
+	border: var(--border);
+	border-bottom: 5px solid var(--border-color);
+	border-radius: 3px;
+	color: var(--primary-fg);
+	text-decoration: none !important;
 
-    background: white;
+	background: var(--primary-bg);
 }
 .big-links a:hover {
-	border-bottom: 5px solid var(--accent-bg);
+	border-color: var(--accent-bg);
 }
 .big-links a {
 	margin-top: 0;
@@ -515,7 +557,8 @@ footer {
 /* Code styling */
 
 pre {
-	background: #efefef;
+	color: var(--code-fg);
+	background: var(--code-bg);
 	padding: var(--s0);
 	border-radius: 0.3125rem;
 	overflow-x: auto;
@@ -540,7 +583,7 @@ pre {
 	box-shadow: var(--play-shadow);
 }
 pre.play {
-	background: repeating-linear-gradient(45deg, #e8e8e8, #e8e8e8 1rem, #f8f8f8 1rem, #f8f8f8 2rem);
+	background: var(--play-background-pattern)
 }
 .run {
 	--radius: 2rem;
