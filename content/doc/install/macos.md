@@ -10,4 +10,6 @@ Xcode is required for Apple platforms.
 
 To test whether the installation works, run:
 
-    go run gioui.org/example/hello@latest
+``` sh
+go run gioui.org/example/hello@latest
+```

@@ -34,14 +34,18 @@ to `git send-email`.
 
 With `git send-email` configured, you can clone the project and set it up for submitting your changes:
 
-    $ git clone https://git.sr.ht/~eliasnaur/gio
-    $ cd gio
-    $ git config sendemail.to '~eliasnaur/gio-patches@lists.sr.ht'
-    $ git config sendemail.annotate yes
+``` sh
+git clone https://git.sr.ht/~eliasnaur/gio
+cd gio
+git config sendemail.to '~eliasnaur/gio-patches@lists.sr.ht'
+git config sendemail.annotate yes
+```
 
 Include the project name in the mail subject:
 
-	$ git config format.subjectPrefix "PATCH gio"
+``` sh
+git config format.subjectPrefix "PATCH gio"
+```
 
 If you're contributing for a different project, replace "gio" with the
 repository name from https://sr.ht/~eliasnaur/gio/sources. For
@@ -50,17 +54,23 @@ example, "giouiorg" is the repository for the
 
 Configure your name and email address if you have not done so already:
 
-    $ git config --global user.email "you@example.com"
-    $ git config --global user.name "Your Name"
+``` sh
+git config --global user.email "you@example.com"
+git config --global user.name "Your Name"
+```
 
 Whenever you want to submit your work for review, use `git send-email` with the number of commit on the
 current branch you want to send. For example, to submit the most recent commit use
 
-    $ git send-email -1
+``` sh
+git send-email -1
+```
 
 If you revise your patchset, add a version to the subject line with the `-vX` flag:
 
-    $ git send-email -v2 -1
+``` sh
+git send-email -v2 -1
+```
 
 ## Automatic patch testing
 

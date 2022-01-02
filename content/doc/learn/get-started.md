@@ -10,8 +10,8 @@ another tutorial.
 Ensure that you have followed [installation instructions](/doc/install).
 If everything is setup correctly, then running:
 
-```
-$ go run gioui.org/example/hello@latest
+``` sh
+go run gioui.org/example/hello@latest
 ```
 
 Should display a pretty "Hello, Gio!" message.
@@ -25,15 +25,15 @@ First step in creating a Go program requires setting up the module.
 We'll use `gio.test` as our module name, however, it's recommended to use a
 repository name when you want to upload it. The module name can be later changed.
 
-```
-$ go mod init gio.test
+``` sh
+go mod init gio.test
 ```
 
 ## Creating the program
 
 Let's create `main.go` with the following code:
 
-```
+``` go
 package main
 
 import (
@@ -87,14 +87,14 @@ func run(w *app.Window) error {
 
 Let's then update all the dependencies with:
 
-```
-$ go mod tidy
+``` sh
+go mod tidy
 ```
 
 Once that succeeds, the program should start up with:
 
-```
-$ go run .
+``` sh
+go run .
 ```
 
 Now to explain what's happening.
@@ -105,7 +105,7 @@ Every program requires a window, the `main` starts up the application loop that
 talks to the operating system and starts the window logic in a separate
 goroutine.
 
-```
+``` go
 func main() {
 	go func() {
 		w := app.NewWindow()
@@ -124,7 +124,7 @@ func main() {
 Applications need to define their fonts and different color settings.
 Themes contain all the necessary information.
 
-```
+``` go
 func run(w *app.Window) error {
 	th := material.NewTheme(gofont.Collection())
 	...
@@ -135,7 +135,7 @@ func run(w *app.Window) error {
 The communication with the operating system (i.e. keyboard, mouse, GPU) happens
 through events. Gio uses the following approach to listen for events:
 
-```
+``` go
 	for {
 		e := <-w.Events()
 		switch e := e.(type) {
@@ -156,7 +156,7 @@ frame.
 
 To draw the text it needs to go through several stages:
 
-```
+``` go
 	var ops op.Ops
 	for {
 		...

@@ -22,7 +22,9 @@ additional desktop feature support, Gio uses a separate tool `gogio`.
 
 To install the latest version of the tool use:
 
-    go install gioui.org/cmd/gogio@latest
+``` sh
+go install gioui.org/cmd/gogio@latest
+```
 
 For the platforms some additional dependencies may be necessary.
 
