@@ -44,3 +44,72 @@ feature set focused on its projects.
 Note that even ignoring the above arguments, there is not a clear alternative.
 For example, the Go project itself supports GitHub contributions, but only as a
 bridge to its preferred code review tool Gerrit.
+
+
+## Why all the closures?
+
+One of the first things people notice is all the callbacks:
+
+``` go
+	return layout.Flex{}.Layout(gtx,
+		layout.Flexed(1, func(gtx layout.Context) layout.Dimensions {
+			return layout.Center.Layout(gtx,
+				func(gtx layout.Context) layout.Dimensions {
+					return material.Body1(th, strconv.Itoa(counter.Count)).Layout(gtx)
+				})
+		}),
+		...
+}
+```
+
+The main reason for writing the code in such a style is performance.
+This approach avoids many heap allocations and a lot of dynamic dispatch.
+There isn't a significant problem with the core loop performance on
+desktops. It does affect low-end devices.
+
+To avoid deeply nested closures there are a few approaches. First, when the
+last call exactly matches the argument, the last closure can be dropped.
+
+``` go
+	return layout.Flex{}.Layout(gtx,
+		layout.Flexed(1, func(gtx layout.Context) layout.Dimensions {
+			return layout.Center.Layout(gtx,
+				material.Body1(th, strconv.Itoa(counter.Count)).Layout)
+		}),
+```
+
+An utility function can be used:
+
+``` go
+	return layout.Flex{}.Layout(gtx,
+		layout.Flexed(1, centeredText(strconv.Itoa(counter.Count))),
+		...
+}
+
+func centeredText(text string) layout.Widget {
+	return func(gtx layout.Context) layout.Dimensions {
+		return layout.Center.Layout(gtx, material.Body1(th, text).Layout)
+	}
+}
+```
+
+Or when more configuration is needed, then a small custom widget can be used:
+
+``` go
+	return layout.Flex{}.Layout(gtx,
+		layout.Flexed(1, alignedText{
+			align: layout.Center,
+			text:  strconv.Itoa(counter.Count),
+		}.Layout),
+		...
+}
+
+type alignedText struct {
+	align layout.Direction
+	text  string
+}
+
+func (w alignedText) Layout(gtx layout.Context) layout.Dimensions {
+	return w.align.Layout(gtx, material.Body1(th, w.text).Layout)
+}
+```
