@@ -29,6 +29,7 @@ These documents provide a deeper look into Gio.
     <a href="/doc/architecture">Architecture<p>Gio Internals.</p></a>
     <a href="/doc/learn/split-widget">Splitter Widget<p>Writing a custom widget.</p></a>
     <a href="https://eliasnaur.com/blog/immediate-mode-gui-programming">Immediate Mode GUI Programming</a>
+    <a href="https://git.sr.ht/~eliasnaur/gio">gioui.org repository<p>Source Code</p></a>
 </div>
 
 ## Talks

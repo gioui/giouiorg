@@ -401,6 +401,7 @@ nav .nav-toggle:checked~ul {
 
 main h2 {
 	margin-top: var(--s2);
+	border-bottom: var(--border);
 }
 main h2:first-child {
 	margin-top: 0;

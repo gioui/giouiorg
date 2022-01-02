@@ -6,6 +6,7 @@ children:
     - doc/install
     - doc/learn
     - doc/architecture
+    - doc/community
     - doc/contribute
     - doc/faq
 ---
@@ -49,7 +50,7 @@ The ["Immediate Mode GUI Programming"](https://eliasnaur.com/blog/immediate-mode
 article compares Gio's immediate mode design with the traditional
 retained mode APIs such as the browser DOM.
 
-# Reference documentation
+## Reference documentation
 
 [Operations](https://pkg.go.dev/gioui.org/op) and stateful operation
 lists are the low-level primitives of Gio. The important operations
@@ -103,32 +104,6 @@ See [Installation](/doc/install) for further information.
 - [Wormhole William](https://play.google.com/store/apps/details?id=io.sanford.wormhole_william), an end-to-end encrypted file transfer application using the Magic Wormhole protocol. [GitHub repository](https://github.com/psanford/wormhole-william-mobile).
 - [Sointu](https://github.com/vsariola/sointu/), a modular software synthesizer to easily produce music for 4k intros.
 - [Photon](https://gitlab.com/microo8/photon), a fast RSS reader as light as a photon.
-
-## Source code
-
-The source code, mailing lists and issue tracker for Gio are [hosted on sourcehut](https://sr.ht/~eliasnaur/gio).
-The examples are in the [gio-example](https://git.sr.ht/~eliasnaur/gio-example) repository.
-
-## Resources
-
-- [gio-x](https://git.sr.ht/~whereswaldon/gio-x) extends Gio with features not (yet) available in the core library.
-- [Immediate Mode GUI Programming](https://eliasnaur.com/blog/immediate-mode-gui-programming)
-- [FAQ](/doc/faq).
-- [Gophercon 2019 talk](https://www.youtube.com/watch?v=9D6eWP4peYM) about Gio and [Scatter](https://scatter.im).
-[Slides](https://go-talks.appspot.com/github.com/eliasnaur/gophercon-2019-talk/gophercon-2019.slide),
-[Demos](https://github.com/eliasnaur/gophercon-2019-talk).
-- [Gophercon UK 2019 talk](https://www.youtube.com/watch?v=PxnL3-Sex3o) demonstrating a Gio program built from scratch.
-[Slides](https://go-talks.appspot.com/github.com/eliasnaur/gophercon-uk-2019-talk/gophercon-uk-2019-live.slide),
-[Demos](https://github.com/eliasnaur/gophercon-uk-2019-talk).
-- [Community Calls](https://www.youtube.com/channel/UCzuKUnKK5gAFJKNyA1imIHw)
-
-## Issues
-
-File bugs and TODOs through the [issue tracker](https://todo.sr.ht/~eliasnaur/gio) or send an email
-to [~eliasnaur/gio@todo.sr.ht](mailto:~eliasnaur/gio@todo.sr.ht). For general discussion, use the
-[~eliasnaur/gio@lists.sr.ht mailing list](https://lists.sr.ht/~eliasnaur/gio) or the
-[#gioui](https://gophers.slack.com/archives/CM87SNCGM) Gophers Slack workspace ([Need an invite to gophers slack?](https://invite.slack.golangbridge.org/).
-
 
 ## Contributing
 
