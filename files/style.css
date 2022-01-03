@@ -539,6 +539,9 @@ pre {
 	background-color: var(--play-background);
 	box-shadow: var(--play-shadow);
 }
+pre.play {
+	background: repeating-linear-gradient(45deg, #e8e8e8, #e8e8e8 1rem, #f8f8f8 1rem, #f8f8f8 2rem);
+}
 .run {
 	--radius: 2rem;
 
