@@ -7,7 +7,7 @@ title: Android
 For Android you need the [Android SDK](https://developer.android.com/studio#command-tools)
 with the NDK bundle installed.
 
-Point the `ANDROID_HOME` to the SDK root directory. To install the NDK bundle use
+Point the `ANDROID_SDK_ROOT` to the SDK root directory. To install the NDK bundle use
 the `sdkmanager` command that comes with the SDK:
 
 ```
