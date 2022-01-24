@@ -16,6 +16,8 @@ sdkmanager ndk-bundle
 
 To run Gio programs on the emulator, you may need to [enable OpenGL ES 3](https://developer.android.com/studio/run/emulator-acceleration).
 
+You will also need OpenJDK 1.8, as part of the Android build toolchain requires it. More recent versions of Java will break the build.
+
 ## Building
 
 Install `gogio`, if you already haven't:
