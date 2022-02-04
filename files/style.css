@@ -2,13 +2,14 @@
 
 :root {
 	--background: #fafafa;
+	--background-lo: #efefef;
 
 	--primary-fg: #000;
 	--primary-fg-lo: #333;
 	--primary-bg: #fff;
 
 	--thumb: #bbb;
-	--thumb-glass: rgba(0.95, 0.95, 0.95, 0.05);
+	--thumb-glass: rgba(0.95, 0.95, 0.95, 0.1);
 	--border-color: var(--thumb);
 	--border: 1px solid var(--border-color);
 	--border-radius: 0.5rem;
@@ -26,7 +27,7 @@
 	--highlight-bg: var(--accent-bg-transparent);
 
 	--code-fg: #000;
-	--code-bg: #efefef;
+	--code-bg: var(--background-lo);
 
 	--play-background: #fff;
 	--play-background-pattern: repeating-linear-gradient(45deg, #e8e8e8, #e8e8e8 1rem, #f8f8f8 1rem, #f8f8f8 2rem);
@@ -455,7 +456,45 @@ main h2:first-child {
 	width: var(--measure);
 }
 
-/* Showcase styling */
+/* Reel styling */
+
+.reel-background {
+	padding: var(--s0);
+	background: var(--background-lo);
+	border: var(--border);
+	border-radius: var(--border-radius);
+}
+
+.reel {
+	display: flex;
+	overflow-x: scroll;
+	overflow-y: hidden;
+
+	height: 50vh;
+
+	padding-bottom: var(--s0);
+}
+
+.reel > img {
+	height: 100%;
+	flex-basis: auto;
+	width: auto;
+	inline-size: auto;
+
+	box-shadow: var(--play-shadow);
+}
+
+.reel > * + * {
+	margin-inline-start: var(--s0);
+}
+
+/* Card styling */
+
+.cards-tiled {
+	display: grid;
+	grid-gap: var(--s0);
+	grid-template-columns: repeat(auto-fit, minmax(var(--measure-half), 1fr));
+}
 
 .card {
 	display: flex;
@@ -463,15 +502,26 @@ main h2:first-child {
 	background: var(--background);
 	box-shadow: 0 2px 3px rgb(0 0 0 / 10%);
 	border: var(--border);
-	margin-top: var(--s2);
 	padding: var(--s0);
 	border-radius: 3px;
 
 	gap: var(--s0);
 }
 
+.card a {
+	color: var(--primary-fg);
+}
+
+.card .card-description {
+	flex: 1;
+}
+
 .card img {
 	width: 13rem;
+	max-height: 13rem;
+	object-fit: cover;
+
+	box-shadow: var(--play-shadow);
 }
 
 /* Big links */
@@ -493,17 +543,66 @@ main h2:first-child {
 	text-decoration: none !important;
 
 	background: var(--primary-bg);
+
+	margin-top: 0;
+	margin-bottom: 0;
 }
 .big-links a:hover {
 	border-color: var(--accent-bg);
 }
-.big-links a {
-	margin-top: 0;
-	margin-bottom: 0;
-}
 .big-links a p {
 	font-size: var(--font-size-small);
 	margin-bottom: 0;
+}
+
+/* Tiles */
+
+.tiles {
+	display: grid;
+	grid-gap: var(--s0);
+	grid-auto-rows: 1fr;
+	grid-template-columns: repeat(auto-fit, minmax(var(--measure-third), 1fr));
+}
+.tiles a {
+	display: block;
+	height: var(--measure-third);
+
+	position: relative;
+	text-align: center;
+	border: var(--border);
+	border-bottom: 5px solid var(--border-color);
+	border-radius: 3px;
+	color: var(--primary-fg);
+	text-decoration: none !important;
+
+	background: var(--primary-bg);
+	background-size: cover;
+	background-position: center;
+
+	margin-top: 0;
+	margin-bottom: 0;
+}
+.tiles a.centered {
+	display: flex;
+	flex-direction: column;
+	justify-content: center;
+}
+.tiles a:hover {
+	border-color: var(--accent-bg);
+}
+.tiles .title {
+	color: white;
+	background: rgba(0, 0, 0, 0.8);
+	padding: var(--s-2) var(--s0);
+}
+.tiles a p {
+	font-size: var(--font-size-small);
+	margin-top: 0;
+	margin-bottom: 0;
+
+	color: white;
+	background: rgba(0, 0, 0, 0.8);
+	padding: var(--s-2) var(--s0);
 }
 
 /* Highlight target caption */
@@ -525,18 +624,19 @@ footer {
 
 /* Nicer looking scrollbar. */
 
-.layout-sidebar {
+.nice-scroll {
 	scrollbar-color: var(--thumb-glass) var(--background);
 	scrollbar-width: thin;
 
 	transition: scrollbar-color 0.1s ease-in-out;
 }
 
-.layout-sidebar::-webkit-scrollbar {
-	width: var(--s-3);
+.nice-scroll::-webkit-scrollbar {
+	width: var(--s-2);
+	height: var(--s-2);
 }
 
-.layout-sidebar::-webkit-scrollbar-thumb {
+.nice-scroll::-webkit-scrollbar-thumb {
 	background-color: var(--thumb-glass);
 	border-radius: var(--s-3);
 	background-clip: content-box;
@@ -545,12 +645,13 @@ footer {
 	-webkit-transition: background-color 0.1s ease-in-out;
 }
 
-.layout-sidebar:hover {
+.nice-scroll:hover {
 	scrollbar-color: var(--thumb) var(--thumb-glass);
 	scrollbar-width: thin;
+	scrollbar-height: thin;
 }
 
-.layout-sidebar:hover::-webkit-scrollbar-thumb {
+.nice-scroll:hover::-webkit-scrollbar-thumb {
 	background-color: var(--thumb);
 }
 
@@ -567,11 +668,11 @@ pre {
 }
 pre,
 code {
-    font-family: Menlo, monospace;
-    font-size: 0.875rem;
+	font-family: Menlo, monospace;
+	font-size: 0.875rem;
 }
 pre {
-    margin: var(--s0);
+	margin: var(--s0);
 }
 .play {
 	position: relative;

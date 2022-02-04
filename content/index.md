@@ -5,6 +5,7 @@ childrennolink: true
 children:
     - doc/install
     - doc/learn
+    - doc/showcase
     - doc/architecture
     - doc/community
     - doc/contribute
@@ -47,15 +48,26 @@ contains links to get you started with Gio.
     <a href="/doc/learn">Learn<p>More helpful resources.</p></a>
 </div>
 
-## Showcase
+## [Showcase](/showcase)
 
-- [godcr](https://github.com/planetdecred/godcr), a cross-platform desktop wallet for the Decred cryptocurrency.
-- [sprig](https://git.sr.ht/~whereswaldon/sprig), a client for the [Arbor chat system](https://arbor.chat).
-- [Tailscale](https://github.com/tailscale/tailscale-android), a [Tailscale](https://tailscale.com) Android client.
-- [Protonet](https://play.google.com/store/apps/details?id=live.protonet), a peer-to-peer chat application. [GitHub Repo](https://github.com/mearaj/protonet)
-- [Wormhole William](https://play.google.com/store/apps/details?id=io.sanford.wormhole_william), an end-to-end encrypted file transfer application using the Magic Wormhole protocol. [GitHub repository](https://github.com/psanford/wormhole-william-mobile).
-- [Sointu](https://github.com/vsariola/sointu/), a modular software synthesizer to easily produce music for 4k intros.
-- [Photon](https://gitlab.com/microo8/photon), a fast RSS reader as light as a photon.
+<div class="tiles">
+    <a href="/doc/showcase/godcr" style="background-image: url('/doc/showcase/godcr/1.png')">
+        <div class="title">godcr</div>
+    </a>
+    <a href="/doc/showcase/tailscale" style="background-image: url('/doc/showcase/tailscale/1.png')">
+        <div class="title">Tailscale</div>
+    </a>
+    <a href="/doc/showcase/sprig" style="background-image: url('/doc/showcase/sprig/1.png')">
+        <div class="title">sprig</div>
+    </a>
+    <a href="/doc/showcase/sointu" style="background-image: url('/doc/showcase/sointu/1.png')">
+        <div class="title">Sointu</div>
+    </a>
+    <a href="/doc/showcase/protonet" style="background-image: url('/doc/showcase/protonet/1.png')">
+        <div class="title">Protonet</div>
+    </a>
+    <a class="centered" href="/doc/showcase"><div class="title">More here ...</div></a>
+</div>
 
 ## Why?
 

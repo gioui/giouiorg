@@ -1,0 +1,11 @@
+{{ define "images" }}
+{{ if .Images }}
+<div class="reel-background">
+	<div class="reel nice-scroll">
+		{{ range $image := .Images }}
+		<img src="{{$image.Source}}" {{with $image.Alt}}alt="{{.}}"{{end}} />
+		{{ end }}
+	</div>
+</div>
+{{ end }}
+{{ end }}

@@ -21,15 +21,19 @@ type Config struct {
 
 type Site struct {
 	// Pages are indexed without prefixed "/".
-	Pages    map[string]*Page
-	Template *template.Template
-	Files    fs.FS
-	Fallback http.HandlerFunc
+	Pages        map[string]*Page
+	Template     *template.Template
+	BaseTemplate *template.Template
+	Content      fs.FS
+	Files        fs.FS
+	Fallback     http.HandlerFunc
 }
 
 type Page struct {
 	FrontMatter
 	TOC []InternalLink
+
+	Template string
 
 	Content  template.HTML
 	Rendered []byte
@@ -49,6 +53,7 @@ type InternalLink struct {
 func (config Config) Parse() (*Site, error) {
 	site := &Site{
 		Pages:    map[string]*Page{},
+		Content:  config.Content,
 		Files:    config.Files,
 		Fallback: config.Fallback,
 	}
@@ -77,6 +82,7 @@ func (site *Site) loadTemplates(templates fs.FS) error {
 	}
 
 	site.Template = templ
+	site.BaseTemplate, _ = templ.Clone()
 
 	return nil
 }
@@ -93,13 +99,37 @@ func (site *Site) loadContent(contentRoot, includes fs.FS) error {
 			return fmt.Errorf("failed to load page %q: %w", path, err)
 		}
 
-		switch filepath.Ext(path) {
+		ext := filepath.Ext(path)
+		if imageExt[ext] {
+			// ignore images
+			return nil
+		}
+
+		switch ext {
+		case ".tmpl":
+			return site.loadTemplate(includes, path, content)
 		case ".md":
 			return site.loadMarkdown(includes, path, content)
 		default:
 			return fmt.Errorf("unknown page extension %q", path)
 		}
 	})
+}
+
+// loadTemplate loads a single go template file into the index.
+func (site *Site) loadTemplate(includes fs.FS, path string, content []byte) error {
+	page, err := ParseTemplate(includes, path, content)
+	if err != nil {
+		return fmt.Errorf("ParseTemplate: %w", err)
+	}
+
+	if _, exists := site.Pages[page.Slug]; exists {
+		return fmt.Errorf("duplicate page %q", page.Slug)
+	}
+
+	site.Pages[page.Slug] = page
+
+	return nil
 }
 
 // loadMarkdown loads a single markdown file into the index.
@@ -183,15 +213,30 @@ func (site *Site) renderPages() error {
 		nav := buildNav(root, page)
 		nav.Active = root == page // override index.md active
 
-		var buf bytes.Buffer
-		if err := site.Template.ExecuteTemplate(&buf, "root", renderData{
+		data := renderData{
 			Nav:   nav,
 			Front: &page.FrontMatter,
 			Page:  page,
-		}); err != nil {
-			return fmt.Errorf("template failed: %w", err)
 		}
 
+		var buf bytes.Buffer
+		if page.Template != "" {
+			siteTempl, err := site.BaseTemplate.Clone()
+			if err != nil {
+				return fmt.Errorf("template clone failed: %w", err)
+			}
+			t, err := siteTempl.Parse(string(page.Template))
+			if err != nil {
+				return fmt.Errorf("template parse failed: %w", err)
+			}
+			if err := t.ExecuteTemplate(&buf, "root", data); err != nil {
+				return fmt.Errorf("template failed: %w", err)
+			}
+		} else {
+			if err := site.Template.ExecuteTemplate(&buf, "root", data); err != nil {
+				return fmt.Errorf("template failed: %w", err)
+			}
+		}
 		page.Rendered = buf.Bytes()
 	}
 	return nil

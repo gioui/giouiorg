@@ -23,6 +23,19 @@ type FrontMatter struct {
 
 	ChildrenNoLink bool     `yaml:"childrennolink"`
 	Children       []string `yaml:"children"`
+
+	Images []Image        `yaml:"images"`
+	Links  []ExternalLink `yaml:"links"`
+}
+
+type Image struct {
+	Alt    string `yaml:"alt"`
+	Source string `yaml:"source"`
+}
+
+type ExternalLink struct {
+	Title string `yaml:"title"`
+	URL   string `yaml:"url"`
 }
 
 func (fm FrontMatter) URL() string { return "/" + fm.Slug }
@@ -56,6 +69,10 @@ func parseFrontMatter(fpath string, content []byte) (FrontMatter, []byte, error)
 		resolveRelativePath(&front.Children[i], fpath)
 	}
 
+	for i := range front.Images {
+		resolveRelativeImageURL(&front.Images[i].Source, fpath)
+	}
+
 	return front, md, nil
 }
 
@@ -65,4 +82,14 @@ func resolveRelativePath(target *string, workingPath string) {
 	}
 
 	*target = path.Clean(path.Join(path.Dir(workingPath), *target))
+}
+
+func resolveRelativeImageURL(target *string, workingPath string) {
+	if !strings.HasPrefix(*target, "./") {
+		return
+	}
+
+	// TODO: avoid difference between paths with and without front slash
+	// use / prefixed slugs and paths throughout the codebase.
+	*target = "/" + path.Clean(path.Join(path.Dir(workingPath), *target))
 }

@@ -7,20 +7,34 @@ import (
 	"io/fs"
 	"log"
 	"net/http"
+	"path"
 	"strings"
+	"time"
 
 	"golang.org/x/tools/godoc/static"
 )
 
+var imageExt = map[string]bool{
+	".png":  true,
+	".jpg":  true,
+	".jpeg": true,
+}
+
 func (site *Site) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	if strings.HasPrefix(r.URL.Path, "/files/") {
-		http.StripPrefix("/files/",
-			http.FileServer(http.FS(site.Files)),
-		).ServeHTTP(w, r)
+		setCacheDuration(w, time.Hour)
+		http.StripPrefix("/files/", http.FileServer(http.FS(site.Files))).ServeHTTP(w, r)
+		return
+	}
+
+	if imageExt[path.Ext(r.URL.Path)] {
+		setCacheDuration(w, time.Hour)
+		http.FileServer(http.FS(site.Content)).ServeHTTP(w, r)
 		return
 	}
 
 	if r.URL.Path == "/scripts.js" {
+		setCacheDuration(w, time.Hour)
 		site.handleScripts(w, r)
 		return
 	}
@@ -54,4 +68,9 @@ func (site *Site) handleScripts(w http.ResponseWriter, r *http.Request) {
 	}
 	w.Header().Set("Content-type", "application/javascript")
 	_, _ = w.Write(buf.Bytes())
+}
+
+func setCacheDuration(w http.ResponseWriter, duration time.Duration) {
+	w.Header().Set("Cache-Control", "max-age=31536000, public")
+	w.Header().Set("Expires", time.Now().Add(duration).UTC().Format(http.TimeFormat))
 }

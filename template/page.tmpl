@@ -21,6 +21,14 @@
 			<li><a href="#{{$link.HeadingID}}">{{$link.Title}}</a></li>
 			{{ end }}
 		</ul>
+
+		{{ if .Links }}
+		<ul class="font-size:base">
+			{{ range $link := .Links }}
+			<li><a href="{{$link.URL}}" target="_blank" rel="noopener noreferrer">🔗 {{$link.Title}}</a></li>
+			{{ end }}
+		</ul>
+		{{ end }}
 	</nav>
 </aside>
 {{end}}

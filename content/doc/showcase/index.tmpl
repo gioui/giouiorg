@@ -1,0 +1,29 @@
+---
+title: Showcase
+subtitle: Programs written with Gio
+children:
+    - ./godcr
+    - ./sprig
+    - ./tailscale
+    - ./protonet
+    - ./wormhole-william
+    - ./sointu
+    - ./photon
+---
+
+{{ define "toc" }}<div style="display:none"></div>{{ end }}
+
+{{ define "content" }}
+<p>
+This contains a showcase of different programs written using Gio.
+</p>
+
+<div class="tiles">
+    {{ range $item := .Children }}
+    <a href="{{$item.URL}}" style="background-image: url('{{(index $item.Images 0).Source}}')">
+        <div class="title">{{$item.Title}}</div>
+        <p>{{$item.Subtitle}}</p>
+    </a>
+    {{ end }}
+</div>
+{{ end }}
