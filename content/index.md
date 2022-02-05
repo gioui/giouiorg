@@ -48,7 +48,7 @@ contains links to get you started with Gio.
     <a href="/doc/learn">Learn<p>More helpful resources.</p></a>
 </div>
 
-## [Showcase](/showcase)
+## Showcase
 
 <div class="tiles">
     <a href="/doc/showcase/godcr" style="background-image: url('/doc/showcase/godcr/1.png')">
