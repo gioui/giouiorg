@@ -41,6 +41,31 @@ For more complex clipping [`clip.Path`](https://gioui.org/op/clip#Path) can expr
 
 <pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="draw-clip-triangle" data-size="200x100"></pre>
 
+## Lines
+
+To draw lines it's possible to use [`clip.Stroke`](https://gioui.org/op/clip#Stroke)
+instead of [`clip.Outline`](https://gioui.org/op/clip#Outline).
+We can also use [`paint.FillShape`](https://gioui.org/op/paint#FillShape) helper
+to avoid managing the clip state or use `ColorOp` or `PaintOp`.
+
+It's possible to use the predefined shapes, such as [`clip.RRect`](https://gioui.org/op/clip#RRect):
+
+<{{files/architecture/draw.go}}[/START STROKE RECT OMIT/,/END STROKE RECT OMIT/]
+
+<pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="draw-stroke-rect" data-size="200x100"></pre>
+
+Or use a custom shape drawn with [`clip.Path`](https://gioui.org/op/clip#Path):
+
+<{{files/architecture/draw.go}}[/START STROKE TRIANGLE OMIT/,/END STROKE TRIANGLE OMIT/]
+
+<pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="draw-stroke-triangle" data-size="200x100"></pre>
+
+
+
+For dashes, stroke end caps and joins, there's a separate package [gioui.org/x/stroke](https://gioui.org/x/stroke).
+However, they are not as performant as `clip.Stroke`.
+
+
 ## Operation Stack
 
 Some operations affect all operations that follow them. For example, [`paint.ColorOp`](https://gioui.org/op/paint#ColorOp) sets the "brush" color that is used in subsequent [`paint.PaintOp`](https://gioui.org/op/paint#PaintOp) operations. This drawing context also includes coordinate transformation (set by [`op.TransformOp`](https://gioui.org/op#TransformOp)) and clipping (set by [`clip.Op`](https://gioui.org/op/clip#Op)).

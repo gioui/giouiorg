@@ -65,6 +65,39 @@ func redTriangle(ops *op.Ops) {
 
 // END CLIP TRIANGLE OMIT
 
+// START STROKE RECT OMIT
+func strokeRect(ops *op.Ops) {
+	const r = 10
+	bounds := f32.Rect(20, 20, 80, 80)
+	rrect := clip.RRect{Rect: bounds, SE: r, SW: r, NW: r, NE: r}
+	paint.FillShape(ops, red,
+		clip.Stroke{
+			Path:  rrect.Path(ops),
+			Width: 4,
+		}.Op(),
+	)
+}
+
+// END STROKE RECT OMIT
+
+// START STROKE TRIANGLE OMIT
+func strokeTriangle(ops *op.Ops) {
+	var path clip.Path
+	path.Begin(ops)
+	path.MoveTo(f32.Pt(30, 30))
+	path.LineTo(f32.Pt(70, 30))
+	path.LineTo(f32.Pt(50, 70))
+	path.Close()
+
+	paint.FillShape(ops, green,
+		clip.Stroke{
+			Path:  path.End(),
+			Width: 4,
+		}.Op())
+}
+
+// END STROKE TRIANGLE OMIT
+
 // START STACK OMIT
 func redButtonBackgroundStack(ops *op.Ops) {
 	const r = 1 // roundness
