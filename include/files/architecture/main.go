@@ -91,6 +91,7 @@ func drawLoop(draw func(*op.Ops)) func() error {
 	return func() error {
 		// START DRAWLOOP OMIT
 		window := app.NewWindow()
+		var ops op.Ops
 		for e := range window.Events() {
 			switch e := e.(type) {
 			case system.DestroyEvent:
@@ -98,11 +99,13 @@ func drawLoop(draw func(*op.Ops)) func() error {
 				return e.Err
 			case system.FrameEvent:
 				// A request to draw the window state.
-				ops := new(op.Ops)
+
+				// Reset the operations back to zero.
+				ops.Reset()
 				// Draw the state into ops.
-				draw(ops)
+				draw(&ops)
 				// Update the display.
-				e.Frame(ops)
+				e.Frame(&ops)
 			}
 		}
 		// END DRAWLOOP OMIT
@@ -114,6 +117,7 @@ func drawQueueLoop(draw func(*op.Ops, event.Queue)) func() error {
 	return func() error {
 		// START DRAWQUEUELOOP OMIT
 		window := app.NewWindow()
+		var ops op.Ops
 		for e := range window.Events() {
 			switch e := e.(type) {
 			case system.DestroyEvent:
@@ -121,11 +125,13 @@ func drawQueueLoop(draw func(*op.Ops, event.Queue)) func() error {
 				return e.Err
 			case system.FrameEvent:
 				// A request to draw the window state.
-				ops := new(op.Ops)
+
+				// Reset the operations back to zero.
+				ops.Reset()
 				// Draw the state into ops based on events in e.Queue.
-				draw(ops, e.Queue)
+				draw(&ops, e.Queue)
 				// Update the display.
-				e.Frame(ops)
+				e.Frame(&ops)
 			}
 		}
 		// END DRAWQUEUELOOP OMIT
