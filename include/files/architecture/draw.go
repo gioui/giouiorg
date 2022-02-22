@@ -26,7 +26,7 @@ func addColorOperation(ops *op.Ops) {
 
 // START DRAWING OMIT
 func drawRedRect(ops *op.Ops) {
-	clip.Rect{Max: image.Pt(100, 100)}.Push(ops)
+	defer clip.Rect{Max: image.Pt(100, 100)}.Push(ops).Pop()
 	paint.ColorOp{Color: color.NRGBA{R: 0x80, A: 0xFF}}.Add(ops)
 	paint.PaintOp{}.Add(ops)
 }
@@ -35,7 +35,7 @@ func drawRedRect(ops *op.Ops) {
 
 // START TRANSFORMATION OMIT
 func drawRedRect10PixelsRight(ops *op.Ops) {
-	op.Offset(f32.Pt(100, 0)).Add(ops)
+	defer op.Offset(f32.Pt(100, 0)).Push(ops).Pop()
 	drawRedRect(ops)
 }
 
@@ -59,7 +59,7 @@ func redTriangle(ops *op.Ops) {
 	path.Quad(f32.Pt(0, 90), f32.Pt(50, 100))
 	path.Line(f32.Pt(-100, 0))
 	path.Line(f32.Pt(50, -100))
-	clip.Outline{Path: path.End()}.Op().Push(ops)
+	defer clip.Outline{Path: path.End()}.Op().Push(ops).Pop()
 	drawRedRect(ops)
 }
 
@@ -102,9 +102,8 @@ func strokeTriangle(ops *op.Ops) {
 func redButtonBackgroundStack(ops *op.Ops) {
 	const r = 1 // roundness
 	bounds := f32.Rect(0, 0, 100, 100)
-	cl := clip.RRect{Rect: bounds, SE: r, SW: r, NW: r, NE: r}.Push(ops)
+	defer clip.RRect{Rect: bounds, SE: r, SW: r, NW: r, NE: r}.Push(ops).Pop()
 	drawRedRect(ops)
-	cl.Pop()
 }
 
 // END STACK OMIT
