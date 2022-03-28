@@ -29,6 +29,21 @@ On Ubuntu 18.04 and newer, use:
 apt install gcc pkg-config libwayland-dev libx11-dev libx11-xcb-dev libxkbcommon-x11-dev libgles2-mesa-dev libegl1-mesa-dev libffi-dev libxcursor-dev libvulkan-dev
 ```
 
+### Nix
+
+On a system with Nix 2.4 or later, Gio includes a Nix flake for setting up a development environment:
+
+```sh
+alias nix='nix --extra-experimental-features "nix-command flakes"'
+nix develop sourcehut:~eliasnaur/gio
+```
+
+The environment can also be applied to the current shell, which is useful in combination with direnv:
+
+```sh
+source <(nix print-dev-env sourcehut:~eliasnaur/gio)
+```
+
 ## Building
 
 To test whether the installation works, run:
