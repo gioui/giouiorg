@@ -119,9 +119,12 @@ func vanityHandler(fallback http.Handler) http.Handler {
 			case strings.HasPrefix(p, "/x"):
 				root = "gioui.org/x"
 				repo = "https://git.sr.ht/~whereswaldon/gio-x"
-			default:
+			case p == "/":
 				root = "gioui.org"
 				repo = "https://git.sr.ht/~eliasnaur/gio"
+			default:
+				http.Error(w, "no such package", http.StatusNotFound)
+				return
 			}
 			fmt.Fprintf(w, `<html><head>
 <meta name="go-import" content="%[1]s git %[2]s">
