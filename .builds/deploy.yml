@@ -56,8 +56,8 @@ tasks:
      ssh-keyscan github.com > "$HOME"/.ssh/known_hosts && cd giouiorg && git push --mirror "$github_mirror" || echo "failed mirroring"
  - install_gcloud: |
      cd /home/build/sdk
-     curl -Lso gcloud.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-sdk-321.0.0-linux-x86_64.tar.gz
-     echo "673f8d4af5e524dcf06547f6c2debcc02ff6678f47f67812d7f90c696cd76e96 gcloud.tar.gz" | sha256sum -c -
+     curl -Lso gcloud.tar.gz https://dl.google.com/dl/cloudsdk/channels/rapid/downloads/google-cloud-cli-382.0.0-linux-x86_64.tar.gz
+     echo "df540f9b8859eb7fd61466940cbfab7e2cbcad7148e7328cf888ad75cc378a0d gcloud.tar.gz" | sha256sum -c -
      tar xzf gcloud.tar.gz
      if [ -f "$gcloud_key_file" ]; then
          gcloud auth activate-service-account --key-file "$gcloud_key_file"
