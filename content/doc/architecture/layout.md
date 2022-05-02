@@ -35,7 +35,7 @@ For example, this draws green and blue rectangles on top of a red background:
 
 ## List
 
-[`layout.List`](https://gioui.org/layout#List) can display a potentially large list of items. Since `List` also handles scrolling it must be persisted across layouts, otherwise the scrolling position is lost.
+[`layout.List`](https://gioui.org/layout#List) can display a potentially large list of items. Since `List` also handles scrolling it must be persisted across layouts, otherwise the scrolling position is lost. List handles large numbers of items by only laying out the visible elements. Each frame, the provided closure is invoked only for indicies visible at the current scroll position (and possibly a small number of items above and below the scroll position).
 
 <{{files/architecture/layout.go}}[/START LIST OMIT/,/END LIST OMIT/]
 
