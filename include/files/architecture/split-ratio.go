@@ -3,7 +3,6 @@ package main
 import (
 	"image"
 
-	"gioui.org/f32"
 	"gioui.org/layout"
 	"gioui.org/op"
 	"gioui.org/widget/material"
@@ -41,7 +40,7 @@ func (s SplitRatio) Layout(gtx layout.Context, left, right layout.Widget) layout
 	}
 
 	{
-		trans := op.Offset(f32.Pt(float32(rightoffset), 0)).Push(gtx.Ops)
+		trans := op.Offset(image.Pt(rightoffset, 0)).Push(gtx.Ops)
 		gtx := gtx
 		gtx.Constraints = layout.Exact(image.Pt(rightsize, gtx.Constraints.Max.Y))
 		right(gtx)

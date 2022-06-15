@@ -3,7 +3,6 @@ package main
 import (
 	"image"
 
-	"gioui.org/f32"
 	"gioui.org/io/pointer"
 	"gioui.org/layout"
 	"gioui.org/op"
@@ -32,7 +31,7 @@ type Split struct {
 	// 0 is center, -1 completely to the left, 1 completely to the right.
 	Ratio float32
 	// Bar is the width for resizing the layout
-	Bar unit.Value
+	Bar unit.Dp
 
 	drag   bool
 	dragID pointer.ID
@@ -41,13 +40,13 @@ type Split struct {
 
 // END INPUTSTATE OMIT
 
-var defaultBarWidth = unit.Dp(10)
+const defaultBarWidth = unit.Dp(10)
 
 func (s *Split) Layout(gtx layout.Context, left, right layout.Widget) layout.Dimensions {
 	// START BAR OMIT
-	bar := gtx.Px(s.Bar)
+	bar := gtx.Dp(s.Bar)
 	if bar <= 1 {
-		bar = gtx.Px(defaultBarWidth)
+		bar = gtx.Dp(defaultBarWidth)
 	}
 
 	proportion := (s.Ratio + 1) / 2
@@ -110,7 +109,7 @@ func (s *Split) Layout(gtx layout.Context, left, right layout.Widget) layout.Dim
 	}
 
 	{
-		off := op.Offset(f32.Pt(float32(rightoffset), 0)).Push(gtx.Ops)
+		off := op.Offset(image.Pt(rightoffset, 0)).Push(gtx.Ops)
 		gtx := gtx
 		gtx.Constraints = layout.Exact(image.Pt(rightsize, gtx.Constraints.Max.Y))
 		right(gtx)

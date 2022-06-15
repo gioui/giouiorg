@@ -3,10 +3,10 @@
 package main
 
 import (
+	"image"
 	"time"
 
 	"gioui.org/app"
-	"gioui.org/f32"
 	"gioui.org/io/system"
 	"gioui.org/op"
 )
@@ -18,7 +18,7 @@ func externalChanges() error {
 	changes := time.NewTicker(time.Second)
 	defer changes.Stop()
 
-	buttonOffset := float32(0.0)
+	buttonOffset := 0
 
 	ops := new(op.Ops)
 	for {
@@ -31,7 +31,7 @@ func externalChanges() error {
 				ops.Reset()
 
 				// Offset the button based on state.
-				op.Offset(f32.Pt(buttonOffset, 0)).Add(ops)
+				op.Offset(image.Pt(buttonOffset, 0)).Add(ops)
 
 				// Handle button input and draw.
 				doButton(ops, e.Queue)
@@ -41,7 +41,7 @@ func externalChanges() error {
 			}
 
 		case t := <-changes.C:
-			buttonOffset = float32(t.Second()%3) * 100
+			buttonOffset = int((t.Second() % 3) * 100)
 			window.Invalidate()
 		}
 	}

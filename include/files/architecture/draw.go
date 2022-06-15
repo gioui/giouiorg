@@ -35,7 +35,7 @@ func drawRedRect(ops *op.Ops) {
 
 // START TRANSFORMATION OMIT
 func drawRedRect10PixelsRight(ops *op.Ops) {
-	defer op.Offset(f32.Pt(100, 0)).Push(ops).Pop()
+	defer op.Offset(image.Pt(100, 0)).Push(ops).Pop()
 	drawRedRect(ops)
 }
 
@@ -44,7 +44,7 @@ func drawRedRect10PixelsRight(ops *op.Ops) {
 // START CLIPPING OMIT
 func redButtonBackground(ops *op.Ops) {
 	const r = 10 // roundness
-	bounds := f32.Rect(0, 0, 100, 100)
+	bounds := image.Rect(0, 0, 100, 100)
 	clip.RRect{Rect: bounds, SE: r, SW: r, NW: r, NE: r}.Push(ops)
 	drawRedRect(ops)
 }
@@ -68,7 +68,7 @@ func redTriangle(ops *op.Ops) {
 // START STROKE RECT OMIT
 func strokeRect(ops *op.Ops) {
 	const r = 10
-	bounds := f32.Rect(20, 20, 80, 80)
+	bounds := image.Rect(20, 20, 80, 80)
 	rrect := clip.RRect{Rect: bounds, SE: r, SW: r, NW: r, NE: r}
 	paint.FillShape(ops, red,
 		clip.Stroke{
@@ -101,7 +101,7 @@ func strokeTriangle(ops *op.Ops) {
 // START STACK OMIT
 func redButtonBackgroundStack(ops *op.Ops) {
 	const r = 1 // roundness
-	bounds := f32.Rect(0, 0, 100, 100)
+	bounds := image.Rect(0, 0, 100, 100)
 	defer clip.RRect{Rect: bounds, SE: r, SW: r, NW: r, NE: r}.Push(ops).Pop()
 	drawRedRect(ops)
 }
@@ -136,7 +136,7 @@ func drawFiveRectangles(ops *op.Ops) {
 	// translated vertically 20px and horizontally 110 pixels.
 	for i := 0; i < 5; i++ {
 		c.Add(ops)
-		op.Offset(f32.Pt(110, 20)).Add(ops)
+		op.Offset(image.Pt(110, 20)).Add(ops)
 	}
 }
 
