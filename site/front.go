@@ -14,13 +14,15 @@ import (
 
 // FrontMatter is used to define properties for the page.
 type FrontMatter struct {
-	Slug     string `yaml:"url"`
-	Title    string `yaml:"title"`
-	Subtitle string `yaml:"subtitle"`
+	Slug       string `yaml:"url"`
+	Title      string `yaml:"title"`
+	Subtitle   string `yaml:"subtitle"`
+	ShortTitle string `yaml:"shorttitle"`
 
 	After  string `yaml:"after"`
 	Before string `yaml:"before"`
 
+	HideChildren   bool     `yaml:"hidechildren"`
 	ChildrenNoLink bool     `yaml:"childrennolink"`
 	Children       []string `yaml:"children"`
 

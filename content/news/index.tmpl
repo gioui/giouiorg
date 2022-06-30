@@ -1,0 +1,19 @@
+---
+title: Newsletter
+subtitle: Gioverse news
+hidechildren: true
+children:
+    - "./2022-05"
+    - "./2022-04"
+    - "./2022-03"
+    - "./2022-02"
+---
+
+{{ define "content" }}
+	<ul>
+	{{- range $item := .Children -}}
+		<li><a href="{{$item.URL}}">{{or $item.ShortTitle $item.Title}}{{with $item.Subtitle}} - {{.}}{{end}}</a></li>
+	</article>
+	{{- end -}}
+	</ul>
+{{ end }}

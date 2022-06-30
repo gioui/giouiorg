@@ -9,7 +9,8 @@
 
 	<nav id="menu">
 		<ul>
-			<li><a href="/" {{if .Nav.Active}}aria-describedby="current"{{end}}>Home</a></li>
+			<li><a href="/" {{if .Nav.Active}}aria-describedby="current"{{end}}>Home</a>
+			</li>
 			{{ template "nav-children" .Nav }}
 		</ul>
 	</nav>
@@ -20,7 +21,7 @@
 {{ range $item := .Children }}
 <li>
 	<a href="{{$item.Page.URL}}" {{if .Active}}aria-describedby="current"{{end}}>{{$item.Page.Title}}</a>
-	{{if $item.Children}}
+	{{ if and $item.Children (not $item.Page.HideChildren) }}
 	<input class="nav-toggle" id="{{$item.Page.Slug}}" type="checkbox" {{if .Active}}checked{{end}}>
 	<label for="{{$item.Page.Slug}}"><span class="font-size:small">▼</span></label>
 	<ul>{{ template "nav-children" $item }}</ul>

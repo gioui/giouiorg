@@ -30,7 +30,7 @@
 						{{ if .Page.Before }}
 						<a class="before" href="{{.Page.Before.URL}}">
 							<div>Prev</div>
-							<div>{{.Page.Before.Title}}</div>
+							<div>{{or .Page.Before.ShortTitle .Page.Before.Title}}</div>
 						</a>
 						{{ else }}
 						<span class="before"></span>
@@ -38,7 +38,7 @@
 						{{ if .Page.After }}
 						<a class="after" href="{{.Page.After.URL}}">
 							<div>Next</div>
-							<div>{{.Page.After.Title}}</div>
+							<div>{{or .Page.After.ShortTitle .Page.After.Title}}</div>
 						</a>
 						{{ else }}
 						<span class="after"></span>
