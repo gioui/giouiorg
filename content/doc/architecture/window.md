@@ -7,7 +7,7 @@ Since a GUI library needs to talk to some sort of display system to display info
 
 <{{files/architecture/main.go}}[/START DRAWLOOP OMIT/,/END DRAWLOOP OMIT/]
 
-[`app.NewWindow`](http://gioui.org/app#NewWindow) chooses the appropriate "driver" depending on the environment and build context. It might choose Wayland, Win32, Cocoa among several others.
+[`app.NewWindow`](http://gioui.org/app#NewWindow) chooses the appropriate "driver" depending on the environment and build context. It might choose Wayland, Win32, or Cocoa among several others.
 
 An `app.Window` sends events from the display system to the [`window.Events()`](https://gioui.org/app#Window.Events) channel. The system events are listed in [`gioui.org/io/system`](https://gioui.org/io/system). The input events, such as [`gioui.org/io/pointer`](https://gioui.org/io/pointer) and [`gioui.org/io/key`](https://gioui.org/io/key), are also sent into that channel.
 
