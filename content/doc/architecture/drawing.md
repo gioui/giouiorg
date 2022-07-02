@@ -13,6 +13,8 @@ For example, the following code will draw a 100x100 pixel colored rectangle at t
 
 <pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="draw-paint" data-size="200x100"></pre>
 
+The `defer`ed line is only deferring the `.Pop()` operation at the end, so we push a rectangular clipping area, set the color to red with `paint.ColorOp`, and then instruct Gio to paint the current area with the current color with `paint.PaintOp`.
+
 ## Offset
 
 Operation [`op.TransformOp`](https://gioui.org/op#TransformOp) translates the position of the operations that come after it.
@@ -22,6 +24,8 @@ For example, the following function offsets the red rectangle 100 pixels to the 
 <{{files/architecture/draw.go}}[/START TRANSFORMATION OMIT/,/END TRANSFORMATION OMIT/]
 
 <pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="draw-transformation" data-size="200x100"></pre>
+
+Again, note that we are `defer`ing the `.Pop()` of the offset. This means that the offset is applied for the duration of the function, then removed.
 
 ## Clipping
 
@@ -41,10 +45,12 @@ For more complex clipping [`clip.Path`](https://gioui.org/op/clip#Path) can expr
 
 ## Lines
 
-To draw lines it's possible to use [`clip.Stroke`](https://gioui.org/op/clip#Stroke)
-instead of [`clip.Outline`](https://gioui.org/op/clip#Outline).
-We can also use [`paint.FillShape`](https://gioui.org/op/paint#FillShape) helper
-to avoid managing the clip state or use `ColorOp` or `PaintOp`.
+To draw lines we can use [`clip.Stroke`](https://gioui.org/op/clip#Stroke)
+instead of [`clip.Outline`](https://gioui.org/op/clip#Outline). Stroke draws a fixed-width line along a path, whereas Outline simply does not allow drawing outside of the described path area.
+We can also use the [`paint.FillShape`](https://gioui.org/op/paint#FillShape) helper
+to avoid managing the clip state or use `ColorOp` or `PaintOp`. `paint.FillShape` lets us specify
+an `*op.Ops`, a `color.NRGBA`, and a `clip.AreaOp`, and it takes care of filling the clipped
+area with the color.
 
 It's possible to use the predefined shapes, such as [`clip.RRect`](https://gioui.org/op/clip#RRect):
 
@@ -61,7 +67,8 @@ Or use a custom shape drawn with [`clip.Path`](https://gioui.org/op/clip#Path):
 
 
 For dashes, stroke end caps and joins, there's a separate package [gioui.org/x/stroke](https://gioui.org/x/stroke).
-However, they are not as performant as `clip.Stroke`.
+However, they are not as performant as `clip.Stroke`, as the work to construct the path
+description must be performed on the CPU.
 
 
 ## Operation Stack
@@ -78,7 +85,8 @@ For example, the `redButtonBackground` function in the previous section has the 
 
 ## Drawing Order {#macros}
 
-Drawing happens from back to front. In this function the green rectangle is drawn on top of red rectangle:
+Drawing happens from back to front. Things inserted into the `op.Ops` first are drawn first, and
+later elements will be drawn on top. In this function the green rectangle is drawn on top of red rectangle:
 
 <{{files/architecture/draw.go}}[/START DRAWORDER OMIT/,/END DRAWORDER OMIT/]
 
@@ -90,13 +98,13 @@ Sometimes you may want to change this order. For example, you may want to delay 
 
 <{{files/architecture/draw.go}}[/START MACRO OMIT/,/END MACRO OMIT/]
 
-<pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="draw-macro" data-size="200x100"></pre>
+<pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="draw-macro" data-size="550x200"></pre>
 
 ## Animation
 
 Gio only issues FrameEvents when the window is resized or the user interacts with the window. However, animation requires continuous redrawing until the animation is completed. For that there is [`op.InvalidateOp`](https://gioui.org/op#InvalidateOp).
 
-The following code will animate a green "progress bar" that fills up from left to right over 10 seconds from when the program starts:
+The following code will animate a red "progress bar" that fills up from left to right over 10 seconds from when the program starts:
 
 <{{files/architecture/draw.go}}[/START ANIMATION OMIT/,/END ANIMATION OMIT/]
 
@@ -110,6 +118,8 @@ While `op.MacroOp` allows you to record and replay operations on a single operat
 
 <pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="draw-cache" data-size="200x100"></pre>
 
+Note: For this cache to actually save any work across frames, you'll need to allocate the cache's `op.Ops` somewhere that persists across frames. Doing it in a local variable like this will mean that the cache is recreated every frame.
+
 ## Images
 
 [`paint.ImageOp`](https://gioui.org/op/paint#ImageOp) is used to draw images. Like [`paint.ColorOp`](https://gioui.org/op/paint#ColorOp), it sets part of the drawing context (the "brush") that's used for subsequent [`PaintOp`](https://gioui.org/op/paint#PaintOp). [`ImageOp`](https://gioui.org/op/paint#ImageOp) is used similarly to [`ColorOp`](https://gioui.org/op/paint#ColorOp).
@@ -120,4 +130,4 @@ Note that [`image.NRGBA`](https://golang.org/pkg/image#NRGBA) and [`image.Unifor
 
 <pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="draw-image" data-size="200x100"></pre>
 
-The image must not be mutated until another [`FrameEvent`](https://gioui.org/io/system#FrameEvent) happens, because the image may be read asynchronously while the frame is being drawn.
+The image must not be mutated until another [`FrameEvent`](https://gioui.org/io/system#FrameEvent) happens, because the image may be read asynchronously while the frame is being drawn. Additionally, mutations to the image provided to `paint.ImageOp` are not guaranteed to ever be reflected in the drawn content. To update an image on-screen, create a new image.Image and construct a new `paint.ImageOp`.
