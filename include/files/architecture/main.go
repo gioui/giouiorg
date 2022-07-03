@@ -22,7 +22,7 @@ func main() {
 		run  func() error
 	}
 
-	var commands = []*command{
+	commands := []*command{
 		// drawing section
 		{name: "draw-operations", run: drawLoop(addColorOperation)},
 		{name: "draw-paint", run: drawLoop(drawRedRect)},
@@ -39,6 +39,7 @@ func main() {
 		{name: "draw-image", run: drawLoop(drawImageInternal)},
 
 		{name: "button-low", run: drawQueueLoop(doButton)},
+		{name: "input-tree", run: drawQueueLoop(doPointerTree)},
 		{name: "external-changes", run: externalChanges},
 		{name: "button-visual", run: contextLoop(handleButtonVisual)},
 		{name: "button", run: contextLoop(handleButton)},
