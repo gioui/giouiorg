@@ -32,15 +32,14 @@ func doButton(ops *op.Ops, q event.Queue) {
 	}
 
 	// Confine the area of interest to a 100x100 rectangle.
-	area := clip.Rect(image.Rect(0, 0, 100, 100)).Push(ops)
+	defer clip.Rect{Max: image.Pt(100, 100)}.Push(ops).Pop()
+
 	// Declare the tag.
 	pointer.InputOp{
 		Tag:   tag,
 		Types: pointer.Press | pointer.Release,
 	}.Add(ops)
-	area.Pop()
 
-	defer clip.Rect{Max: image.Pt(100, 100)}.Push(ops).Pop()
 	var c color.NRGBA
 	if pressed {
 		c = color.NRGBA{R: 0xFF, A: 0xFF}
