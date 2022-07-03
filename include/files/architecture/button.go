@@ -7,6 +7,7 @@ import (
 	"image/color"
 
 	"gioui.org/io/event"
+	"gioui.org/io/key"
 	"gioui.org/io/pointer"
 	"gioui.org/layout"
 	"gioui.org/op"
@@ -127,6 +128,115 @@ func doPointerTree(ops *op.Ops, q event.Queue) {
 }
 
 // END INPUTTREE OMIT
+
+// START KEYINPUTTREE OMIT
+var (
+	// Declare a number of variables to use both as state
+	// and input tags.
+	keyRoot, keyChild1, keyChild2 bool
+	// Focused tracks which of the above tags (if any) currently
+	// have keyboard focus.
+	focused *bool
+)
+
+const (
+	// Define some key sets we're interested in listening for.
+	enterKeys         = key.NameEnter + "|" + key.NameReturn
+	spaceKey          = key.NameSpace
+	enterAndSpaceKeys = spaceKey + "|" + enterKeys
+)
+
+// displayForTag adds a pointer.InputOp interested
+// in press and release events to the given op.Ops using
+// the given tag. It also paints a color based on the current
+// value of the tag to the current clip.
+func keyDisplayForTag(ops *op.Ops, keySet string, tag *bool, rect clip.Rect) {
+	// Listen for pointer events. We'll use this to request key
+	// focus when clicked.
+	pointer.InputOp{
+		Tag:   tag,
+		Types: pointer.Release,
+	}.Add(ops)
+	// Listen for key.Events for each key in keySet.
+	key.InputOp{
+		Tag:  tag,
+		Keys: key.Set(keySet),
+	}.Add(ops)
+	// Choose a color based on whether the tag detects spacebar being depressed.
+	fill := color.NRGBA{B: 0xFF, A: 0x66}
+	if *tag {
+		fill = color.NRGBA{R: 0xFF, A: 0x66}
+	}
+	paint.ColorOp{Color: fill}.Add(ops)
+	paint.PaintOp{}.Add(ops)
+
+	// If we are focused, lay out a rectangle around the perimeter.
+	if focused == tag {
+		border := color.NRGBA{R: 0xFF, A: 0xFF}
+		defer clip.Stroke{
+			Path:  rect.Path(),
+			Width: 5,
+		}.Op().Push(ops).Pop()
+		paint.ColorOp{Color: border}.Add(ops)
+		paint.PaintOp{}.Add(ops)
+	}
+}
+
+func doKeyTree(ops *op.Ops, q event.Queue) {
+	// Process events that arrived between the last frame and this one for every tag.
+	for _, tag := range []*bool{&keyRoot, &keyChild1, &keyChild2} {
+		for _, ev := range q.Events(tag) {
+			switch ev := ev.(type) {
+			case pointer.Event:
+				switch ev.Type {
+				case pointer.Release:
+					// Request focus on this tag if the mouse click ended in our area.
+					key.FocusOp{Tag: tag}.Add(ops)
+				}
+			case key.FocusEvent:
+				// If this tag is focused, update the focused variable.
+				if ev.Focus {
+					focused = tag
+				} else if focused == tag {
+					focused = nil
+				}
+			case key.Event:
+				// If we got a key.Event, it means that we are the foremost
+				// handler for that key (based on the contents of our
+				// key.InputOp's key.Set).
+				*tag = ev.State == key.Press
+			}
+		}
+	}
+
+	// If nothing is focused, focus the root:
+	if focused == nil {
+		key.FocusOp{Tag: &keyRoot}.Add(ops)
+		key.SoftKeyboardOp{Show: true}.Add(ops)
+	}
+
+	// Confine the rootArea of interest to a 200x200 rectangle.
+	rootRect := clip.Rect(image.Rect(0, 0, 200, 200))
+	rootArea := rootRect.Push(ops)
+	keyDisplayForTag(ops, enterAndSpaceKeys, &keyRoot, rootRect)
+
+	// Any clip areas we add before Pop-ing the root area
+	// are considered its children.
+	child1Rect := clip.Rect(image.Rect(25, 25, 175, 100))
+	child1Area := child1Rect.Push(ops)
+	keyDisplayForTag(ops, spaceKey, &keyChild1, child1Rect)
+	child1Area.Pop()
+
+	child2Rect := clip.Rect(image.Rect(100, 25, 175, 175))
+	child2Area := child2Rect.Push(ops)
+	keyDisplayForTag(ops, enterKeys, &keyChild2, child2Rect)
+	child2Area.Pop()
+
+	rootArea.Pop()
+	// Now anything we add is _not_ a child of the rootArea.
+}
+
+// END KEYINPUTTREE OMIT
 
 var buttonVisual ButtonVisual
 

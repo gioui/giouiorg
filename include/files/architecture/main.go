@@ -40,6 +40,7 @@ func main() {
 
 		{name: "button-low", run: drawQueueLoop(doButton)},
 		{name: "input-tree", run: drawQueueLoop(doPointerTree)},
+		{name: "key-input-tree", run: drawQueueLoop(doKeyTree)},
 		{name: "external-changes", run: externalChanges},
 		{name: "button-visual", run: contextLoop(handleButtonVisual)},
 		{name: "button", run: contextLoop(handleButton)},

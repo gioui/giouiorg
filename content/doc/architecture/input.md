@@ -49,7 +49,7 @@ Writing a program using these concepts could get really verbose, which is why Gi
 
 Content below this heading explores more advanced usage of Gio's input operations. This content is mostly useful for people writing custom widgets, and isn't strictly necessary for using Gio's high-level widget and layout APIs.
 
-### Input Tree
+### Input Tree (Pointer)
 
 You may have noticed that the previous example uses a `clip.AreaOp` (constructed with `clip.Rect`) to describe where it wants pointer input. This is because Gio uses `clip.AreaOp`s both to describe drawing and input regions. As you can see above, often you want to both draw within a region and accept input within that region, so this reuse is convenient.
 
@@ -59,7 +59,7 @@ Here's an example to explore how pointer events interact with this tree structur
 
 <{{files/architecture/button.go}}[/START INPUTTREE OMIT/,/END INPUTTREE OMIT/]
 
-<pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="input-tree" data-size="200x100"></pre>
+<pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="input-tree" data-size="200x200"></pre>
 
 Try clicking each of the three blue rectangles. You should see that clicking the biggest rectangle only turns itself red, while clicking either of the two rectangles inside of it turns both the rectangle that you clicked _and_ the outermost rectangle red.
 
@@ -67,3 +67,18 @@ This happens because pointer input events propagate up the tree of `clip.AreaOp`
 
 Notice also that if you click on the area where the two child rectangles overlap, only the top-most (last drawn) rectangle receives the click. By default, Gio only considers the foremost area and its ancestors when routing pointer events. If you want to alter this, you can use `pointer.PassOp` to allow pointer events to pass through an input area to those underneath it. This is useful for laying out overlays and similar elements. See the [documentation for package `pointer`](https://pkg.go.dev/gioui.org/io/pointer#hdr-Pass_through) for details on this operation.
 
+### Input Tree (Key)
+
+Keyboard input works similarly to pointer input. `clip.AreaOp`s can register their interest in key input by declaring a `key.InputOp`. This makes it possible for that `clip.AreaOp` to receive keyboard focus (which it will be notified of with a `key.FocusEvent`). While a `key.InputOp` has focus, it will receive all keyboard input in the form of `key.EditEvent`s.
+
+Sometimes, however, you want some other widget to receive certain key input when it does not have focus. For instance, to implement keyboard shortcuts. This is possible using the `Keys` field of `key.InputOp`. This accepts a set of keys that you want to be notified of while a descendant has keyboard focus. When those keys are pressed, interested areas can receive a `key.Event` (**not** a `key.EditEvent`). If multiple ancestors of the focused widget are interested in the same key combination, only the ancestor nearest to the focused area will receive it. This keeps `key.Event`s contextual. They propagate up the input tree from the focused area until they find an interested area, then stop. This is different from pointer events, which propagate through all interested ancestors.
+
+Here we reuse a similar layout to the last example, but with some changes to make keyboard state clearer. Instead of outlining each area, only the focused area has an outline. Nothing is focused by default, but you can click on an area to focus it, or press tab to cycle through the focusable areas.
+
+<{{files/architecture/button.go}}[/START KEYINPUTTREE OMIT/,/END KEYINPUTTREE OMIT/]
+
+<pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="key-input-tree" data-size="200x200"></pre>
+
+The root of the input tree registers for both presses of the spacebar and the enter/return key. The two children each register for one or the other. If the root is focused, it will receive `key.Event`s for both pressing spacebar and enter/return. If one of the children is focused, it will receive `key.Events` for the specific keypress it registered for (spacebar or enter/return), but the root area will receive events for the other.
+
+The focused tag also receives `key.EditEvent`s for everything typed, but we're not handling those in this example code.
