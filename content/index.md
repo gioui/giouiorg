@@ -87,12 +87,5 @@ resolution independence.
 
 ## Sponsors
 
-<div class="sponsors">
-	<a class="sponsor" href="https://decred.org/">
-		<img src="/files/sponsors/decred.png" alt="decred.org">
-		<em>"Decred - Secure. Adaptable. Sustainable."</em>
-	</a>
-</div>
-
 Development of Gio is funded by sponsorships. If you find Gio useful, please consider sponsoring the
 [project on OpenCollective](https://opencollective.com/gioui) or one or more of its developers directly.
