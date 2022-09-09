@@ -26,6 +26,13 @@ Install `gogio`, if you already haven't:
 go install gioui.org/cmd/gogio@latest
 ```
 
+All of the following example commands assume you're working from a clone of the [`gio-example`](https://git.sr.ht/~eliasnaur/gio-example) repo. Run this once to make a local clone:
+
+```sh
+git clone https://git.sr.ht/~eliasnaur/gio-example
+cd gio-example
+```
+
 To build an Android .apk file from the `kitchen` example:
 
 ``` sh
