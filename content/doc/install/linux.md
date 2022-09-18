@@ -13,12 +13,12 @@ For Linux you need development packages for:
 
 Depending on your distribution, you may also need to install a Vulkan driver for best performance. Distributions like Arch do not do this automatically. You can check if you have working Vulkan support with the `vulkaninfo` command.
 
-### Fedora 28+
+### Fedora 35+
 
-On Fedora 28 and newer, install the dependencies with the command:
+On Fedora 35 and newer, install the dependencies with the command:
 
 ``` sh
-dnf install gcc pkg-config wayland-devel libX11-devel libxkbcommon-x11-devel mesa-libGLES-devel mesa-libEGL-devel libXcursor-devel mesa-vulkan-devel
+dnf install gcc pkg-config wayland-devel libX11-devel libxkbcommon-x11-devel mesa-libGLES-devel mesa-libEGL-devel libXcursor-devel vulkan-headers
 ```
 
 ### Ubuntu 18.04+
