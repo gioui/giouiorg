@@ -216,7 +216,7 @@ func drawImageInternal(ops *op.Ops) {
 func drawImage(ops *op.Ops, img image.Image) {
 	imageOp := paint.NewImageOp(img)
 	imageOp.Add(ops)
-	op.Affine(f32.Affine2D{}.Scale(f32.Pt(0, 0), f32.Pt(4, 4)))
+	op.Affine(f32.Affine2D{}.Scale(f32.Pt(0, 0), f32.Pt(4, 4))).Add(ops)
 	paint.PaintOp{}.Add(ops)
 }
 
