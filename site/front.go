@@ -26,6 +26,8 @@ type FrontMatter struct {
 	ChildrenNoLink bool     `yaml:"childrennolink"`
 	Children       []string `yaml:"children"`
 
+	RSS bool `yaml:"rss"`
+
 	Images []Image        `yaml:"images"`
 	Links  []ExternalLink `yaml:"links"`
 }

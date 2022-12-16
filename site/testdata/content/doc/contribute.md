@@ -3,9 +3,6 @@ title: Index
 subtitle: Subtitle
 ---
 
-Lorem ipsum dolor sit amet, consectetur adipisicing elit, sed do eiusmod
-tempor incididunt ut labore et dolore magna aliqua. Ut enim ad minim veniam,
-quis nostrud exercitation ullamco laboris nisi ut aliquip ex ea commodo
-consequat. Duis aute irure dolor in reprehenderit in voluptate velit esse
-cillum dolore eu fugiat nulla pariatur. Excepteur sint occaecat cupidatat non
-proident, sunt in culpa qui officia deserunt mollit anim id est laborum.
+Index et sapien ligula. Vivamus sollicitudin cursus arcu, vel faucibus nunc mollis sit amet. Etiam tincidunt eros in metus auctor, eget convallis justo condimentum. Vestibulum tincidunt velit at risus gravida iaculis. Nullam in justo consequat, interdum ex a, ultrices elit. Sed et aliquet felis, ac pharetra turpis. Cras porta pretium nibh at venenatis. Nullam sit amet justo nec ligula interdum sollicitudin sed quis ante. Nam luctus condimentum odio, eget egestas nulla. Integer gravida sodales convallis. Nullam blandit sodales lobortis. Vivamus at nisi eget turpis egestas pretium id a ligula. Vestibulum elementum elementum imperdiet. Nunc bibendum tincidunt dapibus. Ut pharetra libero ac lorem ultricies, eu hendrerit justo aliquam. Quisque vel eros tristique, vulputate lacus sit amet, rhoncus mi.
+
+Sed vulputate, arcu nec pretium euismod, eros sem ultrices tellus, at vehicula elit turpis ac est. Duis elementum arcu a pellentesque auctor. Ut nec porttitor magna, id cursus erat. Nam auctor congue pellentesque. Donec purus lorem, ultricies ac mauris vitae, consequat accumsan justo. Vestibulum id ex fringilla, porta diam non, placerat mauris. Duis fermentum sagittis massa, id condimentum dui. Vestibulum quis lorem vitae nisl cursus rhoncus. Ut vitae luctus odio. Quisque eget ante ornare, vulputate neque non, pellentesque diam. Etiam quis bibendum odio.

@@ -20,6 +20,7 @@ func main() {
 	subHandler("/patch/", http.HandlerFunc(patchesHandler))
 
 	config := site.Config{
+		BaseURL:   "https://gioui.org",
 		Content:   os.DirFS("content"),
 		Templates: os.DirFS("template"),
 		Includes:  os.DirFS("include"),

@@ -12,6 +12,8 @@ import (
 )
 
 type Config struct {
+	BaseURL string
+
 	Content   fs.FS
 	Templates fs.FS
 	Includes  fs.FS
@@ -20,6 +22,8 @@ type Config struct {
 }
 
 type Site struct {
+	BaseURL string
+
 	// Pages are indexed without prefixed "/".
 	Pages        map[string]*Page
 	Template     *template.Template
@@ -35,8 +39,10 @@ type Page struct {
 
 	Template string
 
-	Content  template.HTML
-	Rendered []byte
+	Summary     string
+	Content     template.HTML
+	Rendered    []byte
+	RenderedRSS []byte
 
 	Parent   *Page
 	Before   *Page
@@ -52,6 +58,7 @@ type InternalLink struct {
 
 func (config Config) Parse() (*Site, error) {
 	site := &Site{
+		BaseURL:  config.BaseURL,
 		Pages:    map[string]*Page{},
 		Content:  config.Content,
 		Files:    config.Files,
@@ -204,16 +211,10 @@ func (site *Site) renderPages() error {
 	root := site.Pages[""]
 
 	for _, page := range site.Pages {
-		type renderData struct {
-			Nav   Nav
-			Front *FrontMatter
-			*Page
-		}
-
 		nav := buildNav(root, page)
 		nav.Active = root == page // override index.md active
 
-		data := renderData{
+		data := PageData{
 			Nav:   nav,
 			Front: &page.FrontMatter,
 			Page:  page,
@@ -238,8 +239,22 @@ func (site *Site) renderPages() error {
 			}
 		}
 		page.Rendered = buf.Bytes()
+
+		if page.RSS {
+			var err error
+			page.RenderedRSS, err = site.renderRSS(data)
+			if err != nil {
+				return fmt.Errorf("rss rendering failed: %w", err)
+			}
+		}
 	}
 	return nil
+}
+
+type PageData struct {
+	Nav   Nav
+	Front *FrontMatter
+	*Page
 }
 
 type Nav struct {

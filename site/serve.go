@@ -40,13 +40,34 @@ func (site *Site) ServeHTTP(w http.ResponseWriter, r *http.Request) {
 	}
 
 	slug := strings.TrimPrefix(r.URL.Path, "/")
+
+	requestRSS := strings.HasSuffix(slug, "/rss.xml")
+	if requestRSS {
+		slug = strings.TrimSuffix(slug, "/rss.xml")
+	}
+
 	page, ok := site.Pages[slug]
 	if !ok {
 		site.Fallback(w, r)
 		return
 	}
 	if page.Slug != slug {
-		http.Redirect(w, r, "/"+page.Slug, http.StatusPermanentRedirect)
+		target := "/" + page.Slug
+		if requestRSS {
+			target += "/rss.xml"
+		}
+		http.Redirect(w, r, target, http.StatusPermanentRedirect)
+		return
+	}
+
+	if requestRSS {
+		if !page.RSS {
+			http.NotFound(w, r)
+			return
+		}
+
+		w.Header().Set("Content-Type", "application/rss+xml")
+		_, _ = w.Write(page.RenderedRSS)
 		return
 	}
 

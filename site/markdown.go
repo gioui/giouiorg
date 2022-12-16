@@ -43,10 +43,15 @@ func ParseMarkdown(includes fs.FS, path string, content []byte) (*Page, error) {
 			page.TOC = append(page.TOC,
 				InternalLink{
 					Level:     h.Level,
-					Title:     renderAsText(h),
+					Title:     renderAsText(h.Container),
 					HeadingID: h.HeadingID,
 				},
 			)
+		}
+		if page.Summary == "" {
+			if p, ok := node.(*ast.Paragraph); ok {
+				page.Summary = renderAsText(p.Container)
+			}
 		}
 	}
 
@@ -91,9 +96,9 @@ func extractInclude(content []byte, addr string) ([]byte, error) {
 	return content, nil
 }
 
-func renderAsText(h *ast.Heading) string {
+func renderAsText(p ast.Container) string {
 	var s string
-	for _, c := range h.Children {
+	for _, c := range p.Children {
 		if t, ok := c.(*ast.Text); ok {
 			s += string(t.Literal)
 		}

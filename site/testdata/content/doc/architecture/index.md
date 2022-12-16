@@ -4,6 +4,7 @@ after: "./window"
 children:
     - "./window"
     - "./operations"
+rss: true
 ---
 
 Preamble.
