@@ -28,6 +28,7 @@
 				<main>
 					{{ template "content" . }}
 					<div class="layout-stretch"></div>
+					{{ if (and .Page.Before .Page.After)}}
 					<div class="layout-pagination">
 						{{ if .Page.Before }}
 						<a class="before" href="{{.Page.Before.URL}}">
@@ -46,6 +47,7 @@
 						<span class="after"></span>
 						{{ end }}
 					</div>
+					{{end}}
 				</main>
 			</div>
 		</div>

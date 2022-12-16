@@ -248,6 +248,12 @@ html {
 	background-color: var(--thumb);
 }
 
+.newsitem {
+	margin-bottom: var(--s2);
+}
+.newsitem p {
+	margin-left: var(--s0);
+}
 
 /* Mobile adjustments */
 

@@ -17,10 +17,10 @@ children:
 ---
 
 {{ define "content" }}
-	<ul>
-	{{- range $item := .Children -}}
-		<li><a href="{{$item.URL}}">{{or $item.ShortTitle $item.Title}}{{with $item.Subtitle}} - {{.}}{{end}}</a></li>
-	</article>
-	{{- end -}}
-	</ul>
+{{- range $item := .Children -}}
+<article class="newsitem">
+    <h3><a href="{{$item.URL}}">{{or $item.ShortTitle $item.Title}}{{with $item.Subtitle}} - {{.}}{{end}}</a></h3>
+	<p>{{.Summary}}</p>
+</article>
+{{- end -}}
 {{ end }}
