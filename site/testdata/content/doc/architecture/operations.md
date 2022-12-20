@@ -1,5 +1,6 @@
 ---
 title: Operations
+date: "2022-01-15T00:00:00Z"
 ---
 
 Operations nec scelerisque odio. Morbi consequat dapibus suscipit. Morbi fermentum lacus nec quam consectetur, et auctor neque tempus. Sed luctus efficitur dolor in feugiat. Curabitur nec ante eget odio scelerisque gravida. Proin ac odio et enim tincidunt bibendum. Phasellus feugiat eros augue, malesuada vestibulum ante tempus a.

@@ -1,5 +1,6 @@
 ---
 title: Window
+date: "2022-05-01T00:00:00Z"
 ---
 
 Window consequat magna et odio consequat, ac rutrum lorem congue. Sed auctor augue et nibh auctor, placerat elementum libero aliquet. Vestibulum iaculis tellus sed velit scelerisque ullamcorper. Nullam ultricies orci ac leo faucibus, quis placerat felis efficitur. Phasellus dictum vel eros sollicitudin sodales. Nulla neque dolor, vehicula ultrices aliquet a, semper id enim. Sed at ex porta, consequat elit sagittis, luctus dolor. Nam commodo, eros quis aliquam vestibulum, sapien orci sagittis eros, in pretium metus quam a orci. Pellentesque in ante faucibus massa ullamcorper accumsan.

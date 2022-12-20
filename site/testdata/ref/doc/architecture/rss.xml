@@ -8,11 +8,13 @@
             <title>Window</title>
             <link>https://gioui.org/doc/architecture/window</link>
             <description>Window consequat magna et odio consequat, ac rutrum lorem congue. Sed auctor augue et nibh auctor, placerat elementum libero aliquet. Vestibulum iaculis tellus sed velit scelerisque ullamcorper. Nullam ultricies orci ac leo faucibus, quis placerat felis efficitur. Phasellus dictum vel eros sollicitudin sodales. Nulla neque dolor, vehicula ultrices aliquet a, semper id enim. Sed at ex porta, consequat elit sagittis, luctus dolor. Nam commodo, eros quis aliquam vestibulum, sapien orci sagittis eros, in pretium metus quam a orci. Pellentesque in ante faucibus massa ullamcorper accumsan.</description>
+            <pubDate>Sun, 01 May 2022</pubDate>
         </item>
         <item>
             <title>Operations</title>
             <link>https://gioui.org/doc/architecture/operations</link>
             <description>Operations nec scelerisque odio. Morbi consequat dapibus suscipit. Morbi fermentum lacus nec quam consectetur, et auctor neque tempus. Sed luctus efficitur dolor in feugiat. Curabitur nec ante eget odio scelerisque gravida. Proin ac odio et enim tincidunt bibendum. Phasellus feugiat eros augue, malesuada vestibulum ante tempus a.</description>
+            <pubDate>Sat, 15 Jan 2022</pubDate>
         </item>
     </channel>
 </rss>

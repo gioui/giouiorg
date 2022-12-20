@@ -33,6 +33,10 @@ func (site *Site) renderRSS(page PageData) ([]byte, error) {
 			Description: child.Summary,
 		}
 
+		if child.Date != nil {
+			item.PubDate = child.Date.Format("Mon, 02 Jan 2006")
+		}
+
 		channel.Items = append(channel.Items, item)
 	}
 
