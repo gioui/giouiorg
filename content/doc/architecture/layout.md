@@ -61,6 +61,8 @@ The children can be:
 
 <{{files/architecture/layout.go}}[/START SPACER OMIT/,/END SPACER OMIT/]
 
+<pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="layout-spacer" data-size="200x100"></pre>
+
 ## Custom
 
 Sometimes the builtin layouts are not sufficient. To create a custom layout for widgets there are special functions and structures to manipulate layout.Context. In general, layout code performs the following steps for each sub-widget:
