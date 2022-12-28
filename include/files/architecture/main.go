@@ -48,6 +48,7 @@ func main() {
 		{name: "layout-stack", run: contextLoop(stacked)},
 		{name: "layout-list", run: contextLoop(listing)},
 		{name: "layout-flex", run: contextLoop(flexed)},
+		{name: "layout-spacer", run: contextLoop(spacer)},
 
 		{name: "theme", run: themeLoop(themedApplication)},
 

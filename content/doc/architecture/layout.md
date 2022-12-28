@@ -55,6 +55,12 @@ The children can be:
 
 <pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="layout-flex" data-size="200x100"></pre>
 
+## Spacer
+
+[`layout.Spacer`](https://gioui.org/layout#Spacer) can be used together with `layout.List` or `layout.Flex` to add empty space between items.
+
+<{{files/architecture/layout.go}}[/START SPACER OMIT/,/END SPACER OMIT/]
+
 ## Custom
 
 Sometimes the builtin layouts are not sufficient. To create a custom layout for widgets there are special functions and structures to manipulate layout.Context. In general, layout code performs the following steps for each sub-widget:

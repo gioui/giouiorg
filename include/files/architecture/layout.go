@@ -70,3 +70,26 @@ func flexed(gtx layout.Context) layout.Dimensions {
 }
 
 // END FLEX OMIT
+
+// START SPACER OMIT
+func spacer(gtx layout.Context) layout.Dimensions {
+	return layout.Flex{}.Layout(gtx,
+		layout.Rigid(func(gtx layout.Context) layout.Dimensions {
+			return ColorBox(gtx, image.Pt(100, 100), red)
+		}),
+		layout.Rigid(layout.Spacer{Width: 20}.Layout),
+		layout.Flexed(0.5, func(gtx layout.Context) layout.Dimensions {
+			return ColorBox(gtx, gtx.Constraints.Min, blue)
+		}),
+		layout.Rigid(layout.Spacer{Width: 20}.Layout),
+		layout.Rigid(func(gtx layout.Context) layout.Dimensions {
+			return ColorBox(gtx, image.Pt(100, 100), red)
+		}),
+		layout.Rigid(layout.Spacer{Width: 20}.Layout),
+		layout.Flexed(0.5, func(gtx layout.Context) layout.Dimensions {
+			return ColorBox(gtx, gtx.Constraints.Min, green)
+		}),
+	)
+}
+
+// END SPACER OMIT
