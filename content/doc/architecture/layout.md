@@ -30,7 +30,7 @@ For example, this draws green and blue rectangles on top of a red background:
 
 <{{files/architecture/layout.go}}[/START STACK OMIT/,/END STACK OMIT/]
 
-<pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="layout-stack" data-size="200x100"></pre>
+<pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="layout-stack" data-size="400x100"></pre>
 
 
 ## List
@@ -39,7 +39,7 @@ For example, this draws green and blue rectangles on top of a red background:
 
 <{{files/architecture/layout.go}}[/START LIST OMIT/,/END LIST OMIT/]
 
-<pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="layout-list" data-size="200x100"></pre>
+<pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="layout-list" data-size="400x100"></pre>
 
 
 ## Flex
@@ -53,7 +53,7 @@ The children can be:
 
 <{{files/architecture/layout.go}}[/START FLEX OMIT/,/END FLEX OMIT/]
 
-<pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="layout-flex" data-size="200x100"></pre>
+<pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="layout-flex" data-size="400x100"></pre>
 
 ## Spacer
 
@@ -61,7 +61,7 @@ The children can be:
 
 <{{files/architecture/layout.go}}[/START SPACER OMIT/,/END SPACER OMIT/]
 
-<pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="layout-spacer" data-size="200x100"></pre>
+<pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="layout-spacer" data-size="400x100"></pre>
 
 ## Custom
 
