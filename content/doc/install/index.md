@@ -41,3 +41,12 @@ For the platforms some additional dependencies may be necessary.
 
 The `gogio` tool will use the `appicon.png` file in your main package directory,
 if present, as the app icon.
+
+## Cross Compilation
+
+Gio can be cross-complied for platforms other than the current OS, but this requires an appropriate cross-compiler for any native code integrations. Cross-compilation is most easily achieved from Linux, and the Linux instructions can be followed within a container or VM from other platforms.
+
+### From Linux
+
+- `macOS`: a cross-compiler like [osxcross](https://github.com/tpoechtrager/osxcross) as well as the macOS SDK (see link for instructions).
+- `Windows`: no special compiler is needed, as we don't use CGo for Windows support.
