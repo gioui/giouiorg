@@ -15,9 +15,10 @@ import (
 )
 
 var imageExt = map[string]bool{
-	".png":  true,
-	".jpg":  true,
 	".jpeg": true,
+	".jpg":  true,
+	".png":  true,
+	".webp": true,
 }
 
 func (site *Site) ServeHTTP(w http.ResponseWriter, r *http.Request) {
