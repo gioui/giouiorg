@@ -3,14 +3,14 @@ title: G45W
 subtitle: A Dero Universal Wallet with mobile UI.
 images:
     -
-        alt: "Wallet"
+        alt: "Wallet Balance"
         source: ./1.jpg
     -
-        alt: "Select Noded"
+        alt: "Select Node"
         source: ./2.jpg
     -
-        alt: "Demo"
-        source: ./3.gif
+        alt: "Select Wallet"
+        source: ./3.jpg
 links:
     -
         title: Source Code

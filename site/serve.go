@@ -18,7 +18,6 @@ var imageExt = map[string]bool{
 	".png":  true,
 	".jpg":  true,
 	".jpeg": true,
-	".gif":  true,
 }
 
 func (site *Site) ServeHTTP(w http.ResponseWriter, r *http.Request) {
