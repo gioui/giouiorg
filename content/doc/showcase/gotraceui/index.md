@@ -4,7 +4,7 @@ subtitle: an efficient frontend for Go execution traces
 images:
     -
         alt: "Gotraceui screenshot"
-        source: ./1.png
+        source: ./1.webp
 links:
     -
         title: Source
