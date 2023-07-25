@@ -92,7 +92,7 @@ $(function() {
 		frames.forEach((frame)=> {
 			const input = frame.contentDocument.querySelector('input')
 			if (input) {
-				input.dispatchEvent(new KeyboardEvent('keyinput', {key:e.key}))
+				input.dispatchEvent(new KeyboardEvent('keyup', {key:e.key}))
 			}
 		})
 	});
