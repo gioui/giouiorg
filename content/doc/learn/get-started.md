@@ -42,7 +42,6 @@ import (
 	"os"
 
 	"gioui.org/app"
-	"gioui.org/font/gofont"
 	"gioui.org/io/system"
 	"gioui.org/layout"
 	"gioui.org/op"
@@ -63,7 +62,7 @@ func main() {
 }
 
 func run(w *app.Window) error {
-	th := material.NewTheme(gofont.Collection())
+	th := material.NewTheme()
 	var ops op.Ops
 	for {
 		e := <-w.Events()
@@ -126,7 +125,7 @@ Themes contain all the necessary information.
 
 ``` go
 func run(w *app.Window) error {
-	th := material.NewTheme(gofont.Collection())
+	th := material.NewTheme()
 	...
 ```
 
