@@ -53,6 +53,8 @@ func main() {
 
 		{name: "theme", run: themeLoop(themedApplication)},
 
+		{name: "color-mix", run: themeLoop(colorMixing)},
+
 		{name: "split-visual", run: themeLoop(exampleSplitVisual)},
 		{name: "split-ratio", run: themeLoop(exampleSplitRatio)},
 		{name: "split-interactive", run: themeLoop(exampleSplit)},

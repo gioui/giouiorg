@@ -113,3 +113,11 @@ func (w alignedText) Layout(gtx layout.Context) layout.Dimensions {
 	return w.align.Layout(gtx, material.Body1(th, w.text).Layout)
 }
 ```
+
+## Why do my blended colors look wrong?
+
+Gio uses sRGB for color input, yet performs blending in linear colorspace. This
+approach results in correct color blending and while maintaining color value
+compatibility with most programs
+
+For more details see [Color](/doc/architecture/color) page.

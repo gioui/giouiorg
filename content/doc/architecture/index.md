@@ -11,6 +11,7 @@ children:
     - ./theme
     - ./units
     - ./text
+    - ./color
 ---
 
 Gio is a library for implementing [immediate mode user interfaces](https://eliasnaur.com/blog/immediate-mode-gui-programming). This approach can be implemented in multiple ways, however the overarching similarity is that the program:
