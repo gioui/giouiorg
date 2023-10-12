@@ -13,6 +13,7 @@ import (
 	"gioui.org/io/system"
 	"gioui.org/layout"
 	"gioui.org/op"
+	"gioui.org/text"
 	"gioui.org/widget/material"
 )
 
@@ -170,7 +171,8 @@ func contextLoop(draw func(layout.Context) layout.Dimensions) func() error {
 func themeLoop(draw func(layout.Context, *material.Theme) layout.Dimensions) func() error {
 	return func() error {
 		// START THEMELOOP OMIT
-		th := material.NewTheme(gofont.Collection())
+		th := material.NewTheme()
+		th.Shaper = text.NewShaper(text.WithCollection(gofont.Collection()))
 
 		var ops op.Ops
 		window := app.NewWindow()
