@@ -1,6 +1,6 @@
 # SPDX-License-Identifier: Unlicense OR MIT
 
-runtime: go119
+runtime: go121
 
 handlers:
 - url: /files
