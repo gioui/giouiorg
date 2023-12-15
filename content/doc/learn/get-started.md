@@ -33,56 +33,7 @@ go mod init gio.test
 
 Let's create `main.go` with the following code:
 
-``` go
-package main
-
-import (
-	"image/color"
-	"log"
-	"os"
-
-	"gioui.org/app"
-	"gioui.org/io/system"
-	"gioui.org/layout"
-	"gioui.org/op"
-	"gioui.org/text"
-	"gioui.org/widget/material"
-)
-
-func main() {
-	go func() {
-		w := app.NewWindow()
-		err := run(w)
-		if err != nil {
-			log.Fatal(err)
-		}
-		os.Exit(0)
-	}()
-	app.Main()
-}
-
-func run(w *app.Window) error {
-	th := material.NewTheme()
-	var ops op.Ops
-	for {
-		e := <-w.Events()
-		switch e := e.(type) {
-		case system.DestroyEvent:
-			return e.Err
-		case system.FrameEvent:
-			gtx := layout.NewContext(&ops, e)
-
-			title := material.H1(th, "Hello, Gio")
-			maroon := color.NRGBA{R: 127, G: 0, B: 0, A: 255}
-			title.Color = maroon
-			title.Alignment = text.Middle
-			title.Layout(gtx)
-
-			e.Frame(gtx.Ops)
-		}
-	}
-}
-```
+<{{files/get-started/main.go}}
 
 Let's then update all the dependencies with:
 
@@ -104,80 +55,28 @@ Every program requires a window, the `main` starts up the application loop that
 talks to the operating system and starts the window logic in a separate
 goroutine.
 
-``` go
-func main() {
-	go func() {
-		w := app.NewWindow()
-		err := run(w)
-		if err != nil {
-			log.Fatal(err)
-		}
-		os.Exit(0)
-	}()
-	app.Main()
-}
-```
+<{{files/get-started/main.go}}[/START MAIN OMIT/,/END MAIN OMIT/]
 
 ## Creating a theme
 
 Applications need to define their fonts and different color settings.
 Themes contain all the necessary information.
 
-``` go
-func run(w *app.Window) error {
-	th := material.NewTheme()
-	...
-```
+<{{files/get-started/main.go}}[/START CREATE THEME OMIT/,/END CREATE THEME OMIT/]
 
 ## Listening for events
 
 The communication with the operating system (i.e. keyboard, mouse, GPU) happens
-through events. Gio uses the following approach to listen for events:
+through events. Gio uses the following approach to process events:
 
-``` go
-	for {
-		e := <-w.Events()
-		switch e := e.(type) {
-		case system.DestroyEvent:
-			return e.Err
-		case system.FrameEvent:
-			...
-		}
-	}
-```
+<{{files/get-started/main.go}}[/START PROCESS EVENTS OMIT/,/END PROCESS EVENTS OMIT/]
 
-`system.DestroyEvent` means the user pressed the close button.
-
-`system.FrameEvent` means the program should handle input and render a new
+* `system.DestroyEvent` means the user pressed the close button.
+* `system.FrameEvent` means the program should handle input and render a new
 frame.
 
 ## Drawing the text
 
 To draw the text it needs to go through several stages:
 
-``` go
-	var ops op.Ops
-	for {
-		...
-		case system.FrameEvent:
-			// This graphics context is used for managing the rendering state.
-			gtx := layout.NewContext(&ops, e)
-
-			// Define an large label with an appropriate text:
-			title := material.H1(th, "Hello, Gio")
-
-			// Change the color of the label.
-			maroon := color.NRGBA{R: 127, G: 0, B: 0, A: 255}
-			title.Color = maroon
-
-			// Change the position of the label.
-			title.Alignment = text.Middle
-
-			// Draw the label to the graphics context.
-			title.Layout(gtx)
-
-			// Pass the drawing operations to the GPU.
-			e.Frame(gtx.Ops)
-		}
-	}
-```
+<{{files/get-started/main.go}}[/START DRAW TEXT OMIT/,/END DRAW TEXT OMIT/]

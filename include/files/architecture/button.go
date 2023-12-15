@@ -22,7 +22,7 @@ func doButton(ops *op.Ops, q event.Queue) {
 	// Process events that arrived between the last frame and this one.
 	for _, ev := range q.Events(tag) {
 		if x, ok := ev.(pointer.Event); ok {
-			switch x.Type {
+			switch x.Kind {
 			case pointer.Press:
 				pressed = true
 			case pointer.Release:
@@ -37,7 +37,7 @@ func doButton(ops *op.Ops, q event.Queue) {
 	// Declare the tag.
 	pointer.InputOp{
 		Tag:   tag,
-		Types: pointer.Press | pointer.Release,
+		Kinds: pointer.Press | pointer.Release,
 	}.Add(ops)
 
 	var c color.NRGBA
@@ -66,7 +66,7 @@ var (
 func displayForTag(ops *op.Ops, tag *bool, rect clip.Rect) {
 	pointer.InputOp{
 		Tag:   tag,
-		Types: pointer.Press | pointer.Release,
+		Kinds: pointer.Press | pointer.Release,
 	}.Add(ops)
 	// Choose a color based on whether the tag is being pressed.
 	c := color.NRGBA{B: 0xFF, A: 0xFF}
@@ -95,7 +95,7 @@ func doPointerTree(ops *op.Ops, q event.Queue) {
 	for _, tag := range []*bool{&root, &child1, &child2} {
 		for _, ev := range q.Events(tag) {
 			if x, ok := ev.(pointer.Event); ok {
-				switch x.Type {
+				switch x.Kind {
 				case pointer.Press:
 					*tag = true
 				case pointer.Release:
@@ -171,7 +171,7 @@ func (b *Button) Layout(gtx layout.Context) layout.Dimensions {
 	// here we loop through all the events associated with this button.
 	for _, e := range gtx.Events(b) {
 		if e, ok := e.(pointer.Event); ok {
-			switch e.Type {
+			switch e.Kind {
 			case pointer.Press:
 				b.pressed = true
 			case pointer.Release:
@@ -184,7 +184,7 @@ func (b *Button) Layout(gtx layout.Context) layout.Dimensions {
 	area := clip.Rect(image.Rect(0, 0, 100, 100)).Push(gtx.Ops)
 	pointer.InputOp{
 		Tag:   b,
-		Types: pointer.Press | pointer.Release,
+		Kinds: pointer.Press | pointer.Release,
 	}.Add(gtx.Ops)
 	area.Pop()
 

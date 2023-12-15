@@ -56,7 +56,7 @@ func colorMixing(gtx layout.Context, th *material.Theme) layout.Dimensions {
 		layout.Rigid(func(gtx layout.Context) layout.Dimensions {
 			return layout.Flex{Axis: layout.Horizontal, Alignment: layout.Middle}.Layout(gtx,
 				layout.Flexed(1, centeredText(gtx, th, "bias")),
-				layout.Flexed(8, material.Slider(th, &blendBias, 0, 1).Layout),
+				layout.Flexed(8, material.Slider(th, &blendBias).Layout),
 				flexSpace(4),
 				flexSpacing(),
 			)
@@ -128,7 +128,7 @@ func layoutNamedComponentSlider(gtx layout.Context, th *material.Theme, name str
 	return func(gtx layout.Context) layout.Dimensions {
 		return layout.Flex{}.Layout(gtx,
 			layout.Flexed(2, centeredText(gtx, th, name)),
-			layout.Flexed(8, material.Slider(th, value, 0, 1).Layout),
+			layout.Flexed(8, material.Slider(th, value).Layout),
 		)
 	}
 }

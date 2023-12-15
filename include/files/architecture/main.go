@@ -97,8 +97,8 @@ func drawLoop(draw func(*op.Ops)) func() error {
 		// START DRAWLOOP OMIT
 		window := app.NewWindow()
 		var ops op.Ops
-		for e := range window.Events() {
-			switch e := e.(type) {
+		for {
+			switch e := window.NextEvent().(type) {
 			case system.DestroyEvent:
 				// The window was closed.
 				return e.Err
@@ -114,7 +114,6 @@ func drawLoop(draw func(*op.Ops)) func() error {
 			}
 		}
 		// END DRAWLOOP OMIT
-		return nil
 	}
 }
 
@@ -123,8 +122,8 @@ func drawQueueLoop(draw func(*op.Ops, event.Queue)) func() error {
 		// START DRAWQUEUELOOP OMIT
 		window := app.NewWindow()
 		var ops op.Ops
-		for e := range window.Events() {
-			switch e := e.(type) {
+		for {
+			switch e := window.NextEvent().(type) {
 			case system.DestroyEvent:
 				// The window was closed.
 				return e.Err
@@ -140,7 +139,6 @@ func drawQueueLoop(draw func(*op.Ops, event.Queue)) func() error {
 			}
 		}
 		// END DRAWQUEUELOOP OMIT
-		return nil
 	}
 }
 
@@ -149,8 +147,8 @@ func contextLoop(draw func(layout.Context) layout.Dimensions) func() error {
 		// START CONTEXTLOOP OMIT
 		var ops op.Ops
 		window := app.NewWindow()
-		for e := range window.Events() {
-			switch e := e.(type) {
+		for {
+			switch e := window.NextEvent().(type) {
 			case system.DestroyEvent:
 				// The window was closed.
 				return e.Err
@@ -166,7 +164,6 @@ func contextLoop(draw func(layout.Context) layout.Dimensions) func() error {
 			}
 		}
 		// END CONTEXTLOOP OMIT
-		return nil
 	}
 }
 
@@ -178,8 +175,8 @@ func themeLoop(draw func(layout.Context, *material.Theme) layout.Dimensions) fun
 
 		var ops op.Ops
 		window := app.NewWindow()
-		for e := range window.Events() {
-			switch e := e.(type) {
+		for {
+			switch e := window.NextEvent().(type) {
 			case system.DestroyEvent:
 				// The window was closed.
 				return e.Err
@@ -195,6 +192,5 @@ func themeLoop(draw func(layout.Context, *material.Theme) layout.Dimensions) fun
 			}
 		}
 		// END THEMELOOP OMIT
-		return nil
 	}
 }

@@ -13,6 +13,7 @@ var isChecked widget.Bool
 
 func themedApplication(gtx layout.Context, th *material.Theme) layout.Dimensions {
 	var checkboxLabel string
+	isChecked.Update(gtx)
 	if isChecked.Value {
 		checkboxLabel = "checked"
 	} else {

@@ -37,7 +37,7 @@ A single frame consists of getting input, registering for input and drawing the 
 
 <{{files/architecture/main.go}}[/START DRAWQUEUELOOP OMIT/,/END DRAWQUEUELOOP OMIT/]
 
-Let's make the button change it's position every second. We can use a select to wait for events from the window and the external source at the same time. We'll use a [`Ticker`](https://golang.org/pkg/time#Ticker) as an example external change. Once we have modified the state we need to notify the window to retrigger rendering with [`w.Invalidate()`](https://gioui.org/app#Window.Invalidate).
+Let's make the button change it's position every second. We'll use a [`Ticker`](https://golang.org/pkg/time#Ticker) as an example external change. We use locks to protect the state and once we have modified the state we need to notify the window to retrigger rendering with [`w.Invalidate()`](https://gioui.org/app#Window.Invalidate).
 
 <{{files/architecture/external.go}}[/START LOOP OMIT/,/END LOOP OMIT/]
 
