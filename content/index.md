@@ -58,7 +58,7 @@ contains links to get you started with Gio.
     <a href="/doc/showcase/tailscale" style="background-image: url('/doc/showcase/tailscale/1.png')">
         <div class="title">Tailscale</div>
     </a>
-    <a href="/doc/showcase/gotraceui" style="background-image: url('/doc/showcase/gotraceui/1.png')">
+    <a href="/doc/showcase/gotraceui" style="background-image: url('/doc/showcase/gotraceui/1.webp')">
         <div class="title">gotraceui</div>
     </a>
     <a href="/doc/showcase/sointu" style="background-image: url('/doc/showcase/sointu/1.png')">
