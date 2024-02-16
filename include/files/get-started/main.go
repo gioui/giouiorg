@@ -6,8 +6,6 @@ import (
 	"os"
 
 	"gioui.org/app"
-	"gioui.org/io/system"
-	"gioui.org/layout"
 	"gioui.org/op"
 	"gioui.org/text"
 	"gioui.org/widget/material"
@@ -36,13 +34,13 @@ func run(w *app.Window) error {
 	// START PROCESS EVENTS OMIT
 	for {
 		switch e := w.NextEvent().(type) {
-		case system.DestroyEvent:
+		case app.DestroyEvent:
 			return e.Err
-		case system.FrameEvent:
+		case app.FrameEvent:
 			// END PROCESS EVENTS OMIT
 			// START DRAW TEXT OMIT
 			// This graphics context is used for managing the rendering state.
-			gtx := layout.NewContext(&ops, e)
+			gtx := app.NewContext(&ops, e)
 
 			// Define an large label with an appropriate text:
 			title := material.H1(th, "Hello, Gio")

@@ -8,13 +8,12 @@ import (
 	"time"
 
 	"gioui.org/app"
-	"gioui.org/io/system"
 	"gioui.org/op"
 )
 
-func externalChanges() error {
+func externalChanges(title string) error {
 	// START LOOP OMIT
-	window := app.NewWindow()
+	window := app.NewWindow(app.Title(title))
 
 	var button struct {
 		lock   sync.Mutex
@@ -44,16 +43,16 @@ func externalChanges() error {
 	ops := new(op.Ops)
 	for {
 		switch e := window.NextEvent().(type) {
-		case system.DestroyEvent:
+		case app.DestroyEvent:
 			return e.Err
-		case system.FrameEvent:
+		case app.FrameEvent:
 			ops.Reset()
 
 			// Offset the button based on state.
 			op.Offset(image.Pt(readOffset(), 0)).Add(ops)
 
 			// Handle button input and draw.
-			doButton(ops, e.Queue)
+			doButton(ops, e.Source)
 
 			// Update display.
 			e.Frame(ops)

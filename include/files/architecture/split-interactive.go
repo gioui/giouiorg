@@ -3,6 +3,7 @@ package main
 import (
 	"image"
 
+	"gioui.org/io/event"
 	"gioui.org/io/pointer"
 	"gioui.org/layout"
 	"gioui.org/op"
@@ -58,7 +59,22 @@ func (s *Split) Layout(gtx layout.Context, left, right layout.Widget) layout.Dim
 
 	{ // handle input
 		// START INPUTCODE OMIT
-		for _, ev := range gtx.Events(s) {
+		barRect := image.Rect(leftsize, 0, rightoffset, gtx.Constraints.Max.X)
+		area := clip.Rect(barRect).Push(gtx.Ops)
+
+		// register for input
+		event.Op(gtx.Ops, s)
+		pointer.CursorColResize.Add(gtx.Ops)
+
+		for {
+			ev, ok := gtx.Event(pointer.Filter{
+				Target: s,
+				Kinds:  pointer.Press | pointer.Drag | pointer.Release | pointer.Cancel,
+			})
+			if !ok {
+				break
+			}
+
 			e, ok := ev.(pointer.Event)
 			if !ok {
 				continue
@@ -72,6 +88,7 @@ func (s *Split) Layout(gtx layout.Context, left, right layout.Widget) layout.Dim
 
 				s.dragID = e.PointerID
 				s.dragX = e.Position.X
+				s.drag = true
 
 			case pointer.Drag:
 				if s.dragID != e.PointerID {
@@ -84,6 +101,13 @@ func (s *Split) Layout(gtx layout.Context, left, right layout.Widget) layout.Dim
 				deltaRatio := deltaX * 2 / float32(gtx.Constraints.Max.X)
 				s.Ratio += deltaRatio
 
+				if e.Priority < pointer.Grabbed {
+					gtx.Execute(pointer.GrabCmd{
+						Tag: s,
+						ID:  s.dragID,
+					})
+				}
+
 			case pointer.Release:
 				fallthrough
 			case pointer.Cancel:
@@ -91,15 +115,6 @@ func (s *Split) Layout(gtx layout.Context, left, right layout.Widget) layout.Dim
 			}
 		}
 
-		// register for input
-		barRect := image.Rect(leftsize, 0, rightoffset, gtx.Constraints.Max.X)
-		area := clip.Rect(barRect).Push(gtx.Ops)
-		pointer.CursorColResize.Add(gtx.Ops)
-		pointer.InputOp{
-			Tag:   s,
-			Kinds: pointer.Press | pointer.Drag | pointer.Release,
-			Grab:  s.drag,
-		}.Add(gtx.Ops)
 		area.Pop()
 		// END INPUTCODE OMIT
 	}

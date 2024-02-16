@@ -10,6 +10,7 @@ import (
 	"time"
 
 	"gioui.org/f32"
+	"gioui.org/io/input"
 	"gioui.org/op"
 	"gioui.org/op/clip"
 	"gioui.org/op/paint"
@@ -142,22 +143,22 @@ func drawFiveRectangles(ops *op.Ops) {
 
 // END MACRO OMIT
 
-func drawProgressBarInternal(ops *op.Ops) {
-	drawProgressBar(ops, time.Now())
+func drawProgressBarInternal(ops *op.Ops, source input.Source) {
+	drawProgressBar(ops, source, time.Now())
 }
 
 // START ANIMATION OMIT
 var startTime = time.Now()
 var duration = 10 * time.Second
 
-func drawProgressBar(ops *op.Ops, now time.Time) {
+func drawProgressBar(ops *op.Ops, source input.Source, now time.Time) {
 	// Calculate how much of the progress bar to draw,
 	// based on the current time.
 	elapsed := now.Sub(startTime)
 	progress := elapsed.Seconds() / duration.Seconds()
 	if progress < 1 {
 		// The progress bar hasn’t yet finished animating.
-		op.InvalidateOp{}.Add(ops)
+		source.Execute(op.InvalidateCmd{})
 	} else {
 		progress = 1
 	}

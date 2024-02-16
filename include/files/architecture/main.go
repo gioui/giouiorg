@@ -9,8 +9,7 @@ import (
 
 	"gioui.org/app"
 	"gioui.org/font/gofont"
-	"gioui.org/io/event"
-	"gioui.org/io/system"
+	"gioui.org/io/input"
 	"gioui.org/layout"
 	"gioui.org/op"
 	"gioui.org/text"
@@ -20,10 +19,11 @@ import (
 func main() {
 	type command struct {
 		name string
-		run  func() error
+		run  func(title string) error
 	}
 
-	commands := []*command{
+	var commands []*command
+	commands = []*command{
 		// drawing section
 		{name: "draw-operations", run: drawLoop(addColorOperation)},
 		{name: "draw-paint", run: drawLoop(drawRedRect)},
@@ -35,7 +35,7 @@ func main() {
 		{name: "draw-stack", run: drawLoop(redButtonBackgroundStack)},
 		{name: "draw-draworder", run: drawLoop(drawOverlappingRectangles)},
 		{name: "draw-macro", run: drawLoop(drawFiveRectangles)},
-		{name: "draw-animation", run: drawLoop(drawProgressBarInternal)},
+		{name: "draw-animation", run: drawQueueLoop(drawProgressBarInternal)},
 		{name: "draw-cache", run: drawLoop(drawWithCache)},
 		{name: "draw-image", run: drawLoop(drawImageInternal)},
 
@@ -58,6 +58,22 @@ func main() {
 		{name: "split-visual", run: themeLoop(exampleSplitVisual)},
 		{name: "split-ratio", run: themeLoop(exampleSplitRatio)},
 		{name: "split-interactive", run: themeLoop(exampleSplit)},
+
+		{name: "all", run: func(title string) error {
+			for _, cmd := range commands {
+				if cmd.name == "all" {
+					continue
+				}
+
+				cmd := cmd
+				go func() {
+					if err := cmd.run(cmd.name); err != nil {
+						fmt.Fprintln(os.Stderr, err)
+					}
+				}()
+			}
+			return nil
+		}},
 	}
 
 	var cmdname string
@@ -84,7 +100,7 @@ func main() {
 	}
 
 	go func() {
-		err := cmd.run()
+		err := cmd.run(cmd.name)
 		if err != nil {
 			fmt.Fprintln(os.Stderr, err)
 		}
@@ -92,17 +108,17 @@ func main() {
 	app.Main()
 }
 
-func drawLoop(draw func(*op.Ops)) func() error {
-	return func() error {
+func drawLoop(draw func(*op.Ops)) func(title string) error {
+	return func(title string) error {
 		// START DRAWLOOP OMIT
-		window := app.NewWindow()
+		window := app.NewWindow(app.Title(title))
 		var ops op.Ops
 		for {
 			switch e := window.NextEvent().(type) {
-			case system.DestroyEvent:
+			case app.DestroyEvent:
 				// The window was closed.
 				return e.Err
-			case system.FrameEvent:
+			case app.FrameEvent:
 				// A request to draw the window state.
 
 				// Reset the operations back to zero.
@@ -117,23 +133,23 @@ func drawLoop(draw func(*op.Ops)) func() error {
 	}
 }
 
-func drawQueueLoop(draw func(*op.Ops, event.Queue)) func() error {
-	return func() error {
+func drawQueueLoop(draw func(*op.Ops, input.Source)) func(title string) error {
+	return func(title string) error {
 		// START DRAWQUEUELOOP OMIT
-		window := app.NewWindow()
+		window := app.NewWindow(app.Title(title))
 		var ops op.Ops
 		for {
 			switch e := window.NextEvent().(type) {
-			case system.DestroyEvent:
+			case app.DestroyEvent:
 				// The window was closed.
 				return e.Err
-			case system.FrameEvent:
+			case app.FrameEvent:
 				// A request to draw the window state.
 
 				// Reset the operations back to zero.
 				ops.Reset()
 				// Draw the state into ops based on events in e.Queue.
-				draw(&ops, e.Queue)
+				draw(&ops, e.Source)
 				// Update the display.
 				e.Frame(&ops)
 			}
@@ -142,19 +158,19 @@ func drawQueueLoop(draw func(*op.Ops, event.Queue)) func() error {
 	}
 }
 
-func contextLoop(draw func(layout.Context) layout.Dimensions) func() error {
-	return func() error {
+func contextLoop(draw func(layout.Context) layout.Dimensions) func(title string) error {
+	return func(title string) error {
 		// START CONTEXTLOOP OMIT
 		var ops op.Ops
-		window := app.NewWindow()
+		window := app.NewWindow(app.Title(title))
 		for {
 			switch e := window.NextEvent().(type) {
-			case system.DestroyEvent:
+			case app.DestroyEvent:
 				// The window was closed.
 				return e.Err
-			case system.FrameEvent:
+			case app.FrameEvent:
 				// Reset the layout.Context for a new frame.
-				gtx := layout.NewContext(&ops, e)
+				gtx := app.NewContext(&ops, e)
 
 				// Draw the state into ops based on events in e.Queue.
 				draw(gtx)
@@ -167,22 +183,22 @@ func contextLoop(draw func(layout.Context) layout.Dimensions) func() error {
 	}
 }
 
-func themeLoop(draw func(layout.Context, *material.Theme) layout.Dimensions) func() error {
-	return func() error {
+func themeLoop(draw func(layout.Context, *material.Theme) layout.Dimensions) func(title string) error {
+	return func(title string) error {
 		// START THEMELOOP OMIT
 		th := material.NewTheme()
 		th.Shaper = text.NewShaper(text.WithCollection(gofont.Collection()))
 
 		var ops op.Ops
-		window := app.NewWindow()
+		window := app.NewWindow(app.Title(title))
 		for {
 			switch e := window.NextEvent().(type) {
-			case system.DestroyEvent:
+			case app.DestroyEvent:
 				// The window was closed.
 				return e.Err
-			case system.FrameEvent:
+			case app.FrameEvent:
 				// Reset the layout.Context for a new frame.
-				gtx := layout.NewContext(&ops, e)
+				gtx := app.NewContext(&ops, e)
 
 				// Draw the state into ops based on events in e.Queue.
 				draw(gtx, th)
