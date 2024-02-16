@@ -32,6 +32,21 @@ For example, this draws green and blue rectangles on top of a red background:
 
 <pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="layout-stack" data-size="400x100"></pre>
 
+### Background
+
+Because layouting a background for a widget is very frequent there is a more performant implementation for that scenario, which roughly corresponds to:
+
+``` go
+layout.Stack{Alignment: layout.C}.Layout(gtx,
+	layout.Expanded(background),
+	layout.Stacked(widget)
+)
+```
+
+<{{files/architecture/layout.go}}[/START BACKGROUND OMIT/,/END BACKGROUND OMIT/]
+
+<pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="layout-background" data-size="400x100"></pre>
+
 
 ## List
 

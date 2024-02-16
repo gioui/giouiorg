@@ -23,6 +23,7 @@ func doButton(ops *op.Ops, q input.Source) {
 	// Confine the area of interest to a 100x100 rectangle.
 	defer clip.Rect{Max: image.Pt(100, 100)}.Push(ops).Pop()
 
+	// Declare `tag` as being one of the targets.
 	event.Op(ops, tag)
 
 	// Process events that arrived between the last frame and this one.
@@ -45,6 +46,7 @@ func doButton(ops *op.Ops, q input.Source) {
 		}
 	}
 
+	// Draw the button.
 	var c color.NRGBA
 	if pressed {
 		c = color.NRGBA{R: 0xFF, A: 0xFF}

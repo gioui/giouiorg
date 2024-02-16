@@ -216,6 +216,7 @@ func drawImageInternal(ops *op.Ops) {
 // START IMAGE OMIT
 func drawImage(ops *op.Ops, img image.Image) {
 	imageOp := paint.NewImageOp(img)
+	imageOp.Filter = paint.FilterNearest
 	imageOp.Add(ops)
 	op.Affine(f32.Affine2D{}.Scale(f32.Pt(0, 0), f32.Pt(4, 4))).Add(ops)
 	paint.PaintOp{}.Add(ops)

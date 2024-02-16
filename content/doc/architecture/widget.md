@@ -5,7 +5,7 @@ subtitle: Reusable and composable parts
 
 We've been mentioning widgets for quite a while now. In principle widgets are composable and drawable UI elements that may react to input. More concretely:
 
-* They get input from an [`Queue`](https://gioui.org/io/system#FrameEvent.Queue).
+* They get input from an [`Source`](https://gioui.org/app#FrameEvent.Source).
 * They might hold some state.
 * They calculate their size given constraints.
 * They draw themselves to an [`op.Ops`](https://gioui.org/op#Ops) list.

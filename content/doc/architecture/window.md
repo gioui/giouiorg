@@ -9,12 +9,12 @@ Since a GUI library needs to talk to some sort of display system to display info
 
 [`app.NewWindow`](http://gioui.org/app#NewWindow) chooses the appropriate "driver" depending on the environment and build context. It might choose Wayland, Win32, or Cocoa among several others.
 
-An `app.Window` sends events from the display system to the [`window.Events()`](https://gioui.org/app#Window.Events) channel. The system events are listed in [`gioui.org/io/system`](https://gioui.org/io/system). The input events, such as [`gioui.org/io/pointer`](https://gioui.org/io/pointer) and [`gioui.org/io/key`](https://gioui.org/io/key), are also sent into that channel.
+An `app.Window` allows accessing events from the display with [`window.NextEvent()`](https://gioui.org/app#Window.NextEvent). There are other lifecycle events in the `gioui.org/app` package such as [`app.DestroyEvent`](https://gioui.org/app#DestroyEvent) and [`app.FrameEvent`](https://gioui.org/app#FrameEvent).
 
 
 ## Operations
 
-All UI libraries need a way for the program to specify what to display and how to handle events. Gio programs use operations, serialized into one or more [`op.Ops`](https://gioui.org/op#Ops) operation lists. Operation lists are in turn passed to the window driver through the [`FrameEvent.Frame`](https://gioui.org/io/system#FrameEvent.Frame) function.
+All UI libraries need a way for the program to specify what to display and how to handle events. Gio programs use operations, serialized into one or more [`op.Ops`](https://gioui.org/op#Ops) operation lists. Operation lists are in turn passed to the window driver through the [`FrameEvent.Frame`](https://gioui.org/app#FrameEvent.Frame) function.
 
 By convention, each operation kind is represented by a Go type with an `Add` method that records the operation into the `Ops` argument. Like any Go struct literal, zero-valued fields can be useful to represent optional values.
 

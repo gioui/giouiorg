@@ -7,6 +7,8 @@ import (
 	"image/color"
 
 	"gioui.org/layout"
+	"gioui.org/op/clip"
+	"gioui.org/op/paint"
 	"gioui.org/unit"
 )
 
@@ -38,6 +40,20 @@ func stacked(gtx layout.Context) layout.Dimensions {
 }
 
 // END STACK OMIT
+
+// START BACKGROUND OMIT
+func layoutBackground(gtx layout.Context) layout.Dimensions {
+	return layout.Background{}.Layout(gtx,
+		func(gtx layout.Context) layout.Dimensions {
+			defer clip.Rect{Max: gtx.Constraints.Min}.Push(gtx.Ops).Pop()
+			paint.Fill(gtx.Ops, background)
+			return layout.Dimensions{Size: gtx.Constraints.Min}
+		}, func(gtx layout.Context) layout.Dimensions {
+			return ColorBox(gtx, image.Pt(30, 100), blue)
+		})
+}
+
+// END BACKGROUND OMIT
 
 // START LIST OMIT
 var list = layout.List{}

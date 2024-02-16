@@ -102,7 +102,7 @@ Sometimes you may want to change this order. For example, you may want to delay 
 
 ## Animation
 
-Gio only issues FrameEvents when the window is resized or the user interacts with the window. However, animation requires continuous redrawing until the animation is completed. For that there is [`op.InvalidateOp`](https://gioui.org/op#InvalidateOp).
+Gio only issues FrameEvents when the window is resized or the user interacts with the window. However, animation requires continuous redrawing until the animation is completed. For that there is [`op.InvalidateCmd`](https://gioui.org/op#InvalidateCmd).
 
 The following code will animate a red "progress bar" that fills up from left to right over 10 seconds from when the program starts:
 
@@ -128,6 +128,6 @@ Note that [`image.NRGBA`](https://golang.org/pkg/image#NRGBA) and [`image.Unifor
 
 <{{files/architecture/draw.go}}[/START IMAGE OMIT/,/END IMAGE OMIT/]
 
-<pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="draw-image" data-size="200x100"></pre>
+<pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="draw-image" data-size="400x400"></pre>
 
-The image must not be mutated until another [`FrameEvent`](https://gioui.org/io/system#FrameEvent) happens, because the image may be read asynchronously while the frame is being drawn. Additionally, mutations to the image provided to `paint.ImageOp` are not guaranteed to ever be reflected in the drawn content. To update an image on-screen, create a new image.Image and construct a new `paint.ImageOp`.
+The image must not be mutated until another [`FrameEvent`](https://gioui.org/io/app#FrameEvent) happens, because the image may be read asynchronously while the frame is being drawn. Additionally, mutations to the image provided to `paint.ImageOp` are not guaranteed to ever be reflected in the drawn content. To update an image on-screen, create a new image.Image and construct a new `paint.ImageOp`.

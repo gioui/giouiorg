@@ -47,6 +47,7 @@ func main() {
 
 		{name: "layout-inset", run: contextLoop(inset)},
 		{name: "layout-stack", run: contextLoop(stacked)},
+		{name: "layout-background", run: contextLoop(layoutBackground)},
 		{name: "layout-list", run: contextLoop(listing)},
 		{name: "layout-flex", run: contextLoop(flexed)},
 		{name: "layout-spacer", run: contextLoop(spacer)},

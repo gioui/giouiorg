@@ -71,8 +71,8 @@ through events. Gio uses the following approach to process events:
 
 <{{files/get-started/main.go}}[/START PROCESS EVENTS OMIT/,/END PROCESS EVENTS OMIT/]
 
-* `system.DestroyEvent` means the user pressed the close button.
-* `system.FrameEvent` means the program should handle input and render a new
+* `app.DestroyEvent` means the user pressed the close button.
+* `app.FrameEvent` means the program should handle input and render a new
 frame.
 
 ## Drawing the text

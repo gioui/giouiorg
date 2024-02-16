@@ -13,7 +13,7 @@ Then we can use the widget like:
 
 <{{files/architecture/split-visual.go}}[/START EXAMPLE OMIT/,/END EXAMPLE OMIT/]
 
-<pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="split-visual" data-size="200x100"></pre>
+<pre style="min-height: 200px" data-run="wasm" data-pkg="architecture" data-args="split-visual" data-size="400x200"></pre>
 
 ## Ratio
 
@@ -25,7 +25,7 @@ The usage code would look like:
 
 <{{files/architecture/split-ratio.go}}[/START EXAMPLE OMIT/,/END EXAMPLE OMIT/]
 
-<pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="split-ratio" data-size="200x100"></pre>
+<pre style="min-height: 200px" data-run="wasm" data-pkg="architecture" data-args="split-ratio" data-size="400x200"></pre>
 
 ## Interactive
 
@@ -53,4 +53,4 @@ And an example:
 
 <{{files/architecture/split-interactive.go}}[/START EXAMPLE OMIT/,/END EXAMPLE OMIT/]
 
-<pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="split-interactive" data-size="200x100"></pre>
+<pre style="min-height: 200px" data-run="wasm" data-pkg="architecture" data-args="split-interactive" data-size="400x200"></pre>

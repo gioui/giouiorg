@@ -15,6 +15,6 @@ Then in your application use the provided widgets:
 
 <{{files/architecture/theme.go}}[/START EXAMPLE OMIT/,/END EXAMPLE OMIT/]
 
-<pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="theme" data-size="200x100"></pre>
+<pre style="min-height: 100px" data-run="wasm" data-pkg="architecture" data-args="theme" data-size="200x150"></pre>
 
 [Kitchen example](https://git.sr.ht/~eliasnaur/gio-example/tree/main/example/kitchen/kitchen.go) shows all the different widgets available.
