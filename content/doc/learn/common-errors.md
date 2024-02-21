@@ -28,3 +28,13 @@ The problem: You've created a nice new widget. You lay it out, say, in a Flex Ri
 The explanation: Gio communicates the size of widgets dynamically via returned `layout.Dimensions`. High level widgets (such as Labels) return or pass on their dimensions, but lower-level operations, such as paint.PaintOp, do not automatically provide their dimensions.
 
 The solution: calculate the proper dimensions of the content you drew with your custom operations, and return that in your `layout.Dimension`.
+
+## Dependencies don't compile any more
+
+The problem: You've updated your Gio version with `go get -u gioui.org@latest` and things don't compile.
+
+The explanation: In Go `go get -u` (the `-u` part) is unfortunately an [unsafe operation for pre v1.0 releases](https://github.com/golang/go/issues/64864), which includes Gio and some dependencies such as typesetting. `-u` ends up downloading the latest minor version for all dependencies, where unstable dependencies may have breaking changes.
+
+The solution: update Gio dependencies only with `go get gioui.org@latest`. If you have ended up in a very messy situation you can first try reverting `go.mod` to your older commit.
+
+If the suggestions above don't help, then you can try deleting all the lines from `go.mod`, except `module ...` and `go ...` lines, and running `go mod tidy`. This will end up downloading the latest direct dependencies.
