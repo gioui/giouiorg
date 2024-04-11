@@ -14,8 +14,8 @@ import (
 // START MAIN OMIT
 func main() {
 	go func() {
-		w := app.NewWindow()
-		err := run(w)
+		window := new(app.Window)
+		err := run(window)
 		if err != nil {
 			log.Fatal(err)
 		}
@@ -27,13 +27,13 @@ func main() {
 // END MAIN OMIT
 
 // START CREATE THEME OMIT
-func run(w *app.Window) error {
-	th := material.NewTheme()
+func run(window *app.Window) error {
+	theme := material.NewTheme()
 	// END CREATE THEME OMIT
 	var ops op.Ops
 	// START PROCESS EVENTS OMIT
 	for {
-		switch e := w.NextEvent().(type) {
+		switch e := window.Event().(type) {
 		case app.DestroyEvent:
 			return e.Err
 		case app.FrameEvent:
@@ -43,7 +43,7 @@ func run(w *app.Window) error {
 			gtx := app.NewContext(&ops, e)
 
 			// Define an large label with an appropriate text:
-			title := material.H1(th, "Hello, Gio")
+			title := material.H1(theme, "Hello, Gio")
 
 			// Change the color of the label.
 			maroon := color.NRGBA{R: 127, G: 0, B: 0, A: 255}

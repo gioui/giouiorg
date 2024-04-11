@@ -7,9 +7,9 @@ Since a GUI library needs to talk to some sort of display system to display info
 
 <{{files/architecture/main.go}}[/START DRAWLOOP OMIT/,/END DRAWLOOP OMIT/]
 
-[`app.NewWindow`](http://gioui.org/app#NewWindow) chooses the appropriate "driver" depending on the environment and build context. It might choose Wayland, Win32, or Cocoa among several others.
+[`app.Window.Run`](http://gioui.org/app#Window.Run) chooses the appropriate "driver" depending on the environment and build context. It might choose Wayland, Win32, or Cocoa among several others.
 
-An `app.Window` allows accessing events from the display with [`window.NextEvent()`](https://gioui.org/app#Window.NextEvent). There are other lifecycle events in the `gioui.org/app` package such as [`app.DestroyEvent`](https://gioui.org/app#DestroyEvent) and [`app.FrameEvent`](https://gioui.org/app#FrameEvent).
+An `app.Window` allows accessing events from the display with [`window.Event()`](https://gioui.org/app#Window.Event). There are other lifecycle events in the `gioui.org/app` package such as [`app.DestroyEvent`](https://gioui.org/app#DestroyEvent) and [`app.FrameEvent`](https://gioui.org/app#FrameEvent).
 
 
 ## Operations

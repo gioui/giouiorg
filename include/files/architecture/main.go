@@ -112,10 +112,12 @@ func main() {
 func drawLoop(draw func(*op.Ops)) func(title string) error {
 	return func(title string) error {
 		// START DRAWLOOP OMIT
-		window := app.NewWindow(app.Title(title))
+		var window app.Window
+		window.Option(app.Title(title))
+
 		var ops op.Ops
 		for {
-			switch e := window.NextEvent().(type) {
+			switch e := window.Event().(type) {
 			case app.DestroyEvent:
 				// The window was closed.
 				return e.Err
@@ -137,10 +139,12 @@ func drawLoop(draw func(*op.Ops)) func(title string) error {
 func drawQueueLoop(draw func(*op.Ops, input.Source)) func(title string) error {
 	return func(title string) error {
 		// START DRAWQUEUELOOP OMIT
-		window := app.NewWindow(app.Title(title))
+		var window app.Window
+		window.Option(app.Title(title))
+
 		var ops op.Ops
 		for {
-			switch e := window.NextEvent().(type) {
+			switch e := window.Event().(type) {
 			case app.DestroyEvent:
 				// The window was closed.
 				return e.Err
@@ -162,10 +166,12 @@ func drawQueueLoop(draw func(*op.Ops, input.Source)) func(title string) error {
 func contextLoop(draw func(layout.Context) layout.Dimensions) func(title string) error {
 	return func(title string) error {
 		// START CONTEXTLOOP OMIT
+		var window app.Window
+		window.Option(app.Title(title))
+
 		var ops op.Ops
-		window := app.NewWindow(app.Title(title))
 		for {
-			switch e := window.NextEvent().(type) {
+			switch e := window.Event().(type) {
 			case app.DestroyEvent:
 				// The window was closed.
 				return e.Err
@@ -190,10 +196,12 @@ func themeLoop(draw func(layout.Context, *material.Theme) layout.Dimensions) fun
 		th := material.NewTheme()
 		th.Shaper = text.NewShaper(text.WithCollection(gofont.Collection()))
 
+		var window app.Window
+		window.Option(app.Title(title))
+
 		var ops op.Ops
-		window := app.NewWindow(app.Title(title))
 		for {
-			switch e := window.NextEvent().(type) {
+			switch e := window.Event().(type) {
 			case app.DestroyEvent:
 				// The window was closed.
 				return e.Err

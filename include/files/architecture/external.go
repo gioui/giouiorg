@@ -13,7 +13,8 @@ import (
 
 func externalChanges(title string) error {
 	// START LOOP OMIT
-	window := app.NewWindow(app.Title(title))
+	var window app.Window
+	window.Option(app.Title(title))
 
 	var button struct {
 		lock   sync.Mutex
@@ -42,7 +43,7 @@ func externalChanges(title string) error {
 
 	ops := new(op.Ops)
 	for {
-		switch e := window.NextEvent().(type) {
+		switch e := window.Event().(type) {
 		case app.DestroyEvent:
 			return e.Err
 		case app.FrameEvent:
