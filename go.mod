@@ -5,7 +5,7 @@ go 1.19
 require (
 	gioui.org v0.6.0
 	gioui.org/cmd v0.0.0-20240128165106-aa418504058e
-	gioui.org/example v0.5.0
+	gioui.org/example v0.6.1
 	github.com/gomarkdown/markdown v0.0.0-20190912180731-281270bc6d83
 	golang.org/x/image v0.15.0
 	golang.org/x/tools v0.18.0

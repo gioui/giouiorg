@@ -6,8 +6,8 @@ gioui.org/cmd v0.0.0-20240128165106-aa418504058e/go.mod h1:Ka3v7oyXel7Kmtuqwtlp0
 gioui.org/cpu v0.0.0-20210808092351-bfe733dd3334/go.mod h1:A8M0Cn5o+vY5LTMlnRoK3O5kG+rH0kWfJjeKd9QpBmQ=
 gioui.org/cpu v0.0.0-20210817075930-8d6a761490d2 h1:AGDDxsJE1RpcXTAxPG2B4jrwVUJGFDjINIPi1jtO6pc=
 gioui.org/cpu v0.0.0-20210817075930-8d6a761490d2/go.mod h1:A8M0Cn5o+vY5LTMlnRoK3O5kG+rH0kWfJjeKd9QpBmQ=
-gioui.org/example v0.5.0 h1:kwe9R4FX85DQHHeIISR7vXMN5wylZxFC2Err/0ovofQ=
-gioui.org/example v0.5.0/go.mod h1:tC0gVzG/Oeu6JJpZt0BOQBFK+v1vxlXT09uqiZu8IGw=
+gioui.org/example v0.6.1 h1:x9PZQrJHSnZYarQ7IZTR1/KjXOn4Ei366ow9UZy3+ZE=
+gioui.org/example v0.6.1/go.mod h1:CgyJgA+IX0lNasNe8GNty59XcLxjZxYIlOOjsHxuG2w=
 gioui.org/shader v1.0.8 h1:6ks0o/A+b0ne7RzEqRZK5f4Gboz2CfG+mVliciy6+qA=
 gioui.org/shader v1.0.8/go.mod h1:mWdiME581d/kV7/iEhLmUgUK5iZ09XR5XpduXzbePVM=
 github.com/akavel/rsrc v0.10.1 h1:hCCPImjmFKVNGpeLZyTDRHEFC283DzyTXTo0cO0Rq9o=
