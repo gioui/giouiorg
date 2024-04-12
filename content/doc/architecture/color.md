@@ -6,9 +6,9 @@ subtitle: Understanding color and blending
 Color handling is something that we don’t usually don’t think about. However, a
 framework can make many tradeoffs while handling color.
 
-The short explanation is that Gio uses premultiplied sRGB colors for input but
-uses linear color space for blending. This results in the color blending being
-correct without manually converting usual color values to linear color space.
+The short explanation is that Gio uses sRGB colors for input but uses linear
+color space for blending. This results in the color blending being correct
+without manually converting usual color values to linear color space.
 
 If the short explanation wasn't sufficient, then there's a longer one below.
 
