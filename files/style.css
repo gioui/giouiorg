@@ -685,7 +685,6 @@ pre {
 	display: flex;
 	border: var(--play-border);
 	border-radius: var(--play-border-radius);
-	overflow: hidden;
 	background-color: var(--play-background);
 	box-shadow: var(--play-shadow);
 }
