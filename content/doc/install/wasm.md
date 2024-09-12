@@ -10,7 +10,7 @@ Install `gogio`, if you already haven't:
 go install gioui.org/cmd/gogio@latest
 ```
 
-To build WebAssembly from the `kitchen` example:
+To build WebAssembly from the `kitchen` example (run from a local checkout of [`gio-example`](https://git.sr.ht/~eliasnaur/gio-example)):
 
 ``` sh
 gogio -target js gioui.org/example/kitchen
