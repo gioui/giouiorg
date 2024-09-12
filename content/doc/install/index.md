@@ -48,5 +48,5 @@ Gio can be cross-complied for platforms other than the current OS, but this requ
 
 ### From Linux
 
-- `macOS`: a cross-compiler like [osxcross](https://github.com/tpoechtrager/osxcross) as well as the macOS SDK (see link for instructions).
+- `macOS`: a cross-compiler like [osxcross](https://github.com/tpoechtrager/osxcross) as well as the macOS SDK (see link for instructions). See [this mailing list post](https://lists.sr.ht/~eliasnaur/gio/%3CCAHe4cPmjd3RkZ9NsANc4Y7cdsSv9YUWkqwEEKZLhgVJ4emsNpA@mail.gmail.com%3E) for useful information about setting this up.
 - `Windows`: no special compiler is needed, as we don't use CGo for Windows support.
