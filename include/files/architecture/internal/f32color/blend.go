@@ -16,5 +16,5 @@ func BlendRGBA(p float32, a, b RGBA) RGBA {
 
 // BlendSRGBA blends to colors in sRGB color space.
 func BlendSRGBA(p float32, a, b color.NRGBA) color.NRGBA {
-	return mix(a, b, sat8(p))
+	return mix(a, b, sat8(1-p))
 }
