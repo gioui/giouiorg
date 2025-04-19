@@ -6,6 +6,7 @@ import (
 	"encoding/xml"
 	"fmt"
 	"net/url"
+	"time"
 )
 
 // RenderRSS creates an rss.xml from the specified items.
@@ -34,7 +35,7 @@ func (site *Site) renderRSS(page PageData) ([]byte, error) {
 		}
 
 		if child.Date != nil {
-			item.PubDate = child.Date.Format("Mon, 02 Jan 2006 15:04 -0700")
+			item.PubDate = child.Date.Format(time.RFC1123Z)
 		}
 
 		channel.Items = append(channel.Items, item)
