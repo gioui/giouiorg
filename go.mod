@@ -1,6 +1,6 @@
 module gioui.org/website
 
-go 1.21
+go 1.22
 
 require (
 	gioui.org v0.8.0
