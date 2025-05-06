@@ -10,9 +10,7 @@ import (
 	"testing"
 )
 
-var (
-	updateRender = flag.Bool("update", false, "update render content")
-)
+var updateRender = flag.Bool("update", false, "update render content")
 
 func TestParse(t *testing.T) {
 	config := Config{
@@ -32,12 +30,12 @@ func TestParse(t *testing.T) {
 		rsspath := filepath.Join(filepath.FromSlash("testdata/ref/"+page.Slug), "rss.xml")
 
 		if *updateRender {
-			_ = os.MkdirAll(filepath.Dir(path), 0600)
-			if err := os.WriteFile(path, page.Rendered, 0600); err != nil {
+			_ = os.MkdirAll(filepath.Dir(path), 0o600)
+			if err := os.WriteFile(path, page.Rendered, 0o600); err != nil {
 				t.Errorf("failed to write %q: %v", path, err)
 			}
 			if page.RSS {
-				if err := os.WriteFile(rsspath, page.RenderedRSS, 0600); err != nil {
+				if err := os.WriteFile(rsspath, page.RenderedRSS, 0o600); err != nil {
 					t.Errorf("failed to write %q: %v", path, err)
 				}
 			}

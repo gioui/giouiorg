@@ -15,9 +15,11 @@ import (
 	"gioui.org/widget/material"
 )
 
-var colorA = hslColor(0.3, 1.0, 0.5)
-var colorB = hslColor(0.9, 1.0, 0.5)
-var blendBias widget.Float
+var (
+	colorA    = hslColor(0.3, 1.0, 0.5)
+	colorB    = hslColor(0.9, 1.0, 0.5)
+	blendBias widget.Float
+)
 
 func init() { blendBias.Value = 0.5 }
 

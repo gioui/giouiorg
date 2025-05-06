@@ -16,8 +16,10 @@ import (
 )
 
 // START LOWLEVEL OMIT
-var tag = new(bool) // We could use &pressed for this instead.
-var pressed = false
+var (
+	tag     = new(bool) // We could use &pressed for this instead.
+	pressed = false
+)
 
 func doButton(ops *op.Ops, q input.Source) {
 	// Confine the area of interest to a 100x100 rectangle.
