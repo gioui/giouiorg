@@ -66,15 +66,10 @@ func (s *Split) Layout(gtx layout.Context, left, right layout.Widget) layout.Dim
 		event.Op(gtx.Ops, s)
 		pointer.CursorColResize.Add(gtx.Ops)
 
-		for {
-			ev, ok := gtx.Event(pointer.Filter{
-				Target: s,
-				Kinds:  pointer.Press | pointer.Drag | pointer.Release | pointer.Cancel,
-			})
-			if !ok {
-				break
-			}
-
+		for ev := range gtx.Events(pointer.Filter{
+			Target: s,
+			Kinds:  pointer.Press | pointer.Drag | pointer.Release | pointer.Cancel,
+		}) {
 			e, ok := ev.(pointer.Event)
 			if !ok {
 				continue

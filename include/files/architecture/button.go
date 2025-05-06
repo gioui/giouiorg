@@ -190,20 +190,14 @@ func (b *Button) Layout(gtx layout.Context) layout.Dimensions {
 	event.Op(gtx.Ops, b)
 
 	// here we loop through all the events associated with this button.
-	for {
-		ev, ok := gtx.Event(pointer.Filter{
-			Target: b,
-			Kinds:  pointer.Press | pointer.Release,
-		})
-		if !ok {
-			break
-		}
-
+	for ev := range gtx.Events(pointer.Filter{
+		Target: b,
+		Kinds:  pointer.Press | pointer.Release,
+	}) {
 		e, ok := ev.(pointer.Event)
 		if !ok {
 			continue
 		}
-
 		switch e.Kind {
 		case pointer.Press:
 			b.pressed = true
