@@ -55,7 +55,7 @@ func externalChanges(title string) error {
 			// Handle button input and draw.
 			doButton(ops, e.Source)
 
-			// Update display.
+			// Events display.
 			e.Frame(ops)
 		}
 	}
