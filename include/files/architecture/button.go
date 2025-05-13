@@ -16,8 +16,10 @@ import (
 )
 
 // START LOWLEVEL OMIT
-var tag = new(bool) // We could use &pressed for this instead.
-var pressed = false
+var (
+	tag     = new(bool) // We could use &pressed for this instead.
+	pressed = false
+)
 
 func doButton(ops *op.Ops, q input.Source) {
 	// Confine the area of interest to a 100x100 rectangle.
@@ -190,20 +192,14 @@ func (b *Button) Layout(gtx layout.Context) layout.Dimensions {
 	event.Op(gtx.Ops, b)
 
 	// here we loop through all the events associated with this button.
-	for {
-		ev, ok := gtx.Event(pointer.Filter{
-			Target: b,
-			Kinds:  pointer.Press | pointer.Release,
-		})
-		if !ok {
-			break
-		}
-
+	for ev := range gtx.Events(pointer.Filter{
+		Target: b,
+		Kinds:  pointer.Press | pointer.Release,
+	}) {
 		e, ok := ev.(pointer.Event)
 		if !ok {
 			continue
 		}
-
 		switch e.Kind {
 		case pointer.Press:
 			b.pressed = true

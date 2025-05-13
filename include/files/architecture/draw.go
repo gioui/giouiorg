@@ -148,8 +148,10 @@ func drawProgressBarInternal(ops *op.Ops, source input.Source) {
 }
 
 // START ANIMATION OMIT
-var startTime = time.Now()
-var duration = 10 * time.Second
+var (
+	startTime = time.Now()
+	duration  = 10 * time.Second
+)
 
 func drawProgressBar(ops *op.Ops, source input.Source, now time.Time) {
 	// Calculate how much of the progress bar to draw,
