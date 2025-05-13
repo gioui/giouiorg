@@ -128,7 +128,7 @@ func drawLoop(draw func(*op.Ops)) func(title string) error {
 				ops.Reset()
 				// Draw the state into ops.
 				draw(&ops)
-				// Events the display.
+				// Update the display.
 				e.Frame(&ops)
 			}
 		}
@@ -155,7 +155,7 @@ func drawQueueLoop(draw func(*op.Ops, input.Source)) func(title string) error {
 				ops.Reset()
 				// Draw the state into ops based on events in e.Queue.
 				draw(&ops, e.Source)
-				// Events the display.
+				// Update the display.
 				e.Frame(&ops)
 			}
 		}
@@ -182,7 +182,7 @@ func contextLoop(draw func(layout.Context) layout.Dimensions) func(title string)
 				// Draw the state into ops based on events in e.Queue.
 				draw(gtx)
 
-				// Events the display.
+				// Update the display.
 				e.Frame(gtx.Ops)
 			}
 		}
@@ -212,7 +212,7 @@ func themeLoop(draw func(layout.Context, *material.Theme) layout.Dimensions) fun
 				// Draw the state into ops based on events in e.Queue.
 				draw(gtx, th)
 
-				// Events the display.
+				// Update the display.
 				e.Frame(gtx.Ops)
 			}
 		}
