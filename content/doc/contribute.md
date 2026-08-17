@@ -38,7 +38,7 @@ for the change and what it does. See
 [an example](https://gioui.org/commit/abb9d291e954f3b80384046d7d4487e1ead6bd6a).
 
 Add `Fixes: https://todo.sr.ht/~eliasnaur/gio/nnn` or `References: https://todo.sr.ht/~eliasnaur/gio/nnn` (matching
-the syntax described [here](https://man.sr.ht/git.sr.ht/#referencing-tickets-in-git-commit-messages))
+the syntax described [here](https://man.sr.ht/hub.sr.ht/#referencing-tickets-in-commits-and-patches))
 if the change fixes or updates an existing issue.
 
 Contributors must agree to the [developer certificate of origin](https://developercertificate.org/),
