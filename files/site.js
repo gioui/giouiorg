@@ -75,5 +75,26 @@ $(function() {
 		}
 		run.click(onRun);
 	})
+
+	// Current workaround for the issue https://todo.sr.ht/~eliasnaur/gio/415
+	//  where keydown and keyup listeners don't work
+	window.addEventListener('keydown', (e)=> {
+		const frames = document.querySelectorAll('iframe')
+		frames.forEach((frame)=> {
+			const input = frame.contentDocument.querySelector('input')
+			if (input) {
+				input.dispatchEvent(new KeyboardEvent('keydown', {key:e.key}))
+			}
+		})
+	});
+	window.addEventListener('keyup', (e)=> {
+		const frames = document.querySelectorAll('iframe')
+		frames.forEach((frame)=> {
+			const input = frame.contentDocument.querySelector('input')
+			if (input) {
+				input.dispatchEvent(new KeyboardEvent('keyup', {key:e.key}))
+			}
+		})
+	});
 })
 
